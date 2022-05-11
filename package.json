@@ -1,0 +1,22 @@
+{
+  "author": "View Creative Agency",
+  "version": "0.0.1",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4",
+    "postcss": "^8.4",
+    "postcss-import": "^14.1",
+    "vite": "^2.9",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-manifest-sri": "^0.1",
+    "vite-plugin-restart": "^0.1"
+  },
+  "engines": {
+    "node": "^16"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production vite build",
+    "serve": "NODE_ENV=dev vite"
+  }
+}

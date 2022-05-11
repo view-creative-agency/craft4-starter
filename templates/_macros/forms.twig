@@ -1,0 +1,617 @@
+{% macro htmlRadioset(params) %}{# Also works for checkboxes #}
+	{% import _self as macros %}
+	{#
+		HTML scaffolding for consistent form radio / checkbox options output.
+		This macro does nothing clever, it only templates out the passed in data.
+
+		USAGE:
+		{% import '_macros' as macros %}
+
+		{{ macros.htmlRadioset({
+			legend      : 'Radio Group Legend',
+			legendStyle: 'h3',
+			instructions: 'This is a hint of some sort',
+			options: [
+				{
+					type: 'radio',
+					label: 'option label',
+					value: 'option value',
+					name: 'fieldName',
+					id: 'fieldName1',
+					checked: false
+				},
+				{
+					type: 'radio',
+					label: 'option label 2',
+					value: 'option value 2',
+					name: 'fieldName',
+					id: 'fieldName2',
+				}
+			]
+		}) }}
+	#}
+	<div class="
+		{{- "fieldset " -}}
+		{%- if params.error    is defined and params.error | length > 0 %} hasError{% endif -%}
+		{%- if params.required is defined and params.required == true %} required{% endif -%}
+	">
+		<fieldset>
+			<legend class="{{ params.legendStyle ??? 'h3' }}">{{ params.legend }}</legend>
+
+			{% if
+				params.error is defined
+				and
+				params.error | length > 0
+			%}
+				<div class="fieldgroup-error-message">{{ params.error }}</div>
+			{% endif %}
+
+			{% if
+				params.instructions is defined
+				and
+				params.instructions | length
+			-%}
+				<div class="form-instructions">
+					{{ params.instructions }}
+				</div>
+			{%- endif %}
+
+			<div class="theOptions">
+				{% for option in params.options %}
+					{{- macros.htmlField(option) -}}
+				{% endfor %}
+			</div>
+		</fieldset>
+	</div>
+{% endmacro %}
+
+{% macro htmlField(params) %}
+	{#
+		HTML scaffolding for consistent form field output.
+		This macro does nothing clever, it only templates out the passed in data.
+
+		USAGE:
+		{% import '_partials/macros' as macros %}
+
+		{{ macros.htmlField({
+			type        : 'text',
+			id          : 'fieldId',
+			name        : 'fieldName',
+			value       : previousValue
+			required    : true,
+			label       : 'Field Label',
+			instructions: 'This is a hint of some sort'
+		}}
+
+		{{ macros.htmlField({
+			type   : 'select',
+			id     : 'fieldId',
+			name   : 'fieldName',
+			label  : 'Field Label',
+			options: [
+				{
+					label: 'option label',
+					value: 'option value',
+					selected: true
+				},
+				{
+					label: 'option label 2',
+					value: 'option value 2'
+				}
+			]
+		}) }}
+
+		{{ macros.htmlField({
+			type : 'date',
+			id   : 'startFrom',
+			name : 'startFrom',
+			label: 'Starting from',
+			value: craft.app.request.getDate('startFrom') ??? null
+		}) }}
+	#}
+	<div class="htmlField
+		{{- " " ~ params.type -}}
+		{%- if params.error    is defined and params.error | length > 0 %} hasError{% endif -%}
+		{%- if params.required is defined and params.required == true %} required{% endif -%}
+	">
+		<div class="fieldWrapper">
+			{% switch params.type %}{# https://craftcms.com/docs/3.x/dev/tags.html#accessing-the-parent-loop-variable #}
+				{% case 'select' %}
+					<label for="{{ params.id }}">
+						<span>{{ params.label }}</span>
+						<select
+							id="{{ params.id }}"
+							name="{{ params.name }}"
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+						>
+							{% for option in params.options %}
+								<option
+									value="{{ option.value }}"
+									{{ (option.selected is defined and option.selected) ? 'selected'}}
+									{{ (option.disabled is defined and option.disabled) ? 'disabled' }}
+								>{{ option.label }}</option>
+							{% endfor %}
+						</select>
+					</label>
+
+				{% case 'textarea' %}
+					<label for="{{ params.id }}">
+						<span>{{ params.label }}</span>
+						<textarea
+							id="{{ params.id }}"
+							name="{{ params.name }}"
+							placeholder="{{ params.placeholder ??? null }}"
+							rows="5"
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+						>{{ params.value }}</textarea>
+					</label>
+
+				{% case "checkbox" or "radio" %}
+					<label for="{{ params.id }}" class="boolean">
+						<input
+							id="{{ params.id }}"
+							type="{{ params.type }}"
+							name="{{ params.name }}"
+							value="{{ params.value }}"
+							{{ (params.checked is defined and params.checked == true) ? 'checked' : null }}
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+						/>
+						<span>{{ params.label }}</span>
+					</label>
+
+				{% case "number" %}
+					<label for="{{ params.id }}">
+						<span>{{ params.label }}</span>
+						<input
+							id="{{ params.id }}"
+							type="{{ params.type }}"
+							{% if params.numberOptions is defined %}
+								{% if params.numberOptions.min is defined %}
+									min={{ params.numberOptions.min }}
+								{% endif %}
+								{% if params.numberOptions.max is defined %}
+									max={{ params.numberOptions.max }}
+								{% endif %}
+							{% endif %}
+							name="{{ params.name }}"
+							placeholder="{{ params.placeholder ??? null }}"
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							value="{{ params.value ??? null }}"
+						/>
+					</label>
+
+				{% case "date" %}
+					<label for="{{ params.id }}">
+						<span>{{ params.label }}</span>
+						<input
+							id="{{ params.id }}"
+							type="{{ params.type }}"
+							{% if params.dateOptions is defined %}
+								{% if params.dateOptions.min is defined %}
+									min={{ params.dateOptions.min }}
+								{% endif %}
+								{% if params.dateOptions.max is defined %}
+									max={{ params.dateOptions.max }}
+								{% endif %}
+							{% endif %}
+							name="{{ params.name }}"
+							placeholder="{{ params.placeholder ??? null }}"
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							value="{{ params.value ??? null }}"
+						/>
+					</label>
+
+				{% case "file" %}
+					<label for="{{ params.id }}">
+						<span>{{ params.label }}</span>
+						<input
+							id="{{ params.id }}"
+							type="{{ params.type }}"
+							name="{{ params.name }}"
+							placeholder="{{ params.placeholder ??? null }}"
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							value="{{ params.value }}"
+						/>
+					</label>
+
+				{% default %}
+					<label for="{{ params.id }}">
+						<span>{{ params.label }}</span>
+						<input
+							id="{{ params.id }}"
+							type="{{ params.type }}"
+							name="{{ params.name }}"
+							placeholder="{{ params.placeholder ??? null }}"
+							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							value="{{ params.value }}"
+						/>
+					</label>
+			{% endswitch %}
+
+			{% if
+				(params.type != 'checkbox' and params.type != 'radio')
+				and
+				params.instructions is defined
+				and
+				params.instructions | length > 0
+			%}
+				<div class="form-instructions">
+					{{ params.instructions }}
+				</div>
+			{% endif %}
+		</div>
+
+		{% if
+			(params.type != 'checkbox' and params.type != 'radio')
+			and
+			params.error is defined and params.error | length > 0
+		%}
+			<div class="field-error-message">{{ params.error }}</div>
+		{% endif %}
+	</div>
+{% endmacro %}
+
+{% macro newFormField(options) %}
+	{# PURPOSE:
+		Output form elements for passed fields and data
+
+		USAGE:
+		{% import '_macros' as macros %}
+		{% set editingUser = user is defined ? user : currentUser %}
+
+		{{ macros.newFormField({
+			handle: 'theFieldHandle',
+			data:   editingUser.theFieldHandle
+			error:  editingUser.getFirstError('theFieldHandle')
+		}) }}
+	#}
+
+	{% set fieldModel = craft.app.fields.getFieldbyHandle( options.fieldHandle ) %}
+	{% set class      = options.error ? 'has-error' : '' %}
+	{# <s>{{ fieldModel.getFieldType().name }}</s> Only for debugging #}
+
+	{% if fieldModel.getFieldType().name == 'Plain Text' %}
+		<div class="formField {{ class }}">
+			<label for="{{ fieldModel.handle }}">
+				<span>{{ fieldModel.name }}</span>
+
+				{% if fieldModel.settings.multiline %}
+					<textarea
+						id="{{ fieldModel.handle }}"
+						name="fields[{{ fieldModel.handle }}]"
+					>{% if options.data | length %}{{ options.data }}{% endif %}</textarea>
+				{% else %}
+					<input
+						type="text"
+						id="{{ fieldModel.handle }}"
+						name="fields[{{ fieldModel.handle }}]"
+						{% if options.data | length %}
+							value="{{ options.data }}"
+						{% endif %}
+					>
+				{% endif %}
+			</label>
+
+			{% if error | length > 0 %}
+				<p class="form-error-message">{{ error }}</p>
+			{% endif %}
+		</div>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Radio Buttons' %}
+		<fieldset id="{{ fieldModel.handle }}" class="craftField">
+			<legend class="craftLabel">{{ fieldModel.name }}</legend>
+			{% for option in options.data.options %}
+				{% if loop.first %}
+					<div class="options">
+				{% endif %}
+
+				<label class="boolean">
+					<input
+						type="radio"
+						value="{{ option.value }}"
+						name="fields[{{ fieldModel.handle }}]"
+						{{ option.selected ? 'checked' : null }}
+					/>
+					<span>{{ option.label }}</span>
+				</label>
+
+				{% if loop.first %}
+					</div><!-- .options -->
+				{% endif %}
+			{% endfor %}
+
+			{% if error | length > 0 %}
+				<p class="form-error-message">{{ error }}</p>
+			{% endif %}
+		</fieldset>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Checkboxes' %}
+		<fieldset id="{{ fieldModel.handle }}" class="craftField">
+			<legend class="craftLabel">{{ fieldModel.name }}</legend>
+
+			<div class="interactiveArea">
+				{% for option in data.options %}
+					{% if loop.first %}
+						<div class="options">
+							<input type="hidden" name="fields[{{ fieldModel.handle }}]" value="">{# so they can be un-checked #}
+					{% endif %}
+
+					<label class="boolean">
+						<input
+							type="checkbox"
+							value="{{ option.value }}"
+							name="fields[{{ fieldModel.handle }}][]"
+							{{ option.selected ? 'checked' : null }}
+						/>
+
+						<span>{{ option.label }}</span>
+					</label>
+
+					{% if loop.last %}
+						</div><!-- .options -->
+					{% endif %}
+				{% endfor %}
+
+				{% if error | length > 0 %}
+					<p class="form-error-message">{{ error }}</p>
+				{% endif %}
+			</div><!-- interactiveArea -->
+		</fieldset>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Dropdown' %}
+		<label class="craftField">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<span class="interactiveArea">
+				<select name="fields[{{ fieldModel.handle }}]" id="{{ fieldModel.handle }}">
+					{% for option in options.data.options %}
+						<option value="{{ option.value }}" {{ option.selected ? 'selected' : null }}>{{ option.label }}</option>
+					{% endfor %}
+				</select>
+
+				{% if error | length > 0 %}
+					<p class="form-error-message">{{ error }}</p>
+				{% endif %}
+			</span><!-- .interactiveArea -->
+		</label>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Date/Time' %}
+		<label class="craftField" for="{{ fieldModel.handle }}">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<span class="interactiveArea">
+				<input
+					type="date"
+					id="{{ fieldModel.handle }}"
+					name="fields[{{ fieldModel.handle }}]"
+					{% if options.data | length %}
+						value="{{ options.data }}"
+					{% endif %}
+				>
+
+				{% if error | length > 0 %}
+					<p class="form-error-message">{{ error }}</p>
+				{% endif %}
+			</span><!-- .interactiveArea -->
+		</label>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Number' %}
+		<label class="craftField" for="{{ fieldModel.handle }}">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<span class="interactiveArea">
+				<input
+					type="number"
+					id="{{ fieldModel.handle }}"
+					name="fields[{{ fieldModel.handle }}]"
+					{% if options.data | length %}
+						value="{{ options.data }}"
+					{% endif %}
+				>
+
+				{% if error | length > 0 %}
+					<p class="form-error-message">{{ error }}</p>
+				{% endif %}
+			</span>
+		</label>
+	{% endif %}
+{% endmacro %}
+
+{% macro formField(fieldHandle, fieldData, errors) %}
+	{# PURPOSE:
+		DRY; reliably output form field markup for custom fields
+
+		USAGE:
+		{% import '_partials/macros' as macros %}
+		{{ macros.formField('formFieldHandle', currentUser.formFieldHandle, currentUser.getErrors('formFieldHandle')) }}
+
+		It needs both because Craft won't tell you what type of field it is just from currentUser.formFieldHandle
+		So, the first parameter if the field handle, the second is the actual field data, the third is any errors that happened for the field
+	#}
+
+	{% set fieldModel = craft.app.fields.getFieldbyHandle( fieldHandle ) %}
+	{# <s>{{ fieldModel.getFieldType().name }}</s> Only for debugging #}
+
+	{% if fieldModel.getFieldType().name == 'Plain Text' %}
+		<label for="{{ fieldModel.handle }}" class="craftField">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<div class="interactiveArea">
+				{% if fieldModel.settings.multiline %}
+					<textarea
+						id="{{ fieldModel.handle }}"
+						name="fields[{{ fieldModel.handle }}]"
+					>{% if fieldData | length %}{{ fieldData }}{% endif %}</textarea>
+				{% else %}
+					<input
+						type="text"
+						id="{{ fieldModel.handle }}"
+						name="fields[{{ fieldModel.handle }}]"
+						{% if fieldData | length %}
+							value="{{ fieldData }}"
+						{% endif %}
+					>
+				{% endif %}
+			</div><!-- .interactiveArea -->
+
+			{% if errors %}
+				<ul class="errors">
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</label>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Radio Buttons' %}
+		<fieldset id="{{ fieldModel.handle }}" class="craftField">
+			<legend class="craftLabel">{{ fieldModel.name }}</legend>
+
+			<div class="interactiveArea">
+				{% for option in fieldData.options %}
+					{% if loop.first %}
+						<div class="options">
+					{% endif %}
+
+					<label class="boolean">
+						<input
+							type="radio"
+							value="{{ option.value }}"
+							name="fields[{{ fieldModel.handle }}]"
+							{{ option.selected ? 'checked' : null }}
+						/>
+						<span>{{ option.label }}</span>
+					</label>
+
+					{% if loop.first %}
+						</div><!-- .options -->
+					{% endif %}
+				{% endfor %}
+
+				{% if errors %}
+					<ul class="errors">
+						{% for error in errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div><!-- interactiveArea -->
+		</fieldset>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Checkboxes' %}
+		<fieldset id="{{ fieldModel.handle }}" class="craftField">
+			<legend class="craftLabel">{{ fieldModel.name }}</legend>
+
+			<div class="interactiveArea">
+				{% for option in fieldData.options %}
+					{% if loop.first %}
+						<div class="options">
+							<input type="hidden" name="fields[{{ fieldModel.handle }}]" value="">{# so they can be un-checked #}
+					{% endif %}
+
+					<label class="boolean">
+						<input
+							type="checkbox"
+							value="{{ option.value }}"
+							name="fields[{{ fieldModel.handle }}][]"
+							{{ option.selected ? 'checked' : null }}
+						/>
+
+						<span>{{ option.label }}</span>
+					</label>
+
+					{% if loop.last %}
+						</div><!-- .options -->
+					{% endif %}
+				{% endfor %}
+
+				{% if errors %}
+					<ul class="errors">
+						{% for error in errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div><!-- interactiveArea -->
+		</fieldset>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Dropdown' %}
+		<label class="craftField">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<span class="interactiveArea">
+				<select name="fields[{{ fieldModel.handle }}]" id="{{ fieldModel.handle }}">
+					{% for option in fieldData.options %}
+						<option value="{{ option.value }}" {{ option.selected ? 'selected' : null }}>{{ option.label }}</option>
+					{% endfor %}
+				</select>
+
+				{% if errors %}
+					<ul class="errors">
+						{% for error in errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</span><!-- .interactiveArea -->
+		</label>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Date/Time' %}
+		<label class="craftField" for="{{ fieldModel.handle }}">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<span class="interactiveArea">
+				<input
+					type="date"
+					id="{{ fieldModel.handle }}"
+					name="fields[{{ fieldModel.handle }}]"
+					{% if fieldData | length %}
+						value="{{ fieldData }}"
+					{% endif %}
+				>
+
+				{% if errors %}
+					<ul class="errors">
+						{% for error in errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</span><!-- .interactiveArea -->
+		</label>
+	{% endif %}
+
+	{% if fieldModel.getFieldType().name == 'Number' %}
+		<label class="craftField" for="{{ fieldModel.handle }}">
+			<span class="craftLabel">{{ fieldModel.name }}</span>
+
+			<span class="interactiveArea">
+				<input
+					type="number"
+					id="{{ fieldModel.handle }}"
+					name="fields[{{ fieldModel.handle }}]"
+					{% if fieldData | length %}
+						value="{{ fieldData }}"
+					{% endif %}
+				>
+
+				{% if errors %}
+					<ul class="errors">
+						{% for error in errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</span>
+		</label>
+	{% endif %}
+{% endmacro %}

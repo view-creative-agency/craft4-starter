@@ -1,0 +1,294 @@
+{% import '_macros/helpers' as helpers -%}
+{%- minify %}<!doctype html>{# {{ dump(_context|keys) }} DEBUG #}
+{% set devModeIsOn = craft.app.config.general.devMode ??? false %}
+
+{# UPDATED REFERENCE https://www.matuzo.at/blog/html-boilerplate/ #}
+<html
+	lang="{{ craft.app.language }}"{# https://www.w3.org/International/articles/language-tags/ #}
+	class="preload
+	       {%- if craft.app.config.general.devMode %} dev-mode {% endif -%}
+	       {%- if entry is defined %} {{ entry.type }} {% endif -%}
+	       {{- craft.app.request.segments|join(' ') -}}
+	       {%- if htmlClass is defined %} {{ htmlClass }} {% endif %}"
+>
+	<head>
+		<!-- basic meta information -->
+		<meta charset="utf-8"/>
+		<meta name="viewport"
+		      content="width=device-width,initial-scale=1">{# For consideration: https://webkit.org/blog/7929/designing-websites-for-iphone-x/ #}
+		<meta name="twitter:dnt"
+		      content="on">{# Disallow Twitter from using your site’s info for personalization purposes: https://github.com/joshbuchea/HEAD#twitter-privacy #}
+		{#
+		BILINGUAL SITE? Uncomment this then!
+		{% include "_partials/language-alternatives" %}
+		#}
+
+		{# Start pre-loading assets we *know* we will need on the page - DO NOT JUST LOAD EVERY FONT THE SITE USES HERE
+				 https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+		#}
+		<link rel="preload" as="font" crossorigin="anonymous" type="font/woff2"
+		      href="/assets/fonts/subset-Montserrat-Regular.woff2"/>
+		<link rel="preload" as="font" crossorigin="anonymous" type="font/woff"
+		      href="/assets/fonts/subset-Montserrat-Regular.woff"/>
+
+		<!-- cutting the mustard -->
+		<script type="module">{# Parsed only by modern browsers. Means we have Fetch, ES6, etc. #}
+			const htmlElement = document.querySelector('html');
+
+			// We have js, add the class
+			htmlElement.classList.add('js');
+
+			// Do we need mobile nav design? Get this added ASAP to avoid Flash Of Un-styled Navigation.
+			if (window.innerWidth < 680) {
+				htmlElement.classList.add('mobile-nav');
+			}
+
+			// Let the CSS and JS know when ALL the page resources have finished loading.
+			document.addEventListener('DOMContentLoaded', function() {
+				htmlElement.classList.add('load-complete');
+			});
+		</script>
+		<script src="/assets/javascript/modern/helpers-min.js" type="module" defer></script>
+		<script src="/assets/javascript/modern/details-element-min.js" type="module" defer></script>
+		{% if sprig is defined %}
+			{{ sprig.script }}
+		{% endif %}
+
+		{# Fancy JS loaded navigation if needed...
+			<script src="/assets/javascript/modern/responsive-navigation.js" type="module" defer></script>
+		#}
+		{# Commerce JS - check; is this actually needed anymore?
+			<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+		#}
+
+		<!-- Styling for all devices -->
+		<link rel="stylesheet" media="screen" href="/assets/css/screen-core.css"/>
+
+		<!-- Favicons [ See: https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df ] -->
+		<!-- <link rel="icon" href="data:,"> no favicon, blocking automatic browser request -->
+		<meta name="theme-color"
+		      content="#ffffff">{# https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color #}
+		{#
+			<meta name="theme-color" media="(prefers-color-scheme: light)" content="lightskyblue">
+			<meta name="theme-color" media="(prefers-color-scheme: dark)" content="darkblue">
+		#}
+		<link rel="icon" href="/assets/favicon/favicon.svg"/><!-- darkmode aware svg -->
+		{# alternative dark mode approach, limited support https://twitter.com/ChromiumDev/status/1372834089636610048
+			<link rel="icon" href="dark.png" media="(prefers-color-scheme: dark)">
+			<link rel="icon" href="default.png">
+		#}
+		{# <link rel="mask-icon" href="/assets/favicon/favicon.svg" color="#000000"/><!-- Safari pinned tab icons... Not used since Safari 12 --> #}
+		<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png"><!-- iOS home screen icon. 180x180 -->
+		<link rel="manifest" href="/assets/favicon/manifest.json"><!-- PWA irrelevance, here to pass automated Lighthouse test -->
+
+		<!-- additional JS enhancements and state flagging -->
+		{# {% include '_partials/google-maps-js' %}    JS for when we use Google Maps on a page #}
+		{# {% include '_partials/custom-javascript' with { 'location': 'beforeHead' } %} For CMS JS snippets, if defined #}
+		{% block jsHead %}{% endblock %}
+		{% if extraHead is defined %}{{ extraHead }}{% endif %}{# From Commerce example templates #}
+	</head>
+
+	<body data-instant-intensity="viewport-all">
+		<a href="#main" class="skipLink">Skip navigation and jump to content</a>
+
+		{# {% include '_partials/edit-page' %} #}
+
+		{% if getenv('ENVIRONMENT') == 'staging' %}
+			<p class="devWarning">This is a development site, not your live website.</p>
+		{% endif %}
+
+		<header class="section site_context">
+			<div class="container">
+				{{ tag( craft.app.request.segments is empty ? 'h1' : 'p', {
+					class: 'site_title',
+					html: "<a href='/'>#{ siteName }</a>"
+				}) }}
+
+				<div class="nav_main">
+					<nav class="container" id="site_navigation">
+						<h2>Site Navigation</h2>
+
+						{% cache globally %}
+							{# https://verbb.io/craft-plugins/navigation/docs/template-guides/rendering-nodes#craft-navigation-render #}
+							{% set nodes = craft.navigation.nodes('mainNavigation').level(1).with(['children.children']).all() %}
+
+							<ul class="l-1">
+								{% for node in nodes %}
+									{{ helpers.navigationNodes(node) }}
+								{% endfor %}
+							</ul>
+						{% endcache %}
+					</nav><!-- .container -->
+
+					{#
+					Is this a site with Commerce? Here's the Commerce related navigation etc...
+
+					{% include 'shop/_includes/nav-main' %}
+					{% include 'shop/_includes/nav-checkout' %}
+					{% include 'shop/_includes/floating-cart' %}
+					#}
+				</div><!-- .section.nav_main -->
+			</div><!-- .container -->
+		</header><!-- .section.site_context -->
+
+		{% block content %}<!-- Template: {{ _self }}.twig -->
+		<p>If you see me, you haven’t set your
+			<code>{% verbatim %}{% block content %}<!-- Template: {{ _self }}.twig -->…{% endblock %}{% endverbatim %}</code>
+			yet.</p>
+	{% endblock %}
+
+		<div class="notices">
+			{% set flashNotice = craft.app.session.getFlash('notice') %}
+			{% set flashError  = craft.app.session.getFlash('error') %}
+
+			{% if flashNotice %}{# Add `or true` to this if condition to temporarily see what this flash notice would look like #}
+				<div class="flash notice" id="flashNotice">
+					<div class="container">
+						<div class="box">
+							{{ flashNotice ?? 'Test flash notice' }}
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+			{% if flashError %}{# Add `or true` to this if condition to temporarily see what this flash notice would look like #}
+				<div class="flash error" id="flashError">
+					<div class="container">
+						<div class="box">
+							{{ flashError ?? 'test flash error' }}
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+			{% if account is defined %}{# Add `or true` to this if condition to temporarily see what this account notice would look like #}
+				<div class="flash account" id="flashAccount">
+					<div class="container">
+						<h2>There are errors:</h2>
+
+						<ul>
+							{% for error in account.getErrors %}
+								{% for theError in error %}
+									<li>{{ theError }}</li>
+								{% endfor %}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+
+		<footer class="section site_footer">
+			<div class="container dc_constrain-centre dc_layout-padding-both">
+				<h2>Site Footer</h2>
+
+				<div class="footerNav">
+					<h3>Footer Navigation</h3>
+					{% cache globally %}
+						{# https://verbb.io/craft-plugins/navigation/docs/template-guides/rendering-nodes#craft-navigation-render #}
+						{% set nodes = craft.navigation.nodes('footerNavigation').level(1).with(['children.children']).all() %}
+
+						<ul class="l-1">
+							{% for node in nodes %}
+								{{ helpers.navigationNodes(node) }}
+							{% endfor %}
+						</ul>
+					{% endcache %}
+				</div><!-- .footerNav -->
+
+				<div class="footerContact">
+					{% cache globally %}
+						<h3 class="h3">Contact</h3>
+
+						<p class="formattedAddress">
+							{% if website is defined and website.formattedAddress | length %}
+								{{ website.formattedAddress | nl2br }}
+							{% else %}
+								{% if seomatic.site.identity.genericName | length %}
+									<b>{{ seomatic.site.identity.genericName }}</b><br/>
+								{% endif %}
+								{% if seomatic.site.identity.genericStreetAddress | length %}
+									{% if seomatic.site.identity.genericStreetAddress | length %}{{ seomatic.site.identity.genericStreetAddress }},{% endif %}
+									{% if seomatic.site.identity.genericAddressLocality | length %}{{ seomatic.site.identity.genericAddressLocality }},{% endif %}
+									{% if seomatic.site.identity.genericAddressRegion | length %}{{ seomatic.site.identity.genericAddressRegion }},{% endif %}
+									{% if seomatic.site.identity.genericAddressCountry | length %}{{ seomatic.site.identity.genericAddressCountry }},{% endif %}
+									{% if seomatic.site.identity.genericPostalCode | length %}{{ seomatic.site.identity.genericPostalCode }}{% endif %}
+								{% endif %}
+							{% endif %}
+						</p>
+
+						<p class="phoneAndMail">
+							{% if
+								seomatic.site.identity.genericTelephone | length %}
+								{{ seomatic.site.identity.genericTelephone }}
+							{% endif %}
+							{% if
+								seomatic.site.identity.genericEmail | length %}
+								<br/>
+								<a href="mailto:{{ seomatic.site.identity.genericEmail }}">
+									{{ seomatic.site.identity.genericEmail }}
+								</a>
+							{% endif %}
+						</p>
+					{% endcache %}
+				</div><!-- .footerContact -->
+
+				{% include '_partials/social-media' with {
+					showIntro: true,
+					type: 'brand-compliant'
+				} %}
+				{% include '_partials/seomatic-opening-hours' %}
+			</div><!-- .container -->
+		</footer><!-- .section.site_footer -->
+
+		<div class="section site_footer-2">
+			<div class="container dc_constrain-centre dc_layout-padding-bottom">
+				<div class="legal">
+					<h3 class="h3">Legal Information</h3>
+					<ul>
+						<li>VAT: 0123456</li>
+						<li>Company Number: 0123456789</li>
+						<li>© {{ "now"|date("Y") }} {{ siteName }}</li>
+					</ul>
+				</div><!-- .legal -->
+
+				<div class="site_credit">
+					<p>Site design &amp; build by <a href="https://viewcreative.co.uk"
+																					 title="Digital Marketing, brand design and web development">View Creative
+							Agency</a></p>
+				</div><!-- .site_credit -->
+			</div><!-- .container -->
+		</div><!-- .section.site_footer-2 -->
+
+		<!-- Prefetch a hovered/tapped link before the link is actually requested... https://instant.page
+						A more aggressive prefetch to help perceived page speed would be to use https://github.com/GoogleChromeLabs/quicklink
+			-->
+		<script src="//instant.page/5.1.0" type="module"
+						integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+		<!-- <a href="/logout" data-no-instant>LOGOUT</a> -->
+
+		<!-- Redactor -->
+		{% if useRedactor is defined and useRedactor %}
+			<link rel="stylesheet" href="/assets/javascript/modules/redactor/redactor.min.css">
+			<script src="/assets/javascript/modules/redactor/redactor.min.js"></script>
+			<script>
+				$R.options = {
+					buttons: ["bold", "italic", "ul", "link"],
+					toolbarFixed: true
+				};
+
+				$R('.redactor', {styles: true});
+			</script>
+		{% endif %}
+
+		{# {% include '_partials/custom-javascript' with { 'location': 'beforeBody' } %} For CMS JS snippets, if defined #}
+
+		{% if craft['commerce'] is defined and devMode %}
+			<script>console.log('Cart on page load: ', {{ cart.toArray()|json_encode|raw }});</script>
+		{% endif %}
+		{% if currentUser and devMode %}
+			<script>console.log('Current User: ', {{ currentUser.toArray()|json_encode|raw }});</script>
+		{% endif %}
+	</body>
+</html>
+{% endminify %}

@@ -1,0 +1,37 @@
+{#
+	{% include '_partials/social-media' with {
+		showIntro: true|false,
+		type: 'outline|brand-compliant'
+	} %}
+#}
+{% apply spaceless %}
+	{% set useType = type ??? 'brand-compliant' %}
+
+	<div class="sm {{ useType }}">
+		{% if showIntro is defined and showIntro == true %}
+			<div class="intro">
+				<h3 class="h4">{{ 'Find Us' | t }}</h3>
+				<p>You can find us on the following social media platforms...</p>
+			</div>
+		{% endif %}
+
+		{% for sm in seomatic.site.sameAsLinks %}
+			{% if loop.first %}
+				<ul>
+			{% endif %}
+
+			{% if sm.url | length %}
+				<li>
+					<a href="{{ sm.url }}">
+						<span>Find {{ siteName }} on {{ sm.siteName }}</span>
+						{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/' ~ sm.handle ~ '.svg') }}
+					</a>
+				</li>
+			{% endif %}
+
+			{% if loop.last %}
+				</ul>
+			{% endif %}
+		{% endfor %}
+	</div><!-- .sm -->
+{% endapply %}

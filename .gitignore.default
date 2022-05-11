@@ -1,0 +1,73 @@
+### Defined here so that if anyone deletes folders with a .gitignore inside, the folder contents REMAIN ignored if the folder is re-created - otherwise you can end up with a load of stuff in GIT that should not be in GIT, simply because someone didn't realise that deleting the folder also deletes the ignore file ###
+
+### General files and folders ###
+/.env
+/.idea
+.cache
+.project
+node_modules
+config.codekit3
+*.tmproj
+*.tmproject
+*.esproj
+*.sublime-project
+*.sublime-workspace
+prepros-6.config
+/web/dist
+
+### VSCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### Allow a place to stash related files locally, that don't end up in GIT, e.g. photoshop designs ###
+/_gitignore/*
+!/_gitignore/.gitignore
+
+### Craft public directories ###
+/web/content/*
+!/web/content/.gitignore
+
+/web/imager/*
+!/web/imager/.gitignore
+
+/web/cpresources/*
+!/web/cpresources/.gitignore
+
+/web/cache/*
+!/web/cache/.gitignore
+
+### Craft system directories ###
+/vendor
+composer.phar
+
+/storage/backups/*
+!/storage/backups/.gitignore
+
+/storage/composer-backups/*
+!/storage/composer-backups/.gitignore
+
+/storage/config-deltas/*
+!/storage/config-deltas/.gitignore
+
+/storage/logs/*
+!/storage/logs/.gitignore
+
+/storage/runtime/*
+!/storage/runtime/.gitignore
+
+### OSX stuff ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+### Vim stuff ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~

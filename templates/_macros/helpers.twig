@@ -1,0 +1,263 @@
+{% macro errorList(errors) %}
+	{% if errors %}
+		<ul class="errors">
+			{% for error in errors %}
+				<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endmacro %}
+
+{% macro shorten(text, count) %}
+	{# PURPOSE:
+		shorten a block of text to a specified word count
+
+		USAGE:
+		{% import '_partials/macros' as macros %}
+		{{ macros.shorten(entry.myField,20) }}
+	#}
+	{% set words = text | striptags | split(" ") %}
+	{% if words | length > count %}
+		<p>
+			{% for word in 1..count %}
+				{{ words[word] | raw }}
+
+				{%- if
+					loop.last
+					and
+					( words|length > count )
+				-%}
+					...
+				{%- endif %}
+			{% endfor %}
+		</p>
+	{% else %}
+		{{ text }}
+	{% endif %}
+{% endmacro %}
+
+{% macro videoEmbed(url, autoplay, loop, minimalUi) %}
+	{% if
+		(url starts with 'https://vimeo')
+		or
+		(url starts with 'https://www.vimeo')
+	%}
+		{# https://developer.vimeo.com/apis/oembed - options #}
+		{% set videoId = url | replace({'https://vimeo.com/':''}) %}
+
+		{# debug
+			<p>VIMEO</p>
+			<p>Video: {{ urlParams[0] }}</p>
+		#}
+
+		{% set src %}https://player.vimeo.com/video/{{ videoId }}?api=1&{{ autoplay ? 'autoplay=true&' : '' }}{{ loop ? "loop=true&" : '' }}{{ minimalUi ? 'byline=false&portrait=false&title=false' : '' }}{% endset %}
+
+		<div class="embedContainer widescreen {{ autoplay ? 'autoplay' : '' }}">
+			<iframe
+				loading="lazy"
+				allow="encrypted-media"
+				allowfullscreen
+				src="{{ src }}"
+			></iframe>
+		</div><!-- .embedContainer.widescreen -->
+	{% elseif
+		(url starts with 'https://youtube')
+		or
+		(url starts with 'https://www.youtube')
+	%}
+		{# https://developers.google.com/youtube/player_parameters - options #}
+		{% set urlParams   = url | split('v=') %}
+		{% set videoParams = urlParams[1] | split('&') %}
+
+		{# debug
+			<p>YOUTUBE</p>
+			<p>Video: {{ videoParams[0] }}</p>
+			<p>
+				Parameters:
+				{% for param in videoParams %}
+					{{ param }}<br/>
+				{% endfor %}
+			</p>
+		#}
+
+		{% set src %}https://www.youtube.com/embed/{{ videoParams[0] }}?enablejsapi=1&playsinline=1&{{ autoplay ? 'autoplay=1&mute=1&' : '' }}{{ loop ? "loop=1&playlist=" ~ videoParams[0]~ "&" : '' }}{{ minimalUi ? 'modestbranding=1&rel=0&showinfo=0' : '' }}{% endset %}
+
+		<div class="embedContainer widescreen {{ autoplay ? 'autoplay' : '' }}">
+			<iframe
+				loading="lazy"
+				allow="encrypted-media"
+				allowfullscreen
+				src="{{ src }}"
+			></iframe>
+		</div><!-- .embedContainer.widescreen -->
+	{% else %}
+		<p class="editorError">You must use YouTube or Vimeo video URLs. Be sure to use the full video URL, and not a channel or short URL</p>
+	{% endif %}
+{% endmacro %}
+
+{% macro videoEmbed2(options) %}
+	{# PURPOSE:
+		Output video
+
+		USAGE:
+		{% import '_macros' as macros %}
+
+		{{ macros.videoEmbed2({
+			videoUrl:   entry.videoEmbed,
+			autoplay:   true,
+			loop:       true,
+			minimalUi:  true,
+			background: true,
+			aspectRatio: widescreen|cinema185|cinema239|super
+		}) }}
+	#}
+
+	{% if
+		(options.videoUrl starts with 'https://vimeo')
+		or
+		(options.videoUrl starts with 'https://www.vimeo')
+	%}
+		{# https://developer.vimeo.com/apis/oembed - options #}
+		{% set videoId = options.videoUrl | replace({'https://vimeo.com/':''}) %}
+
+		{# debug
+			<p>VIMEO</p>
+			<p>Video: {{ urlParams[0] }}</p>
+		#}
+
+		{% set src %}https://player.vimeo.com/video/{{ videoId }}?api=1{{ options.autoplay ? '&autoplay=true' : '' }}{{ options.loop ? "&loop=true" : '' }}{{ options.minimalUi ? '&byline=false&portrait=false&title=false' : '' }}{{ options.background ? '&background=1' : '' }}{% endset %}
+
+		<div class="embedContainer {{ options.aspectRatio ??? 'widescreen' }} {{ options.autoplay ? 'autoplay' : '' }}">
+			<iframe
+				loading="lazy"
+				allow="encrypted-media"
+				allowfullscreen
+				src="{{ src }}"
+			></iframe>
+		</div><!-- .embedContainer.{{ options.aspectRatio ??? 'widescreen' }} -->
+	{% elseif
+		(options.videoUrl starts with 'https://youtube')
+		or
+		(options.videoUrl starts with 'https://www.youtube')
+	%}
+		{# https://developers.google.com/youtube/player_parameters - options #}
+		{% set urlParams   = options.videoUrl | split('v=') %}
+		{% set videoParams = urlParams[1] | split('&') %}
+
+		{# debug
+			<p>YOUTUBE</p>
+			<p>Video: {{ videoParams[0] }}</p>
+			<p>
+				Parameters:
+				{% for param in videoParams %}
+					{{ param }}<br/>
+				{% endfor %}
+			</p>
+		#}
+
+		{% set src %}https://www.youtube.com/embed/{{ videoParams[0] }}?enablejsapi=1&playsinline=1&{{ options.autoplay ? 'autoplay=1&mute=1&' : '' }}{{ options.loop ? "loop=1&playlist=" ~ videoParams[0]~ "&" : '' }}{{ options.minimalUi ? 'modestbranding=1&rel=0&showinfo=0' : '' }}{% endset %}
+
+		<div class="embedContainer {{ options.aspectRatio ??? 'widescreen' }} {{ options.autoplay ? 'autoplay' : '' }}">
+			<iframe
+				loading="lazy"
+				allow="encrypted-media"
+				allowfullscreen
+				src="{{ src }}"
+			></iframe>
+		</div><!-- .embedContainer.{{ options.aspectRatio ??? 'widescreen' }} -->
+	{% else %}
+		<p class="editorError">You must use YouTube or Vimeo video URLs. Be sure to use the full video URL, and not a channel or short URL</p>
+	{% endif %}
+{% endmacro %}
+
+{% macro navigationNodes(node) %}
+	{% import _self as macros %}
+	{# PURPOSE:
+		Render navigation trees with the mark-up we want
+		https://verbb.io/craft-plugins/navigation/docs/template-guides/rendering-nodes#craft-navigation-render
+		https://verbb.io/craft-plugins/navigation/docs/template-guides/eager-loading
+
+		USAGE:
+		{% import '_macros' as macros %}
+		{% set nodes = craft.navigation.nodes('mainNavigation').level(1).with(['children.children']).all() %}
+		<ul class="l-1">
+			{% for node in nodes %}
+				{{ macros.navigationNodes(node) }}
+			{% endfor %}
+		</ul>
+	#}
+	{% set classes = node.classes %}
+	{% if node.hasDescendants %}
+		{% set classes = classes ~ " has-children" %}
+	{% endif %}
+
+	<li class="{{ classes }}">
+		{# {{ node.link }} #}
+		<a
+			{% if node.url -%}
+				href="{{ node.url }}"
+			{%- endif %}
+			class="
+				{%- if node.active %}is-active{% endif %}
+				{% if node.level == 2 %}dc_anchor2{% endif -%}
+			"
+			{% if node.newWindow %}
+				target="_blank" rel="noopener"
+			{% endif %}
+
+			{% for attribute in node.customAttributes %}
+				{{ attribute.attribute }}="{{ attribute.value }}"
+			{% endfor %}
+		>
+			{{- node.title -}}
+		</a>
+
+		{% if node.hasDescendants %}
+			<ul class="l-{{ node.level + 1 }}">
+				{% for subnode in node.children %}
+					{{ macros.navigationNodes(subnode) }}
+				{% endfor %}
+			</ul>
+			{% endif %}
+	</li>
+{% endmacro %}
+
+{% macro linkField(params) %}
+	{# PURPOSE:
+		Output a linkField "button"
+		DOCS: https://github.com/sebastian-lenz/craft-linkfield
+
+		Always eager load linkFields
+		https://github.com/sebastian-lenz/craft-linkfield#eager-loading
+
+		USAGE:
+		{% import '_macros' as macros %}
+
+		{{ macros.linkField({
+			linkField: entry.bookingLink,
+			options: {
+				newWindow  : true,
+				customClass: 'bookingLink',
+				customText : 'Manual Override'
+			}
+		}) }}
+
+		Only the linkField parameter is required.
+	#}
+
+	{% if params.options is defined and params.options.newWindow == 'true' %}
+		{% set target = '_blank' %}
+	{% else %}
+		{% set target = params.linkField.getTarget() %}
+	{% endif %}
+
+	<a
+		href="{{ params.linkField.getUrl() }}"
+		class="linkField {{ params.options.customClass ??? null }}"
+		{{ target ? " target='#{target}' " }}
+	>
+		<span>
+			{{ params.options.customText ??? params.linkField.getText()  }}
+		</span>
+	</a>
+{% endmacro %}

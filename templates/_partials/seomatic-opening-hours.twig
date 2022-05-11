@@ -1,0 +1,71 @@
+{% for temp in seomatic.site.identity.localBusinessOpeningHours %}
+	{% if loop.first %}
+		<div class="seomatic-opening-hours">
+			<h2>Opening Hours</h2>
+			<ul>
+	{% endif %}
+
+	{# Make this start on a Monday not a Sunday #}
+	{% if loop.index <= 6 %}
+		{% set key = loop.index %}
+	{% else %}
+		{% set key = 0 %}
+	{% endif %}
+
+	{% set day = seomatic.site.identity.localBusinessOpeningHours[key] %}
+
+	<li {% if key == 6 %}class="weekend-starts"{% endif %}>
+		{% switch key %}
+			{% case 0 %}<span class="day">Sun: </span>
+			{% case 1 %}<span class="day">Mon: </span>
+			{% case 2 %}<span class="day">Tue: </span>
+			{% case 3 %}<span class="day">Wed: </span>
+			{% case 4 %}<span class="day">Thu: </span>
+			{% case 5 %}<span class="day">Fri: </span>
+			{% case 6 %}<span class="day">Sat: </span>
+		{% endswitch %}
+
+		<div class="times">
+			{% if day['open'] and day['close'] %}
+				<span class="opens">
+					<i>Opens </i>{{ day['open'].date | date('H:i') }}
+				</span>
+
+				<span class="closes">
+					<i>Closes </i>{{ day['close'].date | date('H:i') }}
+				</span>
+			{% else %}
+				CLOSED
+			{% endif %}
+		</div>
+	</li>
+
+	{% if loop.last %}
+			</ul>
+		</div>
+	{% endif %}
+{% endfor %}
+
+{#
+	.seomatic-opening-hours {
+		li {
+			display: flex;
+
+			.day {
+				width: 3em;
+			}
+
+			.times {
+				i {
+					@include hide-element;
+				}
+			}
+
+			.closes {
+				&:before {
+					content: " - ";
+				}
+			}
+		}
+	}
+#}
