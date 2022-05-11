@@ -1,6 +1,6 @@
 {
-  "name": "craftcms/craft",
-  "description": "Craft CMS",
+  "name": "view-creative-agency/craft4-starter",
+  "description": "A Craft4 and DDEV based starter project for View Creative Agency",
   "keywords": [
     "craft",
     "cms",
