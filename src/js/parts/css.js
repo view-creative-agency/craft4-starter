@@ -1,1 +1,1 @@
-import "@css/app.pcss";
+import "@css/screen.pcss";
