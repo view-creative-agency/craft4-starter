@@ -15,15 +15,20 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.2] - 2022-05-11
+
+### Added
+
+- Missing bootstrap.php file
 
 ## [1.0.1] - 2022-05-11
 
-### Changed:
+### Changed
 
 - Fixed composer.json ready for Packagist
 
 ## [1.0.0] - 2022-05-11
 
-### Added:
+### Added
 
 - Everything; based on onedarnleyroad/craftcms
