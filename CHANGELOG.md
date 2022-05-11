@@ -15,7 +15,15 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## [Unreleased]
+
+## [1.0.1] - 2022-05-11
+
+### Changed:
+
+- Fixed composer.json ready for Packagist
+
+## [1.0.0] - 2022-05-11
 
 ### Added:
+
 - Everything; based on onedarnleyroad/craftcms
