@@ -13,7 +13,6 @@ config.codekit3
 *.sublime-project
 *.sublime-workspace
 prepros-6.config
-/web/dist
 
 ### VSCode ###
 .vscode/*
@@ -29,6 +28,9 @@ prepros-6.config
 ### Craft public directories ###
 /web/content/*
 !/web/content/.gitignore
+
+/web/dist/*
+!/web/dist/.gitignore
 
 /web/imager/*
 !/web/imager/.gitignore
