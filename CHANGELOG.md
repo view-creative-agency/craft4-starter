@@ -15,6 +15,13 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+
+## [1.0.3] - 2022-05-11
+
+### Removed
+
+- Purge remaining Tailwind detritus
+
 ## [1.0.2] - 2022-05-11
 
 ### Added
