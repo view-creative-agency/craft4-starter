@@ -25,11 +25,12 @@
 
 		{# Start pre-loading assets we *know* we will need on the page - DO NOT JUST LOAD EVERY FONT THE SITE USES HERE
 				 https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
-		#}
+
 		<link rel="preload" as="font" crossorigin="anonymous" type="font/woff2"
 		      href="/assets/fonts/subset-Montserrat-Regular.woff2"/>
 		<link rel="preload" as="font" crossorigin="anonymous" type="font/woff"
 		      href="/assets/fonts/subset-Montserrat-Regular.woff"/>
+		#}
 
 		<!-- cutting the mustard -->
 		<script type="module">{# Parsed only by modern browsers. Means we have Fetch, ES6, etc. #}
@@ -62,7 +63,8 @@
 		#}
 
 		<!-- Styling for all devices -->
-		<link rel="stylesheet" media="screen" href="/assets/css/screen-core.css"/>
+		{{ craft.vite.script('src/js/app.js', false) }}
+		{# <link rel="stylesheet" media="screen" href="/assets/css/screen-core.css"/> #}
 
 		<!-- Favicons [ See: https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df ] -->
 		<!-- <link rel="icon" href="data:,"> no favicon, blocking automatic browser request -->
@@ -266,20 +268,6 @@
 		<script src="//instant.page/5.1.0" type="module"
 						integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
 		<!-- <a href="/logout" data-no-instant>LOGOUT</a> -->
-
-		<!-- Redactor -->
-		{% if useRedactor is defined and useRedactor %}
-			<link rel="stylesheet" href="/assets/javascript/modules/redactor/redactor.min.css">
-			<script src="/assets/javascript/modules/redactor/redactor.min.js"></script>
-			<script>
-				$R.options = {
-					buttons: ["bold", "italic", "ul", "link"],
-					toolbarFixed: true
-				};
-
-				$R('.redactor', {styles: true});
-			</script>
-		{% endif %}
 
 		{# {% include '_partials/custom-javascript' with { 'location': 'beforeBody' } %} For CMS JS snippets, if defined #}
 
