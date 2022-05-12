@@ -20,6 +20,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 ### Added
 
 - Vite/PostCSS configured to use W3C draft spec compliant PostCSS Nesting
+- Our normal starter Project Config settings for fields, sections, etc
 
 ### Changed
 
