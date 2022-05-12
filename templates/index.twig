@@ -1,11 +1,9 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Test</title>
-		{{ craft.vite.script('src/js/app.js', false) }}
-	</head>
-	<body>
-		<h1>This is a test</h1>
-		<p>and so is this.</p>
-	</body>
-</html>
+{% import '_macros/helpers' as helpers -%}
+{%- extends "_layout" -%}
+{%- set htmlClass = 'pages ' ~ entry.type -%}
+
+{%- block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<h1>This is the homepage</h1>
+	</main>
+{% endblock %}
