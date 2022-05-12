@@ -3,11 +3,13 @@
 use craft\helpers\App;
 
 return [
-	'checkDevServer' => true,
+	'useDevServer'      => App::env('ENVIRONMENT') === 'dev',
+	'checkDevServer'    => true,
 	'devServerInternal' => 'http://localhost:3000',
+
+	'manifestPath'    => Craft::getAlias('@webroot') . '/dist/manifest.json',
 	'devServerPublic' => Craft::getAlias('@web') . ':3000',
-	'errorEntry' => 'src/js/app.js',
-	'manifestPath' => Craft::getAlias('@webroot') . '/dist/manifest.json',
-	'serverPublic' => Craft::getAlias('@web')  . '/dist/',
-	'useDevServer' => (bool) App::env('VITE_USE_DEV_SERVER'),
+	'serverPublic'    => Craft::getAlias('@web')  . '/dist/',
+	'errorEntry'      => 'src/js/app.js',
+	'useDevServer'    => (bool) App::env('VITE_USE_DEV_SERVER'),
 ];

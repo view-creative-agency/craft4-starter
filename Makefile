@@ -21,15 +21,14 @@ install: up build
 		$(filter-out $@,$(MAKECMDGOALS))
 	ddev exec php craft install \
 		$(filter-out $@,$(MAKECMDGOALS))
-	ddev exec php craft plugin/install agnostic-fetch
-	ddev exec php craft plugin/install async-queue
-	ddev exec php craft plugin/install cp-field-inspect
 	ddev exec php craft plugin/install imager-x
-	ddev exec php craft plugin/install knock-knock
-	ddev exec php craft plugin/install typedlinkfield
-	ddev exec php craft plugin/install postmark
 	ddev exec php craft plugin/install redactor
 	ddev exec php craft plugin/install seomatic
+	ddev exec php craft plugin/install minify
+	ddev exec php craft plugin/install image-resizer
+	ddev exec php craft plugin/install navigation
+	ddev exec php craft plugin/install wheelform
+	ddev exec php craft plugin/install sprig
 	ddev exec php craft plugin/install vite
 up:
 	if [ ! "$$(ddev describe | grep OK)" ]; then \

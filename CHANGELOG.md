@@ -15,6 +15,14 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.4] - 2022-05-12
+
+### Changed
+
+- Fixed alias paths so that Craft now runs correctly
+- Fixed Makefile so that the correct plugins are installed
+- Simplified the .env.example to remove unused variables
+- Edited temporary index.twig to properly test Vite
 
 ## [1.0.3] - 2022-05-11
 
