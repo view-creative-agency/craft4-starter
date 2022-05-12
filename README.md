@@ -188,6 +188,11 @@ A Makefile has been included to provide a unified CLI for common development com
 - `make npm xxx` - Run npm commands inside the container, e.g. `make npm install`
 - `make pull` - Pull remote db & assets (requires setting up [craft-scripts](https://github.com/nystudio107/craft-scripts/)
 
+### Adding PostCSS Plugins
+
+Needs to be done as something like: `ddev exec npm install --save-dev postcss-nesting`
+After which you can edit the `postcss.config.js` file to actually use it.
+
 ## Acknowledgements & Credits
 
 - [Pixel & Tonic](https://pixelandtonic.com/) Makers of Craft CMS.

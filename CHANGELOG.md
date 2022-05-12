@@ -17,6 +17,10 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 ## [1.0.4] - 2022-05-12
 
+### Added
+
+- Vite/PostCSS configured to use W3C draft spec compliant PostCSS Nesting
+
 ### Changed
 
 - Fixed alias paths so that Craft now runs correctly
