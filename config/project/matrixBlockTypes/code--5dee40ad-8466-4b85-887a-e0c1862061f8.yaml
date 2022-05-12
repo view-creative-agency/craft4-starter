@@ -1,0 +1,42 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  55dc1e3e-e35c-47f2-b736-d93164b4740d:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 61e390b2-9faf-4b6c-9381-6e7f4e207fbb # Code
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: afaddaad-e22a-47c7-9c68-2698e23c982f
+            warning: null
+            width: 100
+        name: Content
+        uid: 076c975c-9a9b-4ccf-8887-09b2e773f413
+fields:
+  61e390b2-9faf-4b6c-9381-6e7f4e207fbb: # Code
+    columnSuffix: tmalogcu
+    contentColumnType: text
+    fieldGroup: null
+    handle: code
+    instructions: "This block is for putting in your own HTML/JS code. \r\nBe EXTREMELY careful using this block, pasting in malformed or malicious code may cause the site to break, or lead to the hacking of your site or your users. Know what you are doing."
+    name: Code
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: true
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: code
+name: Code
+sortOrder: 11

@@ -1,0 +1,131 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  07479a44-54c5-49e1-ad9f-822a8e503230:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 1379f9c8-bd39-49e2-b499-6c9c2a67936b # Rich Text
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0ab340b8-ecf8-45b1-a00b-0c5fbbfb4d4e
+            warning: null
+            width: 100
+          -
+            fieldUid: b9df2f18-f25a-4f21-a1bd-2d54dd0ce464 # Column Count
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7ab8edd4-67b8-4835-b71b-701ca0939438
+            warning: null
+            width: 50
+          -
+            fieldUid: fc9fe069-509c-41d5-ab17-fb401bf818e1 # Allow hard to read line lengths
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2fe82b93-73d5-4998-bca9-010b24c5f623
+            warning: null
+            width: 50
+        name: Content
+        uid: 7cce2f73-676c-4b0f-8514-d9a26ed46c25
+fields:
+  1379f9c8-bd39-49e2-b499-6c9c2a67936b: # Rich Text
+    columnSuffix: ubopbcnt
+    contentColumnType: text
+    fieldGroup: null
+    handle: richText
+    instructions: 'You can use the formatting buttons to create things like headings, paragraphs, and lists.'
+    name: 'Rich Text'
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  b9df2f18-f25a-4f21-a1bd-2d54dd0ce464: # Column Count
+    columnSuffix: yxmncbmf
+    contentColumnType: string
+    fieldGroup: null
+    handle: columnCount
+    instructions: 'For smaller blocks of content, you may want to have the text fit into multiple columns when on larger displays.'
+    name: 'Column Count'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - '1'
+            -
+              - value
+              - one
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - '2'
+            -
+              - value
+              - two
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - '3'
+            -
+              - value
+              - three
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  fc9fe069-509c-41d5-ab17-fb401bf818e1: # Allow hard to read line lengths
+    columnSuffix: qwbzrwnz
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: allowHardToReadLineLengths
+    instructions: 'Only turn this on if you''re happy with very long lines of text on wider screens.'
+    name: 'Allow hard to read line lengths'
+    searchable: false
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+handle: richText
+name: 'Rich Text'
+sortOrder: 1

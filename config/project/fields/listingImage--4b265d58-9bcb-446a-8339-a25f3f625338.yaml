@@ -1,0 +1,79 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 42d5c4a2-18cd-49bd-8f8e-3f79b84ed7b2 # Common
+handle: listingImage
+instructions: "An image to represent this page when it is linked to on a different page.\r\nUse a photo, not a screenshot."
+name: 'Listing Image'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowSubfolders: false
+  allowUploads: true
+  allowedKinds:
+    - photos
+  defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  defaultUploadLocationSubpath: null
+  localizeRelations: false
+  maxRelations: 1
+  minRelations: null
+  previewMode: full
+  restrictFiles: true
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  restrictedLocationSubpath: null
+  selectionCondition:
+    __assoc__:
+      -
+        - elementType
+        - craft\elements\Asset
+      -
+        - fieldContext
+        - global
+      -
+        - class
+        - craft\elements\conditions\assets\AssetCondition
+      -
+        - conditionRules
+        -
+          -
+            __assoc__:
+              -
+                - class
+                - craft\elements\conditions\assets\WidthConditionRule
+              -
+                - uid
+                - d0f500b8-0ad1-4c7d-8f93-df333f805a66
+              -
+                - operator
+                - '<='
+              -
+                - value
+                - '2200'
+          -
+            __assoc__:
+              -
+                - class
+                - craft\elements\conditions\assets\HeightConditionRule
+              -
+                - uid
+                - 4b51cb5c-e261-4d2d-9c93-51b67037f5b4
+              -
+                - operator
+                - '<='
+              -
+                - value
+                - '2200'
+  selectionLabel: 'Choose a photo'
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  source: null
+  sources:
+    - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

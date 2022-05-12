@@ -1,0 +1,27 @@
+columnSuffix: ixfrbmcr
+contentColumnType: text
+fieldGroup: 45d743a2-ba39-4aed-9a6d-b6b90abf971e # Globals
+handle: newsletterCtaText
+instructions: 'Optional text to go with the newsletter subscription form.'
+name: 'Newsletter CTA text'
+searchable: false
+settings:
+  availableTransforms: '*'
+  availableVolumes: ''
+  columnType: text
+  configSelectionMode: choose
+  defaultTransform: ''
+  manualConfig: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
+  showHtmlButtonForNonAdmins: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  uiMode: enlarged
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

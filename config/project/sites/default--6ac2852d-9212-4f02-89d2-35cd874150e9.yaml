@@ -1,0 +1,8 @@
+baseUrl: $PRIMARY_SITE_URL
+handle: default
+hasUrls: true
+language: en-GB
+name: 'Craft4 Test'
+primary: true
+siteGroup: b331abc3-406d-4f08-9b2c-7c672bf0de0e # Craft4 Test
+sortOrder: 1

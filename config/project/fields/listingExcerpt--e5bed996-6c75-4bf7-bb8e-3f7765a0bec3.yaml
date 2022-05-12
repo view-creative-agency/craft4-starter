@@ -1,0 +1,27 @@
+columnSuffix: faxkeiyf
+contentColumnType: text
+fieldGroup: 42d5c4a2-18cd-49bd-8f8e-3f79b84ed7b2 # Common
+handle: listingExcerpt
+instructions: 'Displayed on listing pages as an introduction to this page. Its job is to entice the visitor to click through and read the full article.'
+name: 'Listing Excerpt'
+searchable: false
+settings:
+  availableTransforms: '*'
+  availableVolumes: '*'
+  columnType: text
+  configSelectionMode: choose
+  defaultTransform: ''
+  manualConfig: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: Simple.json
+  removeEmptyTags: true
+  removeInlineStyles: true
+  removeNbsp: true
+  showHtmlButtonForNonAdmins: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  uiMode: enlarged
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

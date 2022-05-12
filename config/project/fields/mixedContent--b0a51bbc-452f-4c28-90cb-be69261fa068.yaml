@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 42d5c4a2-18cd-49bd-8f8e-3f79b84ed7b2 # Common
+handle: mixedContent
+instructions: 'Choose what type of content you''d like to add here, as many as you like from any of these options:'
+name: 'Mixed Content'
+searchable: false
+settings:
+  contentTable: '{{%matrixcontent_mixedcontent}}'
+  maxBlocks: null
+  minBlocks: null
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix
