@@ -1,0 +1,220 @@
+dateModified: 1652364902
+elementSources:
+  craft\elements\Entry:
+    -
+      disabled: false
+      key: '*'
+      tableAttributes:
+        - section
+        - postDate
+        - expiryDate
+        - dateUpdated
+        - uri
+      type: native
+    -
+      heading: Structures
+      type: heading
+    -
+      disabled: false
+      key: singles
+      tableAttributes:
+        - 'field:4b265d58-9bcb-446a-8339-a25f3f625338' # Listing Image
+        - dateUpdated
+        - revisionCreator
+        - uri
+      type: native
+    -
+      disabled: false
+      key: 'section:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+      tableAttributes:
+        - 'field:4b265d58-9bcb-446a-8339-a25f3f625338' # Listing Image
+        - postDate
+        - dateUpdated
+        - revisionCreator
+        - uri
+      type: native
+email:
+  fromEmail: mattw@viewcreative.co.uk
+  fromName: 'Craft4 Test'
+  transportType: craft\mail\transportadapters\Sendmail
+fs:
+  localFileUploads:
+    hasUrls: true
+    name: 'Local File Uploads'
+    settings:
+      path: '@primarySiteWebRoot/content/files'
+    type: craft\fs\Local
+    url: '@primarySiteUrl/content/files'
+  localImageUploads:
+    hasUrls: true
+    name: 'Local Image Uploads'
+    settings:
+      path: '@primarySiteWebRoot/content/images'
+    type: craft\fs\Local
+    url: '@primarySiteUrl/content/images'
+meta:
+  __names__:
+    0ad765ce-da18-4b42-8883-7c75e67bc6c7: Files # Files
+    0da6de33-e9ae-4ac5-a7dc-63322767738d: Blockquote # Blockquote
+    0f6f6a63-845d-449f-b5f6-c0b17a402227: Images # Images
+    2b187454-5e81-41a2-bb5a-67f435df8ad2: Image # Image
+    3d35622b-6607-4a05-81f0-93d712f18eed: 'Minimal UI' # Minimal UI
+    4b265d58-9bcb-446a-8339-a25f3f625338: 'Listing Image' # Listing Image
+    4ca648ee-78d8-4b4e-be42-119bdc9ac095: Crop # Crop
+    5c964f76-f7db-4765-8c8d-add2047d8ba7: 'Missing Image Fallback' # Missing Image Fallback
+    5dee40ad-8466-4b85-887a-e0c1862061f8: Code # Code
+    5e75ab6f-700d-4d71-a119-8486e41862d4: 'Images: Multiple' # Images: Multiple
+    6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: Image # Image
+    6ac2852d-9212-4f02-89d2-35cd874150e9: 'Craft4 Test' # Craft4 Test
+    7fe58c02-d209-4e1a-9883-dd49189d500c: Form # Form
+    9eca21d8-3abf-426e-b46d-580dcdb2681d: 'Rich Text' # Rich Text
+    14cfd869-dfee-4009-afee-8350c15d51ad: SEO # SEO
+    36ea2d39-19c7-4446-aeb1-0b3035c5b6c2: 'Image: Single' # Image: Single
+    42d5c4a2-18cd-49bd-8f8e-3f79b84ed7b2: Common # Common
+    45d743a2-ba39-4aed-9a6d-b6b90abf971e: Globals # Globals
+    61b0742f-4efb-4e9f-be20-3f36c5e70a16: Spacer # Spacer
+    61e390b2-9faf-4b6c-9381-6e7f4e207fbb: Code # Code
+    68c0b17f-8401-4068-a0b6-10c4781f5744: 'Loop Video' # Loop Video
+    75d17d41-4e28-4fbc-90ae-74102376b880: 'Link URL' # Link URL
+    78e1ba52-479b-48f4-b0a6-3659f3838ff1: Pages # Pages
+    83b0902d-25fa-4ce1-a72b-0857d3f51d45: 'Link To' # Link To
+    136bd771-2d6d-4fbf-bdab-627335611e32: Website # Website
+    303f6bf0-2c29-459c-afef-f03fb0298d24: 'Text Position' # Text Position
+    344da3ee-6f97-44b2-b4ae-8decb263506d: 'Show Newsletter CTA' # Show Newsletter CTA
+    1111c868-466c-4b74-ae32-915139c845b1: 'Display As...' # Display As...
+    1379f9c8-bd39-49e2-b499-6c9c2a67936b: 'Rich Text' # Rich Text
+    1865e161-9efb-43b3-a4be-59383a6674f7: Quotation # Quotation
+    1976bfb2-6bf2-4f60-91a5-94838c7fcf44: 'Website Admin' # Website Admin
+    2219b27c-3104-49fc-9b26-270a35789282: Autoplay # Autoplay
+    6079e509-0ab3-4f71-ae20-eae74d724613: 'Spacer Size' # Spacer Size
+    50731a92-0234-47dc-b983-b4d3fa37646f: Homepage # Homepage
+    72579a5f-3f21-4476-9c2f-4de146cc0cba: Form # Form
+    91922a85-68db-4cd1-a6a0-54a12b645469: 'Show Listing Excerpt' # Show Listing Excerpt
+    22079320-7090-4cd8-bbb4-27a18a70f38f: Images # Images
+    a1ad1291-f30b-4c72-9380-081566bacf65: 'Main Navigation' # Main Navigation
+    ae9dfd77-941c-4707-8fb0-e4fce617b424: 'Youtube/Vimeo Video URL' # Youtube/Vimeo Video URL
+    aec806ed-10ba-4ecd-819e-bd0bd36ca129: 'Featured Link' # Featured Link
+    b0a51bbc-452f-4c28-90cb-be69261fa068: 'Mixed Content' # Mixed Content
+    b9df2f18-f25a-4f21-a1bd-2d54dd0ce464: 'Column Count' # Column Count
+    b331abc3-406d-4f08-9b2c-7c672bf0de0e: 'Craft4 Test' # Craft4 Test
+    b582704c-66aa-4611-a6e1-79f208db6ab7: 'Link Description' # Link Description
+    bb1cad82-345d-45ce-8868-7e95321e0dde: Attribution # Attribution
+    bb85a1cd-c2b6-49d2-8f4c-221e447e0124: 'Generic Page' # Generic Page
+    cb14981f-573d-46a0-b437-65a5a962b0e2: Email # Email
+    d0c2725f-cc81-4c85-a467-3179e7b41c85: Entries # Entries
+    d77dcb20-938f-42b0-8c62-deed91622131: 'Show Listing Image' # Show Listing Image
+    db0b4568-9841-48bd-a7be-a5d617cbf01b: 'Link Title' # Link Title
+    de2f35a0-9340-455e-bdd1-56d49ee957e9: Video # Video
+    e5bed996-6c75-4bf7-bb8e-3f7765a0bec3: 'Listing Excerpt' # Listing Excerpt
+    e44a73d4-3acb-4966-9453-c5b048152dd2: 'Text By Image' # Text By Image
+    e17983f8-744e-49ef-9eae-e9480693cebc: 'Email Header' # Email Header
+    eba994c9-4a51-4ee1-8574-0e9a8d04b1c1: 'Newsletter CTA text' # Newsletter CTA text
+    ed578c38-afc8-4e66-b8b8-9dece35fc627: 'Footer Navigation' # Footer Navigation
+    f0a903f2-fd7a-4d92-9df6-958587df9b3b: Homepage # Homepage
+    f4eb0191-de34-435f-8f7c-dae20b322c0d: 'Redirect on success' # Redirect on success
+    f6b9e281-1629-4b01-9358-328790bed358: Text # Text
+    f87a627c-8252-450e-bedd-74bb08e21d9d: 'Formatted Address' # Formatted Address
+    f105a959-ff7b-4aa4-bee5-de61ffe7843d: Files # Files
+    f465523b-77c1-45ed-a308-bffb975c28b4: Files # Files
+    faf93cfc-3cbf-4eaa-bd2d-16952cde36db: Entries # Entries
+    fc9fe069-509c-41d5-ab17-fb401bf818e1: 'Allow hard to read line lengths' # Allow hard to read line lengths
+plugins:
+  image-resizer:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+    settings:
+      assetSourceSettings:
+        1:
+          __assoc__:
+            -
+              - enabled
+              - '1'
+            -
+              - imageWidth
+              - '2200'
+            -
+              - imageHeight
+              - '2200'
+            -
+              - imageQuality
+              - '90'
+        2:
+          __assoc__:
+            -
+              - enabled
+              - '1'
+            -
+              - imageWidth
+              - ''
+            -
+              - imageHeight
+              - ''
+            -
+              - imageQuality
+              - ''
+      enabled: true
+      imageHeight: 2200
+      imageQuality: 90
+      imageWidth: 2200
+      nonDestructiveCrop: false
+      nonDestructiveResize: false
+      skipLarger: true
+  imager-x:
+    edition: pro
+    enabled: true
+    licenseKey: XALSCXLH9Q68U9UY3TCMOHAP
+    schemaVersion: 4.0.0
+  minify:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  navigation:
+    edition: standard
+    enabled: true
+    licenseKey: GU3G5MIJS5STPUZR12QOD5N3
+    schemaVersion: 2.0.2
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+  seomatic:
+    edition: standard
+    enabled: true
+    licenseKey: V4SOTXCJEXUQLL2VSV7B5J28
+    schemaVersion: 3.0.11
+  sprig:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.1
+  vite:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  wheelform:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+    settings:
+      cp_label: Forms
+      disabled_fields:
+        - file
+        - hidden
+        - list
+        - number
+        - html
+      from_email: from@website.com
+      from_name: Website
+      recaptcha_min_score: '0.5'
+      recaptcha_public: ''
+      recaptcha_secret: ''
+      recaptcha_version: '2'
+      success_message: 'Thank You! we will review your submission shortly.'
+      volume_id: ''
+system:
+  edition: pro
+  live: true
+  name: 'Craft4 VCA'
+  retryDuration: null
+  schemaVersion: 4.0.0.9
+  timeZone: America/Los_Angeles

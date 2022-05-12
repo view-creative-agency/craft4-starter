@@ -1,0 +1,29 @@
+columnSuffix: xyughtec
+contentColumnType: text
+fieldGroup: 42d5c4a2-18cd-49bd-8f8e-3f79b84ed7b2 # Common
+handle: seo
+instructions: null
+name: SEO
+searchable: false
+settings:
+  elementDisplayPreviewType: google
+  facebookEnabledFields:
+    - ogTitle
+    - ogDescription
+    - ogImage
+  facebookTabEnabled: '1'
+  generalEnabledFields:
+    - seoTitle
+    - seoDescription
+    - seoImage
+  generalTabEnabled: '1'
+  sitemapTabEnabled: ''
+  twitterEnabledFields:
+    - twitterCardType
+    - twitterTitle
+    - twitterDescription
+    - twitterImage
+  twitterTabEnabled: '1'
+translationKeyFormat: null
+translationMethod: none
+type: nystudio107\seomatic\fields\SeoSettings

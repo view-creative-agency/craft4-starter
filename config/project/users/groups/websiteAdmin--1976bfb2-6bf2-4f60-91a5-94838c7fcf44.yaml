@@ -1,0 +1,72 @@
+description: 'Clients with "full" access, that avoids destructive areas of the CMS'
+handle: websiteAdmin
+name: 'Website Admin'
+permissions:
+  - accesscp
+  - accesscpwhensystemisoff
+  - accessplugin-seomatic
+  - 'assignusergroup:1976bfb2-6bf2-4f60-91a5-94838c7fcf44' # Website Admin
+  - assignuserpermissions
+  - 'createentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'createfolders:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'createfolders:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'deleteassets:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'deleteassets:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'deleteentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'deletepeerassets:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'deletepeerassets:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'deletepeerentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'deletepeerentrydrafts:50731a92-0234-47dc-b983-b4d3fa37646f' # Homepage
+  - 'deletepeerentrydrafts:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'editglobalset:136bd771-2d6d-4fbf-bdab-627335611e32' # Website
+  - 'editglobalset:cb14981f-573d-46a0-b437-65a5a962b0e2' # Email
+  - 'editimages:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'editimages:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'editpeerimages:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'editpeerimages:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - editusers
+  - moderateusers
+  - 'navigation-managenav:a1ad1291-f30b-4c72-9380-081566bacf65' # Main Navigation
+  - 'navigation-managenav:ed578c38-afc8-4e66-b8b8-9dece35fc627' # Footer Navigation
+  - registerusers
+  - 'replacefiles:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'replacefiles:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'replacepeerfiles:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'replacepeerfiles:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'saveassets:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'saveassets:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'saveentries:50731a92-0234-47dc-b983-b4d3fa37646f' # Homepage
+  - 'saveentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'savepeerassets:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'savepeerassets:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'savepeerentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'savepeerentrydrafts:50731a92-0234-47dc-b983-b4d3fa37646f' # Homepage
+  - 'savepeerentrydrafts:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'seomatic:content-meta'
+  - 'seomatic:content-meta:facebook'
+  - 'seomatic:content-meta:general'
+  - 'seomatic:content-meta:twitter'
+  - 'seomatic:dashboard'
+  - 'seomatic:global-meta'
+  - 'seomatic:global-meta:facebook'
+  - 'seomatic:global-meta:general'
+  - 'seomatic:global-meta:twitter'
+  - 'seomatic:plugin-settings'
+  - 'seomatic:site-settings'
+  - 'seomatic:site-settings:identity'
+  - 'seomatic:site-settings:miscellaneous'
+  - 'seomatic:site-settings:social'
+  - 'seomatic:tracking-scripts'
+  - 'seomatic:tracking-scripts:facebookpixel'
+  - 'seomatic:tracking-scripts:googleanalytics'
+  - 'seomatic:tracking-scripts:googletagmanager'
+  - 'seomatic:tracking-scripts:gtag'
+  - 'viewassets:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'viewassets:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'viewentries:50731a92-0234-47dc-b983-b4d3fa37646f' # Homepage
+  - 'viewentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'viewpeerassets:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+  - 'viewpeerassets:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+  - 'viewpeerentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
+  - 'viewpeerentrydrafts:50731a92-0234-47dc-b983-b4d3fa37646f' # Homepage
+  - 'viewpeerentrydrafts:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages

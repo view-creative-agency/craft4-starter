@@ -1,0 +1,14 @@
+columnSuffix: bjgbgcrw
+contentColumnType: boolean
+fieldGroup: 45d743a2-ba39-4aed-9a6d-b6b90abf971e # Globals
+handle: showNewsletterCta
+instructions: 'Show the newsletter sign up form (or not).'
+name: 'Show Newsletter CTA'
+searchable: false
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

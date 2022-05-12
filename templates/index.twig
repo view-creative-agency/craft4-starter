@@ -1,9 +1,9 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Test</title>
-	</head>
-	<body>
-		<h1>This is a test</h1>
-	</body>
-</html>
+{% import '_macros/helpers' as helpers -%}
+{%- extends "_layout" -%}
+{%- set htmlClass = 'pages ' ~ entry.type -%}
+
+{%- block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<h1>This is the homepage</h1>
+	</main>
+{% endblock %}

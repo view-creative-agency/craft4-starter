@@ -29,10 +29,11 @@ return [
 
         // https://docs.craftcms.com/v3/config/#aliases
         'aliases' => [
-            '@web' => App::env('PRIMARY_SITE_URL'), // explicitly set to avoid cache poisoning vulnerability
-            '@webroot' => App::env('PRIMARY_SITE_WEB_ROOT'), // console command compat
-            '@primarySiteUrl' => App::env('PRIMARY_SITE_URL'),
-            '@primarySiteWebRoot' => App::env('PRIMARY_SITE_WEB_ROOT'),
+            '@web' => rtrim( App::env('PRIMARY_SITE_URL'), '/' ), // explicitly set to avoid cache poisoning vulnerability
+            '@webroot' => dirname(__DIR__) . '/web', // console command compat
+
+            '@primarySiteUrl' => rtrim( App::env('PRIMARY_SITE_URL'), '/' ), // explicitly set to avoid cache poisoning vulnerability
+            '@primarySiteWebroot' => dirname(__DIR__) . '/web', // console command compat
         ],
 
         // https://github.com/craftcms/cms/issues/1511

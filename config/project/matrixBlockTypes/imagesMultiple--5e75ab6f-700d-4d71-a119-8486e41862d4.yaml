@@ -1,0 +1,127 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  e500682f-f57d-4d1b-98c6-02fbe4d2ae03:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 0f6f6a63-845d-449f-b5f6-c0b17a402227 # Images
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 406e992c-d52f-4407-a890-871340fb83d0
+            warning: null
+            width: 50
+          -
+            fieldUid: 1111c868-466c-4b74-ae32-915139c845b1 # Display As...
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 20848946-a8b2-40b2-bacb-767f5d93898a
+            warning: null
+            width: 50
+        name: Content
+        uid: f2100328-3baf-40ef-83e2-ad0c56604a97
+fields:
+  0f6f6a63-845d-449f-b5f6-c0b17a402227: # Images
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: images
+    instructions: 'Up to 9 images, which can be displays as a gallery in its own row.'
+    name: Images
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds:
+        - photos
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 9
+      minRelations: 1
+      previewMode: full
+      restrictFiles: true
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose images'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  1111c868-466c-4b74-ae32-915139c845b1: # Display As...
+    columnSuffix: swxebzkr
+    contentColumnType: string
+    fieldGroup: null
+    handle: displayAs
+    instructions: "Grid splits the row into columns and shows the images side by side.\r\nSimple Slider gives a full width image that slides to the next/prev image.\r\n\r\nNOTE: Images are always cropped to fit the design. They can be clicked to view the un-cropped image."
+    name: 'Display As...'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Grid (with gap)'
+            -
+              - value
+              - gridWithGap
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 'Grid (compact)'
+            -
+              - value
+              - gridCompact
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Simple Slider'
+            -
+              - value
+              - simpleSlider
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: imagesMultiple
+name: 'Images: Multiple'
+sortOrder: 5

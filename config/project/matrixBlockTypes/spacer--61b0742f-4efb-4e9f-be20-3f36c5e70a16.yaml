@@ -1,0 +1,57 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  4d0f8cc8-2df7-4ab9-b944-f7c69a6cd268:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 6079e509-0ab3-4f71-ae20-eae74d724613 # Spacer Size
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b446c038-a941-4e60-a91a-5b4fdcdb3fcd
+            warning: null
+            width: 100
+        name: Content
+        uid: 5df024d1-bb14-4d32-b88a-b598fb82a706
+fields:
+  6079e509-0ab3-4f71-ae20-eae74d724613: # Spacer Size
+    columnSuffix: fudfipao
+    contentColumnType: string
+    fieldGroup: null
+    handle: spacerSize
+    instructions: 'A visual "break" to clearly separate some of your content.'
+    name: 'Spacer Size'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Small
+            -
+              - value
+              - small
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Large
+            -
+              - value
+              - large
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: spacer
+name: Spacer
+sortOrder: 12

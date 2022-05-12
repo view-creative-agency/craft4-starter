@@ -1,0 +1,97 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  40fff434-404d-4ccb-ad98-e943d59418cd:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 1865e161-9efb-43b3-a4be-59383a6674f7 # Quotation
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2e6f31ce-9671-49bc-a2bf-7fc037df8907
+            warning: null
+            width: 100
+          -
+            fieldUid: bb1cad82-345d-45ce-8868-7e95321e0dde # Attribution
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 166841e2-9928-4f6c-b76a-3d33bbf94262
+            warning: null
+            width: 50
+          -
+            fieldUid: 83b0902d-25fa-4ce1-a72b-0857d3f51d45 # Link To
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 89db0c32-6c9a-4b2b-a37d-1ee4134c9b9d
+            warning: null
+            width: 50
+        name: Content
+        uid: a27de109-bb69-407c-946c-d483d1648b19
+fields:
+  83b0902d-25fa-4ce1-a72b-0857d3f51d45: # Link To
+    columnSuffix: mfamaazj
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: linkTo
+    instructions: 'If you''d like the Attribution to link to a web page, paste the URL here.'
+    name: 'Link To'
+    searchable: false
+    settings:
+      maxLength: 255
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+  1865e161-9efb-43b3-a4be-59383a6674f7: # Quotation
+    columnSuffix: fdqccsli
+    contentColumnType: text
+    fieldGroup: null
+    handle: quotation
+    instructions: null
+    name: Quotation
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: true
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  bb1cad82-345d-45ce-8868-7e95321e0dde: # Attribution
+    columnSuffix: uuauhgud
+    contentColumnType: text
+    fieldGroup: null
+    handle: attribution
+    instructions: null
+    name: Attribution
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: false
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: blockquote
+name: Blockquote
+sortOrder: 2

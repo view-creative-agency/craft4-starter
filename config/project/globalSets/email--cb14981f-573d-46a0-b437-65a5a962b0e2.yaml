@@ -1,0 +1,20 @@
+fieldLayouts:
+  04f3a1cf-d73c-46cf-8fb6-5947075b025c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: e17983f8-744e-49ef-9eae-e9480693cebc # Email Header
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4202429c-8b56-4e26-a11e-a1c9ebe2c25d
+            warning: null
+            width: 100
+        name: Defaults
+        uid: f8364e22-b48e-4413-a61f-9375c318c759
+handle: email
+name: Email
+sortOrder: 1

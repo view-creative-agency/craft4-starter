@@ -1,0 +1,19 @@
+columnSuffix: zqxjzvom
+contentColumnType: text
+fieldGroup: 45d743a2-ba39-4aed-9a6d-b6b90abf971e # Globals
+handle: formattedAddress
+instructions: "Your address - as used in places like the footer.\r\nIf blank, your address will be generated from the SEOmatic data (which Google uses). That may not be formatted how you'd like, but DO NOT CHANGE the SEOmatic address format just to be visually pleasing."
+name: 'Formatted Address'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: true
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

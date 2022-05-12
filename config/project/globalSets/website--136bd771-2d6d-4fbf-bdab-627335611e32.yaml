@@ -1,0 +1,54 @@
+fieldLayouts:
+  f35b77eb-d78b-4eae-a5a0-b4189090dcfd:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: f87a627c-8252-450e-bedd-74bb08e21d9d # Formatted Address
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 394af2aa-f495-4e74-9247-fda42fb9b06b
+            warning: null
+            width: 100
+          -
+            fieldUid: 5c964f76-f7db-4765-8c8d-add2047d8ba7 # Missing Image Fallback
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2e205a7f-4e18-4462-9f24-0323e576112c
+            warning: null
+            width: 100
+        name: 'General Settings'
+        uid: be650588-19b7-43a8-b976-fcb1869e7130
+      -
+        elements:
+          -
+            fieldUid: 344da3ee-6f97-44b2-b4ae-8decb263506d # Show Newsletter CTA
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ec824cfb-349b-41ef-9f0c-28438b2acf80
+            warning: null
+            width: 100
+          -
+            fieldUid: eba994c9-4a51-4ee1-8574-0e9a8d04b1c1 # Newsletter CTA text
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 89d914b1-09e4-4469-8c4d-f105b52988e2
+            warning: null
+            width: 100
+        name: Newsletter
+        uid: fef8650b-c162-497e-8b0a-f58c619daaea
+handle: website
+name: Website
+sortOrder: 2

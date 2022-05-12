@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+handle: pages
+name: Pages
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  6ac2852d-9212-4f02-89d2-35cd874150e9: # Craft4 Test
+    enabledByDefault: true
+    hasUrls: true
+    template: _pages/_routing
+    uriFormat: '{ parent ? parent.uri : '''' }/{ slug }'
+structure:
+  maxLevels: null
+  uid: d1388ff0-cbbb-4245-b62c-fa35fb3b22e1
+type: structure

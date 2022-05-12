@@ -1,0 +1,137 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  bb05aae9-c53a-4321-98d1-be7a51021c32:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4 # Image
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 00c3d4bd-597a-429f-be36-c6d15c115639
+            warning: null
+            width: 50
+          -
+            fieldUid: 4ca648ee-78d8-4b4e-be42-119bdc9ac095 # Crop
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3133b6da-b665-4802-889c-ff9486dc6154
+            warning: null
+            width: 50
+        name: Content
+        uid: 1cc3093d-fcf8-4128-bb31-74b91aff8630
+fields:
+  4ca648ee-78d8-4b4e-be42-119bdc9ac095: # Crop
+    columnSuffix: cvsknatk
+    contentColumnType: string
+    fieldGroup: null
+    handle: crop
+    instructions: "How the image should be cropped.\r\n\"No crop\" will output the image in the same shape as it is uploaded."
+    name: Crop
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'No crop'
+            -
+              - value
+              - noCrop
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 'Landscape Photo 3:2'
+            -
+              - value
+              - landscapePhoto32
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Widescreen 16:9'
+            -
+              - value
+              - widescreen169
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Cinema 2.39:1'
+            -
+              - value
+              - cinema2391
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: # Image
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: image
+    instructions: 'An image that will be displayed full width.'
+    name: Image
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds:
+        - photos
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 1
+      minRelations: 1
+      previewMode: full
+      restrictFiles: true
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: imageSingle
+name: 'Image: Single'
+sortOrder: 4
