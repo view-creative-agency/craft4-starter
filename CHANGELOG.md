@@ -15,6 +15,12 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.5] - 2022-07-10
+
+### Changed
+
+- Prevent full page reloading when JS changes [mirrored from OneDarnleyRoad update](https://github.com/onedarnleyroad/craftcms/commit/8bc36fc228965130d1cff01a68ee3920143a34f7)
+
 ## [1.0.4] - 2022-05-12
 
 ### Added
