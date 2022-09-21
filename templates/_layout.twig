@@ -63,8 +63,8 @@
 		#}
 
 		<!-- Styling for all devices -->
-		{{ craft.vite.script('src/js/app.js', false) }}
-		{# <link rel="stylesheet" media="screen" href="/assets/css/screen-core.css"/> #}
+		{{ craft.vite.script('src/js/app.js', false) }}{# Generates the CSS link, in dev will use Vite, in prod proper CSS #}
+		{# <link rel="stylesheet" media="screen" href="/assets/css/screen-core.css"/> NOT USED? #}
 
 		<!-- Favicons [ See: https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df ] -->
 		<!-- <link rel="icon" href="data:,"> no favicon, blocking automatic browser request -->
