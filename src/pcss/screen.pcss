@@ -1,0 +1,190 @@
+@import "reset.pcss";
+@import "base-rules.pcss";
+
+@import "legacy/cms-textblock.pcss";
+@import "legacy/mixed-content.pcss";
+@import "legacy/ajax-popups.pcss";
+
+.devWarning {
+	position: absolute; top: 0; left: 0; right: 0;
+	padding: 0.5em 1em;
+	text-align: center; background: rebeccapurple; color: white;
+	animation: fadeOut 0.3s 2s both; pointer-events: none;
+}
+
+/* stop transitions playing on page load */
+	html:not( .load-complete ) * {
+		transition: none !important;
+	}
+
+/* accessibility */
+	.skiplink {
+		/* @include hide-element; */
+
+		&:focus {
+			position: fixed; left: 0;
+			width: 100vw; height: auto; padding: 1ch;
+			background-color: yellow; color: navy; text-align: center;
+			outline: 0;
+		}
+	}
+
+/* responsive embed container
+   https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
+   https://web.dev/aspect-ratio/ */
+
+	.embedContainer {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+
+		@supports not (aspect-ratio: 1 / 1) {
+			/* 4:3 ratio (olden standard ratio) */
+			height: 0; padding-bottom: 75%; max-width: 100%;
+		}
+
+		& iframe,
+		& object,
+		& embed,
+		& > div {
+			position: absolute; top: 0; left: 0;
+			width: 100% !important; height: 100% !important;
+
+			& * {
+				box-sizing: content-box;
+			}
+
+			& img {
+				width: auto; max-width: none;
+			}
+		}
+
+		&.widescreen { /* 16:9 ratio (common TV/Video ratio) */
+			@supports (aspect-ratio: 1 / 1) {
+				aspect-ratio: 16 / 9;
+			}
+			@supports not (aspect-ratio: 1 / 1) {
+				padding-bottom: 56.25%;
+			}
+		}
+
+		&.cinema185 { /* 1.85:1 */
+			@supports (aspect-ratio: 1 / 1) {
+				aspect-ratio: 1.85 / 1;
+			}
+			@supports not (aspect-ratio: 1 / 1) {
+				padding-bottom: 54.05405405%;
+			}
+		}
+
+		&.cinema239 { /* 2.39:1 */
+			@supports (aspect-ratio: 1 / 1) {
+				aspect-ratio: 2.39 / 1;
+			}
+			@supports not (aspect-ratio: 1 / 1) {
+				padding-bottom: 43%;
+			}
+		}
+	}
+
+/* social media icons */
+	.sm {
+		& ul {
+			display: flex; align-items: center; flex-wrap: wrap; gap: calc( 0.5 * var(--gap) );
+			list-style: none;
+			margin-bottom: 0;
+		}
+
+		& li {
+			& a {
+				display: block;
+				transition: all .3s; transform-origin: 50% 50%;
+			}
+			& span {
+				/* @include hide-element; */
+			}
+		}
+
+		& svg {
+			display: block;
+		}
+
+		&.brand-compliant {
+			& a {
+				width: 42px;
+
+				&:hover,
+				&:focus {
+					transform: scale(1.1);
+				}
+			}
+
+			& svg {
+				width: 42px; height: 42px;
+			}
+		}
+
+		&.outline	{
+			& a {
+				width: 36px;
+
+				&:hover,
+				&:focus {
+					transform: scale(1.1);
+				}
+			}
+
+			& svg {
+				width: 36px; height: 36px;
+
+				& path,
+				& circle {
+					fill: currentColor;
+				}
+			}
+		}
+	}
+
+/* seomatic opening hours */
+	.seomatic-opening-hours {
+		& li {
+			display: flex;
+
+			& .day {
+				width: 3em;
+			}
+
+			& .closes {
+				&:before {
+					content: " - ";
+				}
+			}
+		}
+	}
+
+/* pagination-controls */
+	.pagination-controls {
+		border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1em; margin-top: 1em;
+
+		& h3 {
+			/* @include hide-element; */
+		}
+
+		& ul {
+			display: flex; justify-content: space-between;
+			list-style: none;
+
+			& li.prev {
+				align-self: flex-start;
+			}
+			& li.next {
+				align-self: flex-end;
+				text-align: right;
+			}
+		}
+	}
+
+/* pendingTranslation */
+	.pendingTranslation {
+		color: red;
+	}
