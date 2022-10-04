@@ -32,11 +32,11 @@ install: up build
 	ddev exec php craft plugin/install vite
 up:
 	if [ ! "$$(ddev describe | grep OK)" ]; then \
-        ddev auth ssh; \
-        ddev start; \
-        ddev composer install; \
-        ddev exec npm install; \
-    fi
+		ddev auth ssh; \
+		ddev start; \
+		ddev composer install; \
+		ddev exec npm install; \
+	fi
 %:
 	@:
 # ref: https://stackoverflow.com/questions/6273608/how-to-pass-argument-to-makefile-from-command-line
