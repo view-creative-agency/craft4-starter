@@ -1,9 +1,9 @@
 <?php
-
+// Config for the Craft Vite Plugin (not for Vite itself, that's at /vite.config.js)
 use craft\helpers\App;
 
 return [
-	'useDevServer'      => App::env('ENVIRONMENT') === 'dev',
+	// 'useDevServer'      => App::env('ENVIRONMENT') === 'dev',
 	'checkDevServer'    => true,
 	'devServerInternal' => 'http://localhost:3000',
 
