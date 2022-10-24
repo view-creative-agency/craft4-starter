@@ -15,7 +15,19 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## [1.1] - 2022-10-24
+## [1.0.8] - 2022-10-24
+
+This release marks the first attempt at a properly complete project ready to actually use.
+
+### Added
+
+- `make seed` command to populate the project with a starter database
+
+### Fixed
+
+- Incorrect plugin name causing `make install` to fail
+
+## [1.0.7] - 2022-10-24
 
 This release marks the first attempt at a properly complete project ready to actually use.
 
