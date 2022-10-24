@@ -2,6 +2,7 @@ fieldLayouts:
   692958f0-45a8-4d59-afa5-78b2a24314ca:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,6 +10,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
             instructions: null
             label: null
@@ -25,9 +27,11 @@ fieldLayouts:
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
             uid: d1ebde03-0734-4535-89b9-3766e3f401a4
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
             instructions: null
             label: null
@@ -35,13 +39,17 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: f2e7d893-1bae-41b8-b17c-105684413228
+            userCondition: null
             warning: null
             width: 100
         name: Content
         uid: 7d35b853-e1d5-45eb-a47d-2f2a7f43eb15
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 4b265d58-9bcb-446a-8339-a25f3f625338 # Listing Image
             instructions: null
             label: null
@@ -49,9 +57,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 4b970851-a507-42cc-a5e1-98a171d9df2d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e5bed996-6c75-4bf7-bb8e-3f7765a0bec3 # Listing Excerpt
             instructions: null
             label: null
@@ -59,13 +69,17 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 5248475d-c9a6-40f5-87c1-8b8827634334
+            userCondition: null
             warning: null
             width: 100
         name: 'Listing Details'
         uid: 893c2b22-1d21-412d-bf8f-b548f6fb45b6
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 14cfd869-dfee-4009-afee-8350c15d51ad # SEO
             instructions: null
             label: null
@@ -73,10 +87,12 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 1c8e2a00-89bd-4622-9607-65f3d545f7c8
+            userCondition: null
             warning: null
             width: 100
         name: SEO
         uid: e27da913-672d-483f-88df-aead84331d56
+        userCondition: null
 handle: genericPage
 hasTitleField: true
 name: 'Generic Page'

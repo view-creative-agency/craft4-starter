@@ -1,0 +1,52 @@
+{% import '_macros/helpers' as helpers -%}
+{%- extends "_layout" -%}
+{%- set htmlClass = 'section_news ' ~ entry.type -%}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<div class="">
+			<div class="col1">
+				{% cache %}{# When caching, wrap as much as possible of the query and prep logic along with the display logic - like this #}
+					{% do eagerLoadElements(entry, [
+						'mixedContent.images:images',
+						'mixedContent.entries:entries.listingImage',
+						'mixedContent.files:files'
+					]) %}
+
+					<div class="mixedContent">
+						{% for block in entry.mixedContent %}
+							{% include '_partials/cms-fields/mixedcontent/' ~ block.type ignore missing %}
+						{% endfor %}
+					</div><!-- .mixedContent -->
+				{% endcache %}
+
+				{# How long can the cache last? When's the next pending publication? #}
+					{% set firstPending = craft.entries
+						.section('newsItems')
+						.status('pending')
+						.orderBy('postDate asc')
+						.one()
+					%}
+					{% if firstPending | length %}
+						{% set cacheUntil = firstPending.postDate %}
+					{% endif %}
+
+					{% if cacheUntil is defined %}
+						{% cache until cacheUntil %}
+							{% include '_news-listing' %}
+						{% endcache %}
+					{% else %}
+						{% cache %}{# standard caching is fine now #}
+							{% include '_news-listing' %}
+						{% endcache %}
+					{% endif %}
+			</div>
+
+			<div class="col2">
+				{% include 'news/_nav-categories' %}
+				{% include 'news/_nav-archive' %}
+				{% include '_partials/social-share' %}
+			</div>
+		</div>
+	</main>
+{% endblock %}

@@ -27,7 +27,7 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+      "@php -r \"file_exists('.env') || copy('.env.ddev', '.env');\"",
       "@php -r \"unlink('.gitignore');\"",
       "@php -r \"rename('.gitignore.default', '.gitignore');\"",
       "@php -r \"unlink('composer.json');\"",

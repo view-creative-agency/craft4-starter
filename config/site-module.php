@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'example' => ''
+	'example' => 'testing-value-here'
 ];

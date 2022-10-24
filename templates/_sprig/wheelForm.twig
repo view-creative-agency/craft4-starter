@@ -1,0 +1,188 @@
+{% import '_macros/helpers' as helpers %}
+{% import '_macros/forms' as forms %}
+
+{% if sprig.isRequest %}
+	{% set form = wheelform.form({
+		id: formId
+	}) %}
+
+	{% if success %}
+		{% if formRedirect is defined and formRedirect | length %}
+			<script>
+				location.assign("{{ formRedirect }}");
+			</script>
+		{% endif %}
+
+		<p class="message success">
+			{{ wheelform.settings.success_message }}
+		</p>
+	{% else %}
+		<form
+			sprig
+			s-method="post"
+			s-encoding="multipart/form-data"
+			s-action="wheelform/message/send"
+		>
+			<input type="hidden" name="form_id" value="{{ formId }}">
+			{% if formRedirect | length %}
+				<input type="hidden" name="redirect" value="{{ formRedirect }}">
+			{% endif %}
+
+			{{ wheelformErrors['form'] is defined      ? helpers.errorList(wheelformErrors['form']) }}
+			{{ wheelformErrors['recaptcha'] is defined ? helpers.errorList(wheelformErrors['recaptcha']) }}
+			{{ wheelformErrors['honeypot'] is defined  ? helpers.errorList(wheelformErrors['honeypot']) }}
+
+			{% for field in form.fields %}
+				{% switch field.type %}
+					{% case 'hidden' %}
+						<input
+							type="hidden"
+							name="{{field.name}}"
+							value="{{ item }}"
+						/>
+
+					{% case "radio" %}
+						{# Build the radio buttons array... #}
+							{% set options = [] %}
+							{% for item in field.items %}
+								{% set options = options | merge( [{
+									type    : field.type,
+									label   : item,
+									value   : item,
+									name    : field.name,
+									id      : field.name ~ loop.index ~ formId,
+									checked : values[field.name] is defined and item == values[field.name]
+								}] ) %}
+							{% endfor %}
+
+							{% set groupError = null %}
+							{% if wheelformErrors is defined and wheelformErrors[field.name] %}
+								{% set groupError = wheelformErrors[field.name][0] %}
+							{% endif %}
+
+							{{ forms.htmlRadioset({
+								legend      : field.options.display_label ? field.label ??? null,
+								legendStyle: 'dc_uppercase-adjusted',
+								required    : field.required,
+								error       : groupError,
+								options     : options
+							}) }}
+
+					{% case "checkbox" %}
+						{# Build the radio buttons array... #}
+							{% set options = [] %}
+							{% for item in field.items %}
+								{% set options = options | merge( [{
+									type    : field.type,
+									label   : item,
+									value   : item,
+									name    : field.name ~ '[]',
+									id      : field.name ~ loop.index ~ formId,
+									checked : values[field.name] is defined and item == values[field.name]
+								}] ) %}
+							{% endfor %}
+
+							{% set groupError = null %}
+							{% if wheelformErrors is defined and wheelformErrors[field.name] %}
+								{% set groupError = wheelformErrors[field.name][0] %}
+							{% endif %}
+
+							{{ forms.htmlRadioset({
+								legend      : field.options.display_label ? field.label ??? null,
+								legendStyle: 'dc_uppercase-adjusted',
+								required    : field.required,
+								error       : groupError,
+								options     : options
+							}) }}
+
+					{% case "select" %}
+						{% set options = [] %}
+						{% for item in field.items %}
+							{% set options = options | merge([
+								{
+									label:    item,
+									value:    item,
+									selected: values[field.name] is defined and item == values[field.name]
+								}
+							]) %}
+						{% endfor %}
+
+						{{ forms.htmlField({
+							type   : 'select',
+							id     : field.name ~ loop.index ~ formId,
+							name   : field.name,
+							label  : field.label ??? 'Field Label Not Set',
+							options: options,
+							error  : wheelformErrors[field.name] is defined ? wheelformErrors[field.name][0] : null
+						}) }}
+
+					{% case "textarea" %}
+						{{ forms.htmlField({
+							type        : 'textarea',
+							id          : field.name ~ loop.index ~ formId,
+							name        : field.name,
+							value       : (values is defined ? values[field.name] : ''),
+							required    : field.required,
+							label       : field.label ??? 'Field Label Not Set',
+							instructions: null,
+							error       : wheelformErrors[field.name] is defined ? wheelformErrors[field.name][0] : null
+						}) }}
+
+					{% case "file" %}
+						{{ forms.htmlField({
+							type        : 'file',
+							id          : field.name ~ loop.index ~ formId,
+							name        : field.name,
+							value       : (values is defined ? values[field.name] : ''),
+							required    : field.required,
+							label       : field.label ??? 'Field Label Not Set',
+							instructions: null,
+							error       : wheelformErrors[field.name] is defined ? wheelformErrors[field.name][0] : null
+						}) }}
+						<script>
+							var uploadField = document.getElementById("{{ field.name ~ loop.index ~ formId }}");
+
+							uploadField.onchange = function() {
+								if(this.files[0].size > 8388608){
+								alert("Sorry, the file size you are trying to upload is too big, please reduce the file size. ");
+								this.value = "";
+								};
+							};
+						</script>
+
+					{% case "html" %}
+						<div class="wheelform-html">
+							{{ field.content | raw }}
+						</div>
+
+					{% default %}
+						{{ forms.htmlField({
+							type        : 'text',
+							id          : field.name ~ loop.index ~ formId,
+							name        : field.name,
+							value       : (values is defined ? values[field.name] : ''),
+							required    : field.required,
+							label       : field.label ??? 'Field Label Not Set',
+							instructions: null,
+							error       : wheelformErrors[field.name] is defined ? wheelformErrors[field.name][0] : null
+						}) }}
+				{% endswitch %}
+			{% endfor %}
+
+			{% if form.recaptcha %}
+				<div>
+					<script src="https://www.google.com/recaptcha/api.js"></script>
+					<!-- Production captcha -->
+					<div class="g-recaptcha" data-sitekey="{{ wheelform.getSettings('recaptcha_public') }}"></div>
+				</div>
+			{% endif %}
+
+			<div class="formActions">
+				<div class="message">* Required fields</div>
+				<button class="uc_button">Send Message</button>
+			</div>
+		</form>
+	{% endif %}
+{% else %}
+	<p>Fetching form...</p>
+{% endif %}

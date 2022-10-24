@@ -28,11 +28,11 @@
 		<div class="times">
 			{% if day['open'] and day['close'] %}
 				<span class="opens">
-					<i>Opens </i>{{ day['open'].date | date('H:i') }}
+					<i class="uc_hide-element">Opens </i>{{ day['open'].date | date('H:i') }}
 				</span>
 
 				<span class="closes">
-					<i>Closes </i>{{ day['close'].date | date('H:i') }}
+					<i class="uc_hide-element">Closes </i>{{ day['close'].date | date('H:i') }}
 				</span>
 			{% else %}
 				CLOSED

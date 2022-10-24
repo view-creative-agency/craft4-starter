@@ -1,0 +1,47 @@
+{#
+	To be used inside of any Paginated block. This template creates
+	the pagination controls themselves.
+
+	REFERENCE:
+		https://docs.craftcms.com/v3/dev/tags/paginate.html#the-pageInfo-variable
+		https://nystudio107.com/docs/seomatic/Technologies.html#pagination-and-seo
+
+	USE:
+		{% paginate craft.entries.section('newsItems') as paginationInfo, paginationEntries %}
+		{% do seomatic.helper.paginate(paginationInfo) %}
+		...loop through paginationEntries...
+		{% include '_partials/pagination-controls.twig' %}
+#}
+{% if paginationInfo.prevUrl or paginationInfo.nextUrl %}
+	<div class="pagination-controls">
+		<h3>Pagination</h3>
+
+		<ul>
+			{% if paginationInfo.prevUrl %}
+				<li class="link prev">
+					<a href="{{ paginationInfo.prevUrl }}" class="prev uc_button">{{ 'Back' | t }}</a>
+				</li>
+			{% else %}
+				<li class="link prev">
+					<span class="prev uc_button disabled">{{ 'Back' | t }}</span>
+				</li>
+			{% endif %}
+
+			{% if paginationInfo.totalPages > 1 %}
+				<li class="paginationInfo">
+					{{ 'Page' | t }} {{ paginationInfo.currentPage }} {{ 'of' | t }} {{ paginationInfo.totalPages }}
+				</li>
+			{% endif %}
+
+			{% if paginationInfo.nextUrl %}
+				<li class="link next">
+					<a href="{{ paginationInfo.nextUrl }}" class="next uc_button">{{ 'Next' | t }}</a>
+				</li>
+			{% else %}
+				<li class="link next">
+					<span class="next uc_button disabled">{{ 'Next' | t }}</span>
+				</li>
+			{% endif %}
+		</ul>
+	</div><!-- .pagination -->
+{% endif %}

@@ -3,8 +3,10 @@ fieldLayouts:
   4d0f8cc8-2df7-4ab9-b944-f7c69a6cd268:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 6079e509-0ab3-4f71-ae20-eae74d724613 # Spacer Size
             instructions: null
             label: null
@@ -12,10 +14,12 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: b446c038-a941-4e60-a91a-5b4fdcdb3fcd
+            userCondition: null
             warning: null
             width: 100
         name: Content
         uid: 5df024d1-bb14-4d32-b88a-b598fb82a706
+        userCondition: null
 fields:
   6079e509-0ab3-4f71-ae20-eae74d724613: # Spacer Size
     columnSuffix: fudfipao
@@ -54,4 +58,4 @@ fields:
     type: craft\fields\Dropdown
 handle: spacer
 name: Spacer
-sortOrder: 12
+sortOrder: 13

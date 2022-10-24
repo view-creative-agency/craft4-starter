@@ -1,0 +1,90 @@
+<div
+	class="mixedContent_imagesSlider"
+	id="block-{{ block.id }}"
+	data-reveal-on-scroll
+>
+	{# Using https://swiperjs.com/swiper-api rather than jQuery and Slick #}
+
+	{# Register the CSS file with Craft #}
+	{% css "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" %}
+	{% css %}
+		:root {
+			--swiper-theme-color: hsl( var(--white, 0 100% 100%) );
+		}
+	{% endcss %}
+
+	{# Register the JS file with Craft #}
+	{% js "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" %}
+	{% js %}
+		const swiper = new Swiper('.mixedContent_imagesSlider .swiper', {
+			// Optional parameters
+			direction: 'horizontal',
+			loop: true,
+
+			// If we need pagination
+			pagination: {
+				el: '.swiper-pagination',
+			},
+
+			// Navigation arrows
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			// And if we need scrollbar
+			{#scrollbar: {
+				el: '.swiper-scrollbar',
+			},#}
+		});
+	{% endjs %}
+
+	{% for image in block.images %}
+		{% set jpgs  = craft.imagerx.transformImage( image, 'imageSingleLandscape169Jpg') %}
+		{% set webps = craft.imagerx.transformImage( image, 'imageSingleLandscape169Webp') %}
+
+		{% if loop.first %}
+			<div class="swiper">
+				<div class="swiper-wrapper">
+		{% endif %}
+
+		<div class="swiper-slide">
+			{#<a href="/responsive-image/{{ image.id }}" id="id-{{ block.id }}-{{ loop.index }}">#}
+				<picture>
+					<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
+					<source
+						srcset="{{ webps[0].url }}"
+						type="{{ webps[0].mimeType }}"
+						width="{{ webps[0].width }}"
+						height="{{ webps[0].height }}">
+
+					<!-- jpg fallbacks -->
+					<source
+						srcset="{{ jpgs[0].url }}"
+						type="{{ jpgs[0].mimeType }}"
+						width="{{ jpgs[0].width }}"
+						height="{{ jpgs[0].height }}">
+
+					<img
+						loading="lazy"
+						decoding="async"
+						src="{{ jpgs[0].url }}"
+						width="{{ jpgs[0].width }}"
+						height="{{ jpgs[0].height }}"
+						alt="{{ image.alt }}"
+					/>
+				</picture>
+			{#</a>#}
+		</div>
+
+		{% if loop.last %}
+				</div>
+
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+				{#<div class="swiper-scrollbar"></div>#}
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>

@@ -1,0 +1,77 @@
+{# Used by Ajax pop-ups in order to show a responsibly sized "full image" from a thumbnail gallery #}
+{% import '_macros/helpers' as helpers %}
+
+{% set image = craft.assets.id(number).one() %}{# number is set in the Routes section of the admin area #}
+{% do seomatic.config.renderEnabled(false) %}{# We don't want any SEOmatic stuff for this template #}
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+					content="width=device-width,initial-scale=1">
+		<meta name="robots" content="noindex">
+
+		<style>
+			html, body, picture, img {
+				margin: 0; padding: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="ajaxcontent">
+			{% set jpgs  = craft.imagerx.transformImage( image, 'imageSingleUncroppedJpg') %}
+			{% set webps = craft.imagerx.transformImage( image, 'imageSingleUncroppedWebp') %}
+			<picture>
+			<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
+			<source
+				media="(max-width: 719px)"
+				srcset="{{ webps[0].url }}"
+				type="{{ webps[0].mimeType }}"
+				width="{{ webps[0].width }}"
+				height="{{ webps[0].height }}">
+			<source
+				media="(min-width: 720px)"
+				srcset="{{ webps[1].url }}"
+				type="{{ webps[1].mimeType }}"
+				width="{{ webps[1].width }}"
+				height="{{ webps[1].height }}">
+			<source
+				media="(min-width: 1280px)"
+				srcset="{{ webps[2].url }}"
+				type="{{ webps[2].mimeType }}"
+				width="{{ webps[2].width }}"
+				height="{{ webps[2].height }}">
+
+			<!-- jpg fallbacks -->
+			<source
+				media="(max-width: 719px)"
+				srcset="{{ jpgs[0].url }}"
+				type="{{ jpgs[0].mimeType }}"
+				width="{{ jpgs[0].width }}"
+				height="{{ jpgs[0].height }}">
+			<source
+				media="(min-width: 720px)"
+				srcset="{{ jpgs[1].url }}"
+				type="{{ jpgs[1].mimeType }}"
+				width="{{ jpgs[1].width }}"
+				height="{{ jpgs[1].height }}">
+			<source
+				media="(min-width: 1280px)"
+				srcset="{{ jpgs[2].url }}"
+				type="{{ jpgs[2].mimeType }}"
+				width="{{ jpgs[2].width }}"
+				height="{{ jpgs[2].height }}">
+
+			<img
+				{#loading="lazy"
+				decoding="async" these don't work with an ajax load properly #}
+				src="{{ jpgs[0].url }}"
+				width="{{ jpgs[0].width }}"
+				height="{{ jpgs[0].height }}"
+				alt="{{ image.alt }}"
+			/>
+		</picture>
+		</div>
+	</body>
+</html>

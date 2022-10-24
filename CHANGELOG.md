@@ -15,6 +15,23 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.1] - 2022-10-24
+
+This release marks the first attempt at a properly complete project ready to actually use.
+
+### Changed
+
+- Built out templates
+- Built out basic PCSS
+- Built out basic JS
+
+## [1.0.6] - 2022-10-04
+
+### Changed
+
+- Vite now working correctly, with HMR
+- Base CSS now working correctly
+
 ## [1.0.5] - 2022-07-10
 
 ### Changed

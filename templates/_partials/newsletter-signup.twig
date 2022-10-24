@@ -1,0 +1,20 @@
+{% if website.showNewsletter is defined and website.showNewsletter == 1 %}
+	<form class="block newsletter">
+		{{ website.newsletterText ??? null }}
+
+		<fieldset>
+			<h2>Newsletter sign up</h2>
+			<label for="name">
+				<span>Your Name</span>
+				<input type="text" name="name" id="name" placeholder="George Smith" />
+			</label>
+
+			<label for="email">
+				<span>Your Email</span>
+				<input type="email" name="email" id="email" placeholder="georgina@smith.com" />
+			</label>
+
+			<input type="submit" value="Sign up" />
+		</fieldset>
+	</form><!-- .block.newsletter -->
+{% endif %}

@@ -1,0 +1,610 @@
+/*
+	This file styles "default" elements and "core level" markup.
+	E.g., how a <p> or <em> etc look by default, or how a basic form looks - without any page or component specific over-rides.
+
+	Of note, we are using newer CSS pseudo-class selectors:
+	:where() // where has no specificity, so it is easily overridden without chaining classes
+	:is()    // has a higher specificity
+	:has()   // just brilliant
+
+	Learn more: https://www.sitepoint.com/css-is-where-has-pseudo-class-selectors/
+*/
+
+@media screen and (prefers-reduced-motion: no-preference) { /* https://css-tricks.com/introduction-reduced-motion-media-query/ */
+	html {
+		scroll-behavior: smooth; /* https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior */
+	}
+}
+
+/* Font Imports -------------------------------------------------------------------------------- */
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('/dist/fonts/subset-Montserrat-Regular.woff2') format('woff2'),
+		     url('/dist/fonts/subset-Montserrat-Regular.woff') format('woff');
+		font-weight: normal; font-style: normal; font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('/dist/fonts/subset-Montserrat-Italic.woff2') format('woff2'),
+		     url('/dist/fonts/subset-Montserrat-Italic.woff') format('woff');
+		font-weight: normal; font-style: italic; font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('/dist/fonts/subset-Montserrat-Bold.woff2') format('woff2'),
+		     url('/dist/fonts/subset-Montserrat-Bold.woff') format('woff');
+		font-weight: bold; font-style: normal; font-display: swap;
+	}
+
+/* CSS Custom Properties ----------------------------------------------------------------------- */
+	/*
+		Experimenting with "Custom property values with defaults"
+		https://lea.verou.me/2021/10/custom-properties-with-defaults/
+
+		:root {
+			--variable-name: value;
+		}
+
+		element {
+			--_variable-name: var(--variable-name, fallback-if-no-such-variable);
+			property: var(--_variable-name);
+		}
+	*/
+
+	:root {
+		/* Generic measures */
+		--gap:                     var(--font-size-base);
+		--ps-letter-spacing:       40; /* the photoshop value on "letter spacing" for VCA's habitual uppercase text styles */
+
+		/* measures intended for "row" layout rather than component layout */
+		--row-width-max:           1280px;
+		--row-padding-block:       var(--gap);
+		--row-padding-inline:      var(--gap);
+
+		/* Animation speeds */
+		--fast:                    0.3s;
+		--slow:                    0.6s;
+		--very-slow:               1.3s;
+
+		/*
+			Text sizes based on the Modular Scale, with fluid base size.
+			See https://modern-fluid-typography.vercel.app/ for the fluid base generation.
+			This is set so that it's 16px at 320px, to 20px at 1280px.
+		*/
+		--font-size-root:          14px; /* Required for the font-size base. Goes from 16px at mobile to 20px desktop */
+		--font-size-base:          clamp(1.143rem, 0.5vw + 1rem, 1.429rem);
+
+		/* The other font sizes are then relative to the base font as it's scaled at the moment */
+		--font-size-diminished:    calc( 0.875 * var(--font-size-base) ); /* e.g., footer text or footnote */
+		--font-size-promoted:      calc( 1.2   * var(--font-size-base) ); /* e.g., an intro paragraph */
+		--font-size-heading-small: calc( 1.4   * var(--font-size-base) );
+		--font-size-heading:       calc( 1.6   * var(--font-size-base) );
+		--font-size-heading-large: calc( 2     * var(--font-size-base) );
+
+		--font-family-primary   : Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+		--font-family-helvetica : "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+		/* Form related */
+		--input-padding:           0.5em 1em;
+		--input-border-width:      2px;
+		--input-border-radius:     0.25em;
+		--input-border-colour:     hsl(var(--black) / 0.1);
+		--caret-colour:            hsl(var(--ui-green));
+
+		/* Colour / theme related (hsl) */
+		--ui-green:                103 46% 48%;
+		--ui-red:                  17 46% 48%;
+		--black:                   0 0% 0%;
+		--white:                   0 0% 100%;
+		--brand-colour:            120 40% 40%;
+		--brand-colour-contrast:   300 60% 60%;
+	}
+
+	@media screen and (min-width: 1024px) {
+		:root {
+			/* Generic measures */
+			--row-padding-block: calc(2 * var(--gap, 1rem) );
+		}
+	}
+
+/* Base elements ------------------------------------------------------------------------------- */
+	html {
+		background-color: hsl( var(--white) );
+		color           : hsl( var(--black) );
+		accent-color    : var(--brand-colour, auto);  /* https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color */
+		text-size-adjust: none;
+		-webkit-font-smoothing: antialiased; /* This is a good default in a modern Retina world */
+		font-size: var(--font-size-root);
+	}
+
+	body,	input, select, textarea {
+		font-size: var(--font-size-base, 100%);
+		line-height: 1.375;
+		font-family: var(--font-family-primary);
+		hyphens: none; /* hyphenations now work! http://www.quirksmode.org/blog/archives/2012/11/hyphenation_wor.html */
+	}
+
+	p, h1, h2, h3, h4, h5, h6 {
+		overflow-wrap: break-word; /* if a word needs to split on a long line, split it. */
+	}
+
+	sup       { vertical-align: top; font-size: .75em; }
+	sub       { vertical-align: bottom; font-size: .75em; }
+	strong, b { font-weight: bold; }
+	em, i     { font-style: italic; }
+	code      { font: .85em/1 Courier, monospace; color: #006; }
+
+	a:link    { -webkit-tap-highlight-color: hsl( var(--ui-green) ); text-decoration: none; }
+	a:link,
+	a:visited { color: inherit; }
+	/* a:hover   { color: hsl( var(--ui-green, 120 100% 47%) ); } */
+	a:focus   { outline-color: transparent; } /* not outline: none; as that doesn't support accessible colour scheme. */
+	a:active  { outline-color: transparent; }
+
+	[id] {
+		scroll-margin-top: 5vh; /* ensure there's a bit of headroom on all possible scroll targets */
+	}
+
+	details {
+		& > summary {
+			list-style-type: none;
+
+			&::-webkit-details-marker {
+				display: none;
+			}
+			&:focus {
+				text-decoration: none;
+			}
+
+			padding: 0.5em var(--gap) 0.25em 0; border: 1px solid transparent; border-bottom-color: currentColor;
+			background: transparent url(/dist/svg/plus.svg) 100% 5px no-repeat;
+			cursor: pointer;
+		}
+
+		& .content {
+			padding: var(--gap, 1rem) 0;
+		}
+
+		&[open] {
+			& > summary {
+				background: transparent url(/dist/svg/minus.svg) 100% 5px no-repeat;
+			}
+		}
+	}
+
+	dialog.modal {
+		position: sticky; inset: 0;
+		max-width: 40ch; border: 0; padding: var(--gap);
+		background-color: hsl( var(--black) / 0.2 );
+		box-shadow: 0 0 var( --gap ) hsl( var(--black) / 0.6 );
+		backdrop-filter: blur(10px);
+	}
+
+	[v-cloak] {
+		display: none;
+	}
+
+/* Focus management ---------------------------------------------------------------------------- */
+	*:focus {
+		outline: max(2px, 0.2em) solid currentColor !important;
+		outline-offset: 0.25em; z-index: 1000;
+	}
+
+	@supports selector(:focus-visible) {
+		*:focus {
+			outline: none !important;
+			text-decoration: none;
+		}
+
+		*:focus-visible {
+			outline: max(2px, 0.2em) solid currentColor !important;
+			outline-offset: 0.25em; z-index: 1000;
+		}
+	}
+
+/* Image management ---------------------------------------------------------------------------- */
+	img                            { max-width: 100%; }
+	#target_hilight                { position : absolute; }
+	a img                          { margin: 0; }
+	img[data-object-fit="contain"] { object-fit: contain; }
+	img[data-object-fit="cover"]   { object-fit: cover; }
+
+	picture {
+		display: flex;
+
+		& img {
+			width: 100%; height: 100%;
+		}
+	}
+
+	/* loading spinner bg on picture */
+		picture {
+			background-color: hsl( var(--black) / 0.2 );
+			position: relative;
+
+			& img {
+				z-index: 1;
+			}
+		}
+		picture:before {
+			position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+			content: ""; display: block; width: 64px; height: 64px; margin: 8px;
+			border-radius: 50%; border: 6px solid #fff;
+			border-color: #fff transparent #fff transparent;
+			animation: loadingSpinner var(--slow, 0.9s) linear infinite;
+		}
+		@keyframes loadingSpinner {
+			0%   { transform: translate(-50%,-50%) rotate(0deg); }
+			100% { transform: translate(-50%,-50%) rotate(360deg); }
+		}
+
+		main img,
+		footer img { /* https://www.industrialempathy.com/posts/image-optimizations/ */
+			content-visibility: auto; /* Only render when in viewport, we can assume any image inside <header> is already in the viewport */
+		}
+
+	/* lazy loaded images */
+		html:not(.js) img.lazyload {
+			display: none;
+		}
+
+		.lazyload {
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+
+		.lazyloaded {
+			opacity: 1;
+		}
+
+/* Form management ----------------------------------------------------------------------------- */
+	button { /* remove default browser styling of this element */
+		-webkit-appearance: none; -moz-appearance: none; appearance: none;
+		display: inline-block; border: none;
+		cursor: pointer;
+		touch-action: manipulation; /* faster taps as long as we're not zooming etc */
+		-webkit-tap-highlight-color: transparent; /* No, Safari */
+	}
+
+	label {
+		display: block;
+
+		& > span {
+			font-size: 0.875em; text-transform: uppercase;
+		}
+
+		&:not(.boolean) > span {
+			display: block; margin-bottom: 0.5em;
+		}
+
+		&.boolean {
+			& span,
+			& input {
+				display: inline-block;
+			}
+		}
+	}
+
+	.legend {
+		display: block; margin-bottom: 1em;
+		font-size: 0.875em; text-transform: uppercase;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="search"],
+	input[type="password"],
+	input[type="number"],
+	input[type="date"],
+	textarea,
+	select {
+		width        : 100%;
+		padding      : var(--input-padding);
+		border-style : solid;
+		border-width : var(--input-border-width);
+		border-color : var(--input-border-colour);
+		border-radius: var(--input-border-radius);
+		transition   : all var(--fast);
+		caret-color  : var(--input-caret-colour);
+		color        : initial;
+
+		/*
+			&:focus,
+			&:focus-visible {
+				border-color: currentColor;
+				outline: 0 !important;
+			}
+		*/
+	}
+
+	select {
+		-moz-appearance    : none; -webkit-appearance: none;
+		padding-right      : calc( 1.25em + var(--input-padding) );
+		background-image   : url(../images/heroicons/solid/chevron-down.svg);
+		background-repeat  : no-repeat;
+		background-position: right .7em top 50%;
+		background-size    : 1.25em auto;
+
+		&::-ms-expand {
+			display: none;
+		}
+	}
+
+	.htmlFieldset {
+		margin-bottom: var(--gap);
+
+		&.required,
+		&:has(*[required]) {
+			legend {
+				&:after {
+					content: " *";
+					font-weight: bold; opacity: 0.5;
+				}
+			}
+		}
+
+		& .fieldgroup-error-message {
+			padding: 0.25em 0.5em 0.5em; border-radius: 5px 5px;
+			background-color: red; color: white;
+		}
+
+		& > div {
+			margin-top: var(--gap);
+		}
+
+		& .theOptions {
+			margin-top: calc( 0.5 * var(--gap) );
+			display: flex; flex-wrap: wrap; gap: calc( 2 * var(--gap) );
+			padding      : var(--input-padding);
+			border-style : solid;
+			border-width : var(--input-border-width);
+			border-color : var(--input-border-colour);
+			border-radius: var(--input-border-radius);
+
+			& .htmlField {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	div.formField,
+	div.htmlField {
+		margin-bottom: var(--gap);
+
+		&.required,
+		&:has(*[required]) {
+			& label > span {
+				&:after {
+					content: " *";
+					font-weight: bold; opacity: 0.5;
+				}
+			}
+		}
+
+		&.radio,
+		&.checkbox {
+			& label {
+				display: flex;
+
+				& input {
+					margin-right: 20px;
+				}
+			}
+		}
+
+		& .field-error-message {
+			padding: 0.25em 0.5em 0.5em;
+			border-radius: 0 0 var(--input-border-radius, 0.25rem) var(--input-border-radius, 0.25rem);
+			background-color: red; color: white;
+		}
+
+		& .form-instructions {
+			padding: 0.25em 0.5em 0.5em;
+			border-radius: 0 0 var(--input-border-radius, 0.25rem) var(--input-border-radius, 0.25rem);
+			background-color: var(--input-border-colour); color: white;
+			font-size: 0.875em;
+		}
+
+		&.hasError {
+			--input-border-colour: red;
+
+			& .form-instructions {
+				border-radius: 0; border-right-color: red; border-left-color: red;
+			}
+		}
+	}
+
+	.formActions {
+		display: flex; align-items: center; justify-content: space-between;
+		margin-top: var(--gap);
+
+		& > * { margin-right: 1em; }
+		& > *:last-child { margin-right: 0; }
+	}
+
+	.previouslyUploaded {
+		& p {
+			@include uppercase; margin-bottom: 0.5em;
+		}
+
+		& ul {
+			--minimum-width: 220px;
+
+			display: grid; grid-gap: var(--gap, 1rem);
+			grid-template-columns: repeat(auto-fill, minmax( min( var(--minimum-width, 220px), 100% ), 1fr) );
+		}
+
+		& li {
+			position: relative;
+			display: flex;
+
+			& a {
+				position: absolute; top: 0; right: 0;
+				padding: 0.5em; background-color: white;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			& img {
+				width: 100%; display: flex;
+			}
+		}
+	}
+
+/* Utility classes ----------------------------------------------------------------------------- */
+	.font-size\:diminished {    font-size: var(--font-size-diminished) !important; }
+	.font-size\:base {          font-size: var(--font-size-base) !important; }
+	.font-size\:promoted {      font-size: var(--font-size-promoted) !important; }
+	.font-size\:heading-small { font-size: var(--font-size-heading-small) !important; }
+	.font-size\:heading {       font-size: var(--font-size-heading) !important; }
+	.font-size\:heading-large { font-size: var(--font-size-heading-large) !important; }
+
+	:where(.uc_uppercase) {
+		text-transform: uppercase;
+		letter-spacing: calc( (var(--ps-letter-spacing, 40) / 1000) * 1em );
+	}
+	:where(.uc_uppercase-adjusted) { /* Upper case characters sized down to look visually the same height as lower */
+		text-transform: uppercase;
+		letter-spacing: calc( (var(--ps-letter-spacing, 40) / 1000) * 1em );
+		font-size: 0.875em;
+	}
+
+	:where(.uc_hide-visually) { /* screen readers still get the content */
+		position: absolute; left: -200vw; top: 0;
+		display: block; width: 1px; height: 1px;
+		overflow: hidden;
+	}
+
+	:where(.uc_hide-for-everyone) { /* screen readers also get the content hidden */
+		display: none !important;
+	}
+
+	.uc_fade-out {
+		opacity: 0.3; filter: grayscale(1) blur(3px);
+	}
+
+	.uc_card {
+		padding: var( --gap );
+		background-color: hsl( var(--brand-colour) / 0.25 );
+	}
+
+	.uc_button {
+		display: inline-flex; align-items: center; gap: calc( var(--gap) / 2 );
+		padding: calc( var(--gap) / 2 ); border-radius: 0.5em;
+		background-color: hsl( var(--brand-colour) / 0.25 );
+		text-transform: uppercase;
+		letter-spacing: calc( (var(--ps-letter-spacing, 40) / 1000) * 1em );
+		font-size: 0.875em;
+		color: hsl( var(--white) ) !important;
+		transition: all var(--fast);
+
+		&:hover {
+			background-color: hsl( var(--brand-colour) / 1 );
+		}
+	}
+
+/* Layouts -------------------------------------------------------------------------------------
+   These are special types of utility class, that effect the positioning and spacing of elements in relation
+   to each other.
+*/
+	.l_constrain {
+		/* Standardised gutters on the outer vertical edges, restricts the maximum width, and centers the block */
+		padding-inline: var(--gap, 1rem); max-width: var(--row-max-width, 1280px); margin-inline: auto;
+	}
+
+	.l_padding-block {
+		/* Standardises padding on horizontal edges */
+		padding-block: var(--row-padding-block);
+	}
+	.l_padding-block-start {
+		/* Standardises padding on the top horizontal edge */
+		padding-block-start: var(--row-padding-block);
+	}
+	.l_padding-block-end {
+		/* Standardises padding on the bottom horizontal edge */
+		padding-block-end: var(--row-padding-block);
+	}
+
+	.l_padding-inline {
+		/* Standardises padding on vertical edges */
+		padding-inline: var(--row-padding-inline);
+	}
+	.l_padding-inline-start {
+		/* Standardises padding on the left vertical edge */
+		padding-inline-start: var(--row-padding-inline);
+	}
+	.l_padding-inline-end {
+		/* Standardises padding on the right edge */
+		padding-inline-end: var(--row-padding-inline);
+	}
+
+	.l_padding-full {
+		/* Standardises padding on all edges */
+		padding: var(--row-padding-block) var(--row-padding-inline);
+	}
+
+	/* layouts: stack
+		https://every-layout.dev/layouts/stack/
+		Simple standardised vertical spacing of elements.
+		The stack does nothing other than insert correct vertical margins for direct child elements.
+	*/
+	.l_stack {
+		--_gap-small: calc( var(--gap, 1rem) * 1);
+		--_gap-large: calc( var(--gap, 2rem) * 2);
+
+		display: flex; flex-direction: column; justify-content: flex-start;
+
+		&:only-child {
+			/* Where the Stack is the only child of its parent, nothing forces it to stretch. A height of 100% ensures the Stack's height matches the parent's and any split can occur */
+			block-size: 100%;
+		}
+
+		& > .split-stack { /* elements after this class are grouped at the bottom of the stack, if there is spare space */
+			margin-block-end: auto;
+		}
+
+		& > * + * {
+			margin-block-start: var(--_gap-small, 1rem);
+		}
+		&[data-stack-size='large'] > * + * {
+			margin-block-start: var(--_gap-large, 1.25rem);
+		}
+	}
+
+	/* layouts: cluster
+		https://every-layout.dev/layouts/cluster/
+		Cluster components suit any groups of elements that differ in length and are liable to wrap.
+		Use the Cluster to align any groups of horizontally laid out elements to the left, right, or center.
+	*/
+	.l_cluster {
+		display:         flex; flex-wrap: wrap; gap: var(--gap, 1rem);
+		justify-content: flex-start; align-items: center;
+
+		&.cluster-apart {
+			justify-content: space-between;
+		}
+
+		&.cluster-at-start {
+			align-items: flex-start;
+		}
+	}
+
+	/* layout: grid */
+	.l_liquid-grid {
+		--minimum-width: 220px;
+
+		display: grid; grid-gap: var(--gap, 1rem);
+
+		&.fullWidth {
+			width: 100%;
+		}
+	}
+	@supports (width: min(250px, 100%)) {
+		.l_liquid-grid {
+			grid-template-columns: repeat(auto-fill, minmax( min( var(--minimum-width, 220px), 100% ), 1fr) );
+		}
+	}

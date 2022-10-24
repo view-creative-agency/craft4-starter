@@ -1,0 +1,41 @@
+<div
+	class="mixedContent_imagesGrid l_liquid-grid"
+	id="block-{{ block.id }}"
+	data-grid-style="{{ block.gridStyle }}"
+	data-reveal-on-scroll
+>
+	{% for image in block.images %}
+		{% set jpgs  = craft.imagerx.transformImage( image, 'imagesGridJpg') %}
+		{% set webps = craft.imagerx.transformImage( image, 'imagesGridWebp') %}
+
+		<a
+			href="/responsive-image/{{ image.id }}" id="id-{{ block.id }}-{{ loop.index }}"
+			class="popup"
+		>
+			<picture>
+				<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
+				<source
+					srcset="{{ webps[0].url }}"
+					type="{{ webps[0].mimeType }}"
+					width="{{ webps[0].width }}"
+					height="{{ webps[0].height }}">
+
+				<!-- jpg fallbacks -->
+				<source
+					srcset="{{ jpgs[0].url }}"
+					type="{{ jpgs[0].mimeType }}"
+					width="{{ jpgs[0].width }}"
+					height="{{ jpgs[0].height }}">
+
+				<img
+					loading="lazy"
+					decoding="async"
+					src="{{ jpgs[0].url }}"
+					width="{{ jpgs[0].width }}"
+					height="{{ jpgs[0].height }}"
+					alt="{{ image.alt }}"
+				/>
+			</picture>
+		</a>
+	{% endfor %}
+</div>

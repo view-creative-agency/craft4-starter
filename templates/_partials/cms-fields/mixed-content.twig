@@ -1,0 +1,38 @@
+{#
+	USE:
+	{% cache %}
+		{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': entry } %}
+	{% endcache %}
+
+	{% cache %}
+		{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': category } %}
+	{% endcache %}
+#}
+
+{% cache %}
+	{% set mixedContent = parent.mixedContent
+		.with([
+			'imageSingle:uncropped',
+			'imageSingle:landscape32',
+			'imageSingle:landscape169',
+			'imageSingle:landscape2391',
+
+			'imagesGrid:images',
+			'imagesSlider:images',
+
+			'entries:entries.listingImage',
+			'files:files',
+			'textByImage:image',
+
+			'featuredLink:backgroundImage',
+
+			'form:redirectOnSuccess'
+		])
+		.collect()
+	%}
+	<div class="mixedContent l_stack" data-stack-size="large">
+		{% for block in mixedContent %}
+			{% include '_partials/cms-fields/mixedcontent/' ~ block.type ignore missing %}
+		{% endfor %}
+	</div><!-- .mixedContent -->
+{% endcache %}

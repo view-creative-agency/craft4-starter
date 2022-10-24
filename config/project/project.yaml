@@ -1,5 +1,22 @@
-dateModified: 1652364902
+dateModified: 1666351382
 elementSources:
+  craft\elements\Asset:
+    -
+      disabled: false
+      key: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      tableAttributes:
+        - filename
+        - alt
+        - size
+        - dateModified
+        - link
+      type: native
+    -
+      key: 'volume:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
+      type: native
+    -
+      key: 'folder:89f726e7-32eb-4093-a391-d30c2d052d0d'
+      type: native
   craft\elements\Entry:
     -
       disabled: false
@@ -34,9 +51,19 @@ elementSources:
         - uri
       type: native
 email:
-  fromEmail: mattw@viewcreative.co.uk
-  fromName: 'Craft4 Test'
-  transportType: craft\mail\transportadapters\Sendmail
+  fromEmail: $TEST_TO_EMAIL_ADDRESS
+  fromName: $SYSTEM_FROM_NAME
+  replyToEmail: null
+  template: ''
+  transportSettings:
+    encryptionMethod: none
+    host: $SMTP_HOST
+    password: ''
+    port: $SMTP_PORT
+    timeout: '10'
+    useAuthentication: '0'
+    username: ''
+  transportType: craft\mail\transportadapters\Smtp
 fs:
   localFileUploads:
     hasUrls: true
@@ -61,27 +88,33 @@ meta:
     3d35622b-6607-4a05-81f0-93d712f18eed: 'Minimal UI' # Minimal UI
     4b265d58-9bcb-446a-8339-a25f3f625338: 'Listing Image' # Listing Image
     4ca648ee-78d8-4b4e-be42-119bdc9ac095: Crop # Crop
+    5aacad15-f360-4977-9943-6c56e7ceaa59: 'Landscape: 2.39:1' # Landscape: 2.39:1
     5c964f76-f7db-4765-8c8d-add2047d8ba7: 'Missing Image Fallback' # Missing Image Fallback
     5dee40ad-8466-4b85-887a-e0c1862061f8: Code # Code
-    5e75ab6f-700d-4d71-a119-8486e41862d4: 'Images: Multiple' # Images: Multiple
-    6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: Image # Image
-    6ac2852d-9212-4f02-89d2-35cd874150e9: 'Craft4 Test' # Craft4 Test
+    5e75ab6f-700d-4d71-a119-8486e41862d4: 'Images: Grid' # Images: Grid
+    6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: Uncropped # Uncropped
+    6ac2852d-9212-4f02-89d2-35cd874150e9: $SYSTEM_NAME # $SYSTEM_NAME
     7fe58c02-d209-4e1a-9883-dd49189d500c: Form # Form
+    08a13d2e-584d-4d56-a8fe-3b355f04e0c7: 'Landscape 16:9' # Landscape 16:9
     9eca21d8-3abf-426e-b46d-580dcdb2681d: 'Rich Text' # Rich Text
+    9f1920f0-78f1-47cd-b259-887b1de32c74: 'Aspect Ratio' # Aspect Ratio
     14cfd869-dfee-4009-afee-8350c15d51ad: SEO # SEO
     36ea2d39-19c7-4446-aeb1-0b3035c5b6c2: 'Image: Single' # Image: Single
     42d5c4a2-18cd-49bd-8f8e-3f79b84ed7b2: Common # Common
     45d743a2-ba39-4aed-9a6d-b6b90abf971e: Globals # Globals
+    58a434d4-7519-40ff-ac32-cb573996138a: 'Public Schema' # Public Schema
     61b0742f-4efb-4e9f-be20-3f36c5e70a16: Spacer # Spacer
     61e390b2-9faf-4b6c-9381-6e7f4e207fbb: Code # Code
     68c0b17f-8401-4068-a0b6-10c4781f5744: 'Loop Video' # Loop Video
+    72c0afad-ee40-44a9-baa6-18dc30116a7b: Answer # Answer
     75d17d41-4e28-4fbc-90ae-74102376b880: 'Link URL' # Link URL
     78e1ba52-479b-48f4-b0a6-3659f3838ff1: Pages # Pages
     83b0902d-25fa-4ce1-a72b-0857d3f51d45: 'Link To' # Link To
     136bd771-2d6d-4fbf-bdab-627335611e32: Website # Website
     303f6bf0-2c29-459c-afef-f03fb0298d24: 'Text Position' # Text Position
     344da3ee-6f97-44b2-b4ae-8decb263506d: 'Show Newsletter CTA' # Show Newsletter CTA
-    1111c868-466c-4b74-ae32-915139c845b1: 'Display As...' # Display As...
+    702f0f38-1282-4085-8e00-5baaa7256063: 'Background Image' # Background Image
+    1111c868-466c-4b74-ae32-915139c845b1: 'Grid Style' # Grid Style
     1379f9c8-bd39-49e2-b499-6c9c2a67936b: 'Rich Text' # Rich Text
     1865e161-9efb-43b3-a4be-59383a6674f7: Quotation # Quotation
     1976bfb2-6bf2-4f60-91a5-94838c7fcf44: 'Website Admin' # Website Admin
@@ -90,18 +123,23 @@ meta:
     50731a92-0234-47dc-b983-b4d3fa37646f: Homepage # Homepage
     72579a5f-3f21-4476-9c2f-4de146cc0cba: Form # Form
     91922a85-68db-4cd1-a6a0-54a12b645469: 'Show Listing Excerpt' # Show Listing Excerpt
+    97151f9f-def3-4806-894b-148bd551342b: 'Text Colour' # Text Colour
+    00365143-d8a1-4887-b5af-649d379597ea: Question # Question
+    3876604f-baf6-4dcb-a75d-380ed5b026b3: 'Landscape 3:2' # Landscape 3:2
     22079320-7090-4cd8-bbb4-27a18a70f38f: Images # Images
     a1ad1291-f30b-4c72-9380-081566bacf65: 'Main Navigation' # Main Navigation
+    aa3fec5f-bca4-49d9-818a-7e96cac33be9: Images # Images
     ae9dfd77-941c-4707-8fb0-e4fce617b424: 'Youtube/Vimeo Video URL' # Youtube/Vimeo Video URL
     aec806ed-10ba-4ecd-819e-bd0bd36ca129: 'Featured Link' # Featured Link
     b0a51bbc-452f-4c28-90cb-be69261fa068: 'Mixed Content' # Mixed Content
     b9df2f18-f25a-4f21-a1bd-2d54dd0ce464: 'Column Count' # Column Count
-    b331abc3-406d-4f08-9b2c-7c672bf0de0e: 'Craft4 Test' # Craft4 Test
+    b331abc3-406d-4f08-9b2c-7c672bf0de0e: Primary # Primary
     b582704c-66aa-4611-a6e1-79f208db6ab7: 'Link Description' # Link Description
     bb1cad82-345d-45ce-8868-7e95321e0dde: Attribution # Attribution
     bb85a1cd-c2b6-49d2-8f4c-221e447e0124: 'Generic Page' # Generic Page
     cb14981f-573d-46a0-b437-65a5a962b0e2: Email # Email
     d0c2725f-cc81-4c85-a467-3179e7b41c85: Entries # Entries
+    d9e8808e-2fe2-41ab-b75f-4c7501b6b7d8: 'Public Schema' # Public Schema
     d77dcb20-938f-42b0-8c62-deed91622131: 'Show Listing Image' # Show Listing Image
     db0b4568-9841-48bd-a7be-a5d617cbf01b: 'Link Title' # Link Title
     de2f35a0-9340-455e-bdd1-56d49ee957e9: Video # Video
@@ -113,12 +151,19 @@ meta:
     f0a903f2-fd7a-4d92-9df6-958587df9b3b: Homepage # Homepage
     f4eb0191-de34-435f-8f7c-dae20b322c0d: 'Redirect on success' # Redirect on success
     f6b9e281-1629-4b01-9358-328790bed358: Text # Text
+    f54d2cc3-2e99-4524-812d-c5a604169d7a: 'Question and Answer' # Question and Answer
     f87a627c-8252-450e-bedd-74bb08e21d9d: 'Formatted Address' # Formatted Address
     f105a959-ff7b-4aa4-bee5-de61ffe7843d: Files # Files
     f465523b-77c1-45ed-a308-bffb975c28b4: Files # Files
     faf93cfc-3cbf-4eaa-bd2d-16952cde36db: Entries # Entries
+    fb6bb926-0792-4a1f-804a-cca44724ce74: 'Images: Slider' # Images: Slider
     fc9fe069-509c-41d5-ab17-fb401bf818e1: 'Allow hard to read line lengths' # Allow hard to read line lengths
+    ff214a18-a91f-4bdf-b3bf-2904b0be331a: 'Public Schema' # Public Schema
 plugins:
+  blitz-recommendations:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.1.0
   image-resizer:
     edition: standard
     enabled: true
@@ -173,7 +218,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: GU3G5MIJS5STPUZR12QOD5N3
-    schemaVersion: 2.0.2
+    schemaVersion: 2.0.4
   redactor:
     edition: standard
     enabled: true
@@ -183,6 +228,71 @@ plugins:
     enabled: true
     licenseKey: V4SOTXCJEXUQLL2VSV7B5J28
     schemaVersion: 3.0.11
+    settings:
+      addHrefLang: true
+      addPaginatedHreflang: true
+      addXDefaultHrefLang: true
+      alwaysIncludeCanonicalUrls: false
+      cpTitlePrefix: '⚙ '
+      cspNonce: ''
+      cspScriptSrcPolicies:
+        -
+          __assoc__:
+            -
+              - policy
+              - '''self'''
+      devModeCpTitlePrefix: '&#x1f6a7;⚙ '
+      devModeTitlePrefix: '&#x1f6a7; '
+      displayAnalysisSidebar: true
+      displayPreviewSidebar: true
+      enableJsonLdEndpoint: false
+      enableMetaContainerEndpoint: false
+      enableSeoFileLinkEndpoint: false
+      environment: local
+      excludeNonCanonicalUrls: false
+      generatorEnabled: false
+      headersEnabled: true
+      includeHomepageInBreadcrumbs: true
+      lowercaseCanonicalUrl: true
+      manuallySetEnvironment: false
+      maxDescriptionLength: 155
+      maxTitleLength: 70
+      metaCacheDuration: 0
+      pluginName: SEO
+      regenerateSitemapsAutomatically: true
+      renderEnabled: true
+      separatorChar: '|'
+      sidebarDisplayPreviewTypes:
+        - google
+        - twitter
+        - facebook
+      siteGroupsSeparate: true
+      siteUrlOverride: ''
+      sitemapsEnabled: true
+      socialMediaPreviewTarget: true
+      submitSitemaps: true
+      truncateDescriptionTags: true
+      truncateTitleTags: true
+  simplemap:
+    edition: lite
+    enabled: false
+    schemaVersion: 3.4.2
+    settings:
+      apiKey: null
+      browserApiKey: null
+      disablePopulateMissingFieldData: false
+      geoLocationAutoRedirect: false
+      geoLocationCacheDuration: 5274000
+      geoLocationService: none
+      geoLocationToken: ''
+      geoService: google
+      geoToken: ''
+      mapTiles: google.roadmap
+      mapToken: ''
+      serverApiKey: null
+      unrestrictedApiKey: null
+      w3wEnabled: false
+      w3wToken: ''
   sprig:
     edition: standard
     enabled: true
@@ -214,7 +324,7 @@ plugins:
 system:
   edition: pro
   live: true
-  name: 'Craft4 VCA'
+  name: $SYSTEM_NAME
   retryDuration: null
   schemaVersion: 4.0.0.9
   timeZone: America/Los_Angeles

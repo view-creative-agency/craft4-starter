@@ -1,0 +1,10 @@
+<div
+	class="mixedContent_richText cms-textblock l_stack"
+	id="block-{{ block.id }}"
+	data-reveal-on-scroll
+	{% if block.allowHardToReadLineLengths %}
+		data-allow-long-lines="true"
+	{% endif %}
+>
+	{{ block.richText }}
+</div>

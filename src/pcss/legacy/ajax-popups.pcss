@@ -1,0 +1,41 @@
+.mfp-inline-holder .mfp-content,
+.mfp-ajax-holder .mfp-content {
+	max-width: 80vw; max-height: 80vh;
+
+	& picture img {
+		max-width: 80vw; max-height: 80vh; object-fit: contain;
+	}
+}
+
+.ajaxpopupimage {
+	position: relative;
+	display: block;
+
+	&:before {
+		content: "";
+		position: absolute; top: 11px; right: 9px; z-index: 2;
+		display: block; width: 30px; height: 30px;
+		background: url(../images/maximize-black.svg);
+		background-size: contain; filter: blur(2px);
+		opacity: 0; transform: scale(0.75); transition: all 0.3s; pointer-events: none;
+	}
+
+	&:after {
+		content: "";
+		position: absolute; top: 10px; right: 10px; z-index: 3;
+		display: block; width: 30px; height: 30px;
+		background: url(../images/maximize-white.svg);
+		background-size: contain;
+		opacity: 0; transform: scale(0.75); transition: all 0.3s; pointer-events: none;
+	}
+
+	&:hover,
+	&:focus {
+		&:before {
+			opacity: 0.5; transform: scale(1)
+		}
+		&:after {
+			opacity: 1; transform: scale(1)
+		}
+	}
+}

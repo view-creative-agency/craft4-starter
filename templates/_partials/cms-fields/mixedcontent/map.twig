@@ -1,0 +1,37 @@
+{# For this to work you need to make sure that Maps JS is uncommented in the _layout.twig file #}
+<div
+	class="mixedContent_map"
+	id="block-{{ block.id }}"
+	data-reveal-on-scroll
+>
+	<div class="outerWrapper">
+		<div id="map{{ block.id }}" class="map"></div>
+
+		<script>
+			var map{{ block.id }};
+			var thisMapFunciton = function displayMap{{ block.id }}() {
+				// Display the map
+				map{{ block.id }} = new google.maps.Map(document.getElementById("map{{ block.id }}"), {
+					center: {
+						lat: {{ block.map.lat }},
+						lng: {{ block.map.lng }}
+					},
+					zoom: {{ block.map.zoom }}
+				});
+
+				// Display the marker
+				var marker = new google.maps.Marker({
+					position: {
+						lat: {{ block.map.lat }},
+						lng: {{ block.map.lng }}
+					},
+					// A custom icon can be defined here, if desired
+					// icon: '/path/to/custom/icon.png',
+					map: map{{ block.id }}
+				});
+			}
+
+			mapArray.push(thisMapFunciton);
+		</script>
+	</div><!-- .outerWrapper -->
+</div>

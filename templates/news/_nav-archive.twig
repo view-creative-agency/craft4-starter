@@ -1,0 +1,78 @@
+{% cache globally %}
+	{#
+		Works, but HIGHLY unoptimised for this use case, can produce hundreds of DB queries
+	#}
+		{% set allEntries = craft.entries.section('newsItems').limit(null).all() %}
+		<div class="archives widget">
+			<h2>News Archive</h2>
+			<ul>
+				{% for year, entriesInYear in allEntries | group("postDate | date('Y')") %}
+					<li>
+						<a href="/news/archive/{{ year }}">{{ year }}</a>
+						<ul>
+							{% for month, entriesInMonth in entriesInYear | group("postDate|date('m')") | reverse(true) %}
+								<li>
+									<a href="/news/archive/{{ year }}/{{ month }}">
+										{{ entriesInMonth[0].postDate|date('F') }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+	{#
+		Works as one query but only on MySQL 5.7.4 and under
+		{% set postDates = craft.entries({
+			section: 'newsItems',
+			select: 'MAX(postDate)',
+			limit: null,
+			groupBy: ['DATE_FORMAT(postDate, "%Y-%m")'],
+		}).column() %}
+
+		<div class="archives widget">
+			<h2>News Archive</h2>
+			<ul>
+				{% for year, postDatesInYear in postDates|group("object|date('Y')") %}
+					<li>
+						<a href="/news/archive/{{ year }}">{{ year }}</a>
+						<ul>
+							{% for month, postDatesInMonth in postDatesInYear|group("object|date('m')")|reverse(true) %}
+								<li>
+									<a href="/news/archive/{{ year }}/{{ month }}">
+										{{ postDatesInMonth[0]|date('F') }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% endfor %}
+			</ul>
+		</div><!-- .archives -->
+	#}
+
+	{#
+		The official way. Is out of date and also suffers from massive DB queires...
+		https://craftcms.com/guides/creating-an-archive-page-for-entries#grouping-by-year-and-then-month
+
+		<div class="archives widget">
+			{% set allEntries = craft.entries.section('newsItems').limit(null).all() %}
+
+			{% for year, entriesInYear in allEntries | group("postDate.year") %}
+				<h2>{{ year }}</h2>
+				<ul>
+					{% for month, entriesInMonth in entriesInYear | group("postDate|date('F')") %}
+						<h3>{{ month }}</h3>
+						<ul>
+							{% for entry in entriesInMonth %}
+								<li>{{ entry.getLink() }}</li>
+							{% endfor %}
+						</ul>
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+	#}
+{% endcache %}

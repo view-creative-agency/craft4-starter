@@ -3,8 +3,22 @@ fieldLayouts:
   ce64eb04-8963-4e7d-9945-4610ee0f0c2c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
+            fieldUid: 702f0f38-1282-4085-8e00-5baaa7256063 # Background Image
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7a9755dc-eeda-47e7-bfd1-7e5c2afc0ea0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
             fieldUid: 75d17d41-4e28-4fbc-90ae-74102376b880 # Link URL
             instructions: null
             label: null
@@ -12,19 +26,23 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: b519be90-b5bc-484a-8278-0e1e276736c7
+            userCondition: null
             warning: null
             width: 50
           -
+            elementCondition: null
             fieldUid: db0b4568-9841-48bd-a7be-a5d617cbf01b # Link Title
             instructions: null
             label: null
-            required: false
+            required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 1bbf6680-62d4-4adb-bd34-8cd2df4c6b13
+            userCondition: null
             warning: null
             width: 50
           -
+            elementCondition: null
             fieldUid: b582704c-66aa-4611-a6e1-79f208db6ab7 # Link Description
             instructions: null
             label: null
@@ -32,10 +50,24 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 83e154c2-4f04-4b3f-8b60-481e29f76b99
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 97151f9f-def3-4806-894b-148bd551342b # Text Colour
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 80591aa3-4ff2-4fd1-89b3-80a0a31c23b2
+            userCondition: null
             warning: null
             width: 100
         name: Content
         uid: 402e1be7-78fe-442b-b669-05f5eb45e7ef
+        userCondition: null
 fields:
   75d17d41-4e28-4fbc-90ae-74102376b880: # Link URL
     columnSuffix: hddtcmes
@@ -52,6 +84,90 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Url
+  702f0f38-1282-4085-8e00-5baaa7256063: # Background Image
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: backgroundImage
+    instructions: null
+    name: 'Background Image'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds:
+        - image
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 1
+      minRelations: null
+      previewMode: full
+      restrictFiles: true
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  97151f9f-def3-4806-894b-148bd551342b: # Text Colour
+    columnSuffix: glfsggqw
+    contentColumnType: string
+    fieldGroup: null
+    handle: textColour
+    instructions: 'What colour should the text be to contrast against the image?'
+    name: 'Text Colour'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Light
+            -
+              - value
+              - light
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Dark
+            -
+              - value
+              - dark
+            -
+              - default
+              - '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
   b582704c-66aa-4611-a6e1-79f208db6ab7: # Link Description
     columnSuffix: gayndchv
     contentColumnType: text
@@ -59,7 +175,7 @@ fields:
     handle: linkDescription
     instructions: 'A bit of text to talk about the link'
     name: 'Link Description'
-    searchable: false
+    searchable: true
     settings:
       byteLimit: null
       charLimit: null
@@ -87,11 +203,11 @@ fields:
       columnType: null
       initialRows: 4
       multiline: false
-      placeholder: null
+      placeholder: 'e.g., Google'
       uiMode: normal
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
 handle: featuredLink
 name: 'Featured Link'
-sortOrder: 9
+sortOrder: 10

@@ -1,0 +1,15 @@
+{% import '_macros/helpers' as helpers -%}
+<div
+	class="mixedContent_video"
+	id="block-{{ block.id }}"
+	data-reveal-on-scroll
+>
+	{{ helpers.videoEmbed2({
+		videoUrl:   block.youtubeVimeoVideoUrl,
+		autoplay:   block.autoplay,
+		loop:       block.loopVideo,
+		minimalUi:  block.minimalUi,
+		background: null,
+		aspectRatio: block.aspectRatio
+	}) }}
+</div>

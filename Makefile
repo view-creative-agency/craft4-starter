@@ -30,13 +30,18 @@ install: up build
 	ddev exec php craft plugin/install wheelform
 	ddev exec php craft plugin/install sprig
 	ddev exec php craft plugin/install vite
+	ddev exec php craft plugin/install blitz
+	ddev exec php craft plugin/install blitz-recommendations
+	ddev exec php craft plugin/install resizer
+	ddev exec php craft plugin/install phpdotenv
 up:
+	# if DDEV hasn't been set up, set it up and install the Composer and NPM things
 	if [ ! "$$(ddev describe | grep OK)" ]; then \
-        ddev auth ssh; \
-        ddev start; \
-        ddev composer install; \
-        ddev exec npm install; \
-    fi
+		ddev auth ssh; \
+		ddev start; \
+		ddev composer install; \
+		ddev exec npm install; \
+	fi
 %:
 	@:
 # ref: https://stackoverflow.com/questions/6273608/how-to-pass-argument-to-makefile-from-command-line

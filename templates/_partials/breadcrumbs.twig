@@ -1,0 +1,9 @@
+{% set crumbs = entry.ancestors|default([]) %}
+{% if crumbs|length %}
+	<ul class="l_cluster" role="list">
+		<li><a href="{{ siteUrl }}">Home</a></li>
+		{% for crumb in crumbs %}
+			<li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+		{% endfor %}
+	</ul>
+{% endif %}

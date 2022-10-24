@@ -1,0 +1,85 @@
+/* CMS textblock - Styling the contents of a Redactor / Rich Text field. */
+	.cms-textblock {
+		&:not([data-allow-long-lines]) {
+			max-inline-size: 72ch; /* Don't allow hard to read line-lengths */
+		}
+
+		& h1:before { content: "h1 not allowed here!"; color: red; }
+
+		& :is(h2, h3, h4) {
+			font-weight: bold;
+		}
+		& h2 {
+			font-size: var(--font-size-heading);
+		}
+		& h3 {
+			font-size: var(--font-size-heading-small);
+		}
+		& h4 {
+			font-size: var(--font-size-promoted);
+		}
+
+		& a {
+			text-decoration: underline;
+		}
+
+		& ol {
+			margin-left: 1.7em;
+
+			& li::marker {
+				font-family: monospace; font-size: 0.875em;
+			}
+		}
+
+		& ul {
+			margin-left: 1.2em;
+		}
+
+		& blockquote {
+			padding: 1em; margin-bottom: 1em;
+
+			& p:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		& iframe {
+			display: block; margin-bottom: 2em;
+		}
+
+		& table {
+			width: 100%; margin-bottom: 2em;
+
+			& tr {
+				transition: background-color .2s;
+			}
+			& tr:hover {
+				background-color: rgba(0,0,0,0.1);
+			}
+			& th,
+			& td {
+				padding: 3px 10px 3px 0;
+				text-align: left;
+			}
+			& th { font-weight: bold; }
+		}
+
+		& .align-left,
+		& [align="left"] {
+			float: left; margin-right: 2em; max-width: 50%;
+		}
+		& .align-right,
+		& [align="right"] {
+			float: right; margin-left: 2em; max-width: 50%;
+		}
+
+		& b,
+		& strong {
+			font-weight: bold;
+		}
+
+		& i,
+		& em {
+			font-style: italic;
+		}
+	}
