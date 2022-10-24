@@ -1,0 +1,16 @@
+<div class="mixedContent_blockquote" id="block-{{ block.id }}" data-reveal-on-scroll>
+	<blockquote>{{ block.quotation | nl2br }}</blockquote>
+	{% if block.attribution | length %}
+		<cite>
+			{% if block.linkTo | length > 0 %}
+				<a href="{{ block.linkTo }}" class="ui-effect">
+			{% endif %}
+
+			{{ block.attribution }}
+
+			{% if block.linkTo | length > 0 %}
+				</a>
+			{% endif %}
+		</cite>
+	{% endif %}
+</div><!-- .blockquote -->

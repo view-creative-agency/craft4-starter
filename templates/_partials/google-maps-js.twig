@@ -1,0 +1,79 @@
+{#
+	Google Maps, but loaded and executed async, and compatible with additional maps and such defined on the page by things like Matrix blocks.
+
+	To add more maps manually add them to the allMaps array, which will be called when all the dependencies have been loaded (that's managed below).
+
+	Example of manually adding a map on another template:
+	<script>
+		var map{{ entry.id }};
+
+		var thisMapFunciton = function displayMap{{ entry.id }}() {
+			// Set up this particular map
+			map{{ entry.id }} = new google.maps.Map(document.getElementById("map{{ entry.id }}"), {
+				center: {
+					lat: {{ entry.mapLocation.lat }},
+					lng: {{ entry.mapLocation.lng }}
+				},
+				zoom: {{ entry.mapLocation.zoom }}
+			});
+
+			// Display a marker on the correct Map
+			var marker = new google.maps.Marker({
+				position: {
+					lat: {{ entry.mapLocation.lat }},
+					lng: {{ entry.mapLocation.lng }}
+				},
+				// A custom icon can be defined here, if desired
+				// icon: '/path/to/custom/icon.png',
+				map: map{{ entry.id }}
+			});
+		}
+
+		// add this map to the array of maps that need to be instantiated on page load
+			mapArray.push(thisMapFunciton);
+	</script>
+
+	<div id="map{{ entry.id }}" class="map"></div>
+#}
+
+	<script>
+		// console.log('1');
+
+		var mapArray = []; // array of all the map functions that need to be triggered (this get populated by other JS on some pages)
+
+		function allMaps() {
+			// console.log('5');
+
+			// allMaps() is called as soon as the googlemaps script finishes loading; which - if it's been cached - may be before the rest of the HTML on the page has been parsed, or it may be later than that...
+			// wait for the initial HTML document to be completely loaded and parsed, so we know we have mapArray available
+
+			if(document.readyState === "complete" || document.readyState === "interactive") {
+				console.log('DOM loading already complete or interactive');
+
+				// the HTML and JS has already loaded
+				mapArray.forEach(function(item, index, array) {
+					// console.log('7');
+					// console.log(item, index);
+					item(); // execute the function stored in each array item (i.e., the map code)
+				});
+			}
+			else {
+				console.log('DOM is not yet interactive or complete, wait for that');
+
+				// OK, wait for it first
+				document.addEventListener('load', event => {
+					console.log( event );
+
+					// fire all the functions which exist in the array
+					mapArray.forEach(function(item, index, array) {
+						// console.log('7');
+						// console.log(item, index);
+						item(); // execute the function stored in each array item (i.e., the map code)
+					});
+				});
+			}
+		};
+
+		// console.log('2');
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key={{ craft.maps.mapToken }}&amp;callback=allMaps" defer></script>

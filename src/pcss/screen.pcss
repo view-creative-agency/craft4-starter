@@ -1,9 +1,34 @@
+/* imports have to be at the top */
 @import "reset.pcss";
 @import "base-rules.pcss";
 
-@import "legacy/cms-textblock.pcss";
-@import "legacy/mixed-content.pcss";
+/* Individual UI components */
+@import "components/cms-textblock.pcss";
+@import "components/mixed-content.pcss";
 @import "legacy/ajax-popups.pcss";
+
+/* Handy tricks with modern CSS
+	.container:not(:has(*)) {
+		selects any container with no child elements
+	}
+
+	.container:has(> :last-child:nth-child(N)) {
+		selects any container with exactly N child elements
+	}
+*/
+
+/* visualise layout helper classes
+	.dev-mode *[class*='l_'] {
+		outline: 1px solid red;
+		&::after {
+			position: absolute;
+			content: attr(class);
+			font-size: 0.6rem;
+			background-color: gray; color: white;
+			padding: 0.5em;
+		}
+	}
+*/
 
 .devWarning {
 	position: absolute; top: 0; left: 0; right: 0;
@@ -19,8 +44,6 @@
 
 /* accessibility */
 	.skiplink {
-		/* @include hide-element; */
-
 		&:focus {
 			position: fixed; left: 0;
 			width: 100vw; height: auto; padding: 1ch;
@@ -188,3 +211,87 @@
 	.pendingTranslation {
 		color: red;
 	}
+
+/* Actual design! */
+	a.ui-effect,
+	.cms-textblock a {
+		position: relative;
+		display: inline-block;
+
+		&::before {
+			position: absolute; inset: -0.1em -0.2em; z-index: -1;
+			content: ""; display: block;
+			background-color: currentColor; opacity: 0.1; border-radius: 0.25em;
+			transform-origin: bottom right; transform: scaleX(0);
+			transition: transform var(--fast) ease;
+		}
+
+		&:hover {
+			&::before {
+				transform-origin: bottom left;
+				transform: scaleX(1);
+			}
+		}
+	}
+
+	footer {
+		background-color: hsl( var(--brand-colour) ); color: hsl( var(--white) );
+
+		& :where(.row1, .row2) {
+			width: 100%;
+		}
+
+		& .phoneAndMail {
+			font-family: monospace;
+
+			& li::before {
+				content: "";
+				vertical-align: center;
+				display: inline-block;
+				width: calc(1ch);
+				height: 1ch;
+				margin-inline-end: 0.25ch;
+				background: transparent url('/dist/svg/phone.svg') 0 0 / contain no-repeat;
+			}
+		}
+
+		& li.email::before {
+			background: transparent url('/dist/svg/mail.svg') 0 0 / contain no-repeat;
+		}
+	}
+
+	dialog#lightbox {
+		inset: clamp(1vw, 10%, 10vh) clamp(1vw, 10%, 10vh);
+
+		&::backdrop {
+			background-color: hsl( 0 0% 0% / 0.66 );
+			backdrop-filter: blur(0.2rem);
+		}
+
+		& form {
+			position: absolute; top: 0; right: 0;
+			z-index: 2;
+		}
+	}
+
+/*	html.js-supportsIntersectionObserver {
+		& [data-reveal-on-scroll] { !* opacity is safe to animate for everyone *!
+			will-change: opacity, filter, translate;
+			opacity: 0.2; filter: grayscale(1);
+			transition: all var(--slow, 0.6s); transition-delay: 0.1s;
+
+			&.js-inViewport {
+				opacity: 1; filter: grayscale(0);
+			}
+		}
+
+		@media screen and (prefers-reduced-motion: no-preference) { !* only animate motion if the user is OK with it *!
+			& [data-reveal-on-scroll] {
+				transform: translateY(-50px);
+
+				&.js-inViewport {
+					transform: translateY(0);
+				}
+			}
+		}
+	}*/

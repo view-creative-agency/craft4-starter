@@ -1,0 +1,271 @@
+.mixedContent {
+	& .mixedContent_richText {
+		& a[href^="http" i]:not([href*="craft4-vca" i]) {
+		/* links to external websites */
+		color: blue;
+
+		&::after {
+			content: "";
+			vertical-align: top;
+			display: inline-block;
+			width: calc(1ch);
+			height: 1ch;
+			margin-inline-start: 0.25ch;
+			background: transparent url('/dist/svg/globe-alt.svg') 0 0 / contain no-repeat;
+		}
+	}
+
+		& a[href*="craft4-vca" i] {
+			/* links to other pages on this domain */
+			color: green;
+		}
+
+		& a[href^='#'] {
+			/* internal page links */
+
+			&::after {
+				content: "";
+				vertical-align: top;
+				display: inline-block;
+				width: calc(1ch);
+				height: 1ch;
+				margin-inline-start: 0.25ch;
+				background: transparent url('/dist/svg/switch-vertical.svg') 0 0 / contain no-repeat;
+			}
+		}
+
+		& a[target='_blank'] {
+			/* Style links that open in a new window */
+
+			&::after {
+				content: "";
+				vertical-align: top;
+				display: inline-block;
+				width: calc(1ch);
+				height: 1ch;
+				margin-inline-start: 0.25ch;
+				background: transparent url('/dist/svg/external-link.svg') 0 0 / contain no-repeat;
+			}
+		}
+
+		& a[target='_blank'][href^="http" i]:not([href*="craft4-vca" i]) {
+			/* links to external websites that open in a new window */
+
+			&::after {
+				content: "";
+				vertical-align: top;
+				display: inline-block;
+				width: calc(2.25ch);
+				height: 1ch;
+				margin-inline-start: 0.25ch;
+				background-color: transparent;
+				background-image: url('/dist/svg/globe-alt.svg'),
+				url('/dist/svg/external-link.svg');
+				background-position: 0 0,
+				1.25ch 0;
+				background-size: auto 1ch,
+				auto 1ch;
+				background-repeat: no-repeat,
+				no-repeat;
+			}
+		}
+
+		& a[href*="craft4-vca.ddev.site/content" i],
+		& a[href*="staging1.viewcreative.agency/craft4-vca/content" i],
+		& a[href*="craft4-vca.com/content" i] { /* Style links to uploaded assets */
+
+			&::after {
+				content: "";
+				vertical-align: top;
+				display: inline-block;
+				width: calc(1ch);
+				height: 1ch;
+				margin-inline-start: 0.25ch;
+				background: transparent url('/dist/svg/document.svg') 0 0 / contain no-repeat;
+			}
+		}
+	}
+
+	& .mixedContent_blockquote {
+		margin-inline: 0; padding: 1em 3em; border-left: 0.5em solid currentColor;
+
+		& blockquote {
+			margin-bottom: var(--gap);
+
+			&::before,
+			&::after {
+				content: "“";
+				position: absolute;
+				color: currentColor; font-size: 4em;
+			}
+			&::before {
+				transform: translate(-0.5em, -0.35em);
+			}
+			&::after {
+				content: "”";
+				transform: translate(0.125em, -0.1em);
+			}
+		}
+
+		& cite {
+			font-size: var(--font-size-diminished);
+		}
+	}
+
+	& .mixedContent_spacer {
+		height: var(--gap); /* small is the default */
+
+		&[data-space-size='medium'] { height: calc( var(--gap) * 2 ); }
+		&[data-space-size='large']  { height: calc( var(--gap) * 4 ); }
+	}
+
+	& .mixedContent_displayAs-thumbnailSlider,
+	& .mixedContent_displayAs-slider {
+		margin-bottom: 0;
+	}
+
+	& .mixedContent_fileList {
+		& .file:not(:last-child) {
+			border-bottom: 1px dashed black; margin-bottom: var(--gap); padding-bottom: var(--gap);
+		}
+
+		& .top {
+			padding-left: calc( var(--gap) * 2);
+			background: transparent url(../images/heroicons/outline/download.svg) 0 0 no-repeat;
+		}
+
+		& a {
+			display: inline-block; padding: 0.5ch 0 0.5ch 3ch;
+			background: transparent url(../images/heroicons/outline/download.svg) 0 50% / auto 24px no-repeat;
+		}
+		& a[href$=txt] {
+			background-image: url(../images/heroicons/outline/document-download.svg);
+		}
+		& a[href$=zip] {
+			background-image: url(../images/heroicons/outline/folder-download.svg);
+		}
+	}
+
+	& .mixedContent_mixedContentFiles {
+		& h2 {
+			@include h3;
+			margin-bottom: 1em;
+		}
+
+		& .file {
+			& .heading     { font-weight: bold; margin-bottom: 0; }
+			& .description { margin-bottom: var(--gap); }
+			& .meta        { font-size: 0.875em; font-style: italic; }
+		}
+	}
+
+	& .mixedContent_mixedContentEntries {
+		& .image {
+			margin-bottom: 1em;
+		}
+		& .heading {
+			font-weight: bold; margin-bottom: 0;
+		}
+		& .listingExcerpt {
+			margin-bottom: 0;
+			font-size: 0.875em;
+		}
+		& .readMore {
+			margin-top: 1em;
+		}
+	}
+
+	& .mixedContent_map {
+		height: 50vh; min-height: 320px;
+	}
+
+	& .mixedContent_textByImage {
+		display: flex; flex-direction: column; gap: var(--gap);
+	}
+
+	& .mixedContent_imagesGrid[data-grid-style="compact" i] {
+		gap: 0;
+	}
+
+	& .mixedContent_table {
+		& table {
+			width: 100%;
+		}
+
+		& td,
+		& th {
+			padding: 0.5em;
+		}
+
+		& thead {
+			border-bottom: 1px solid #999;
+
+			& th {
+				text-transform: uppercase; font-size: 0.875em;
+			}
+		}
+	}
+
+	& .mixedContent_imagesSlider {
+	}
+
+	& .mixedContent_featuredLink {
+		--_colour-light: var(--white);
+		--_colour-dark: var(--black);
+
+		position: relative;
+
+		& .text {
+			position: absolute; left: 50%; top: 50%; z-index: 2;
+			transform: translate(-50%, -50%);
+			width: clamp(300px, 40vw, 80vw);
+			text-align: center; align-items: center;
+		}
+
+		& .uc_button {
+			background-color: hsl( var(--_colour-light) / 0.5 );
+			color: hsl( var(--_colour-dark) ) !important;
+
+			&:hover {
+				background-color: hsl( var(--_colour-light) / 1 );
+			}
+		}
+
+		&[data-text-colour='light'] {
+			color: hsl( var(--_colour-light) / 1 );
+
+			& .uc_button {
+				background-color: hsl( var(--_colour-dark) / 0.5 );
+				color: hsl( var(--_colour-light) ) !important;
+
+				&:hover {
+					background-color: hsl( var(--_colour-dark) / 1 );
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: 720px) {
+		& .mixedContent_textByImage {
+			display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+			margin-bottom: 0;
+
+			& .text {
+				padding: var(--gap); display: flex; align-items: center; justify-content: center; text-align: center;
+
+				& .richText {
+					justify-content: center;
+				}
+			}
+
+			& .theImage {
+				margin-bottom: 0;
+			}
+
+			&[data-text-position='left'] {
+				& .text { order: 1; }
+				& picture { order: 2; }
+			}
+		}
+	}
+}

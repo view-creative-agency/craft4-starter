@@ -3,8 +3,10 @@ fieldLayouts:
   102101fe-01a2-4bca-bf83-3955809ce635:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: faf93cfc-3cbf-4eaa-bd2d-16952cde36db # Entries
             instructions: null
             label: null
@@ -12,9 +14,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 54415e1c-11da-4290-ab35-88991089ff7c
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: d77dcb20-938f-42b0-8c62-deed91622131 # Show Listing Image
             instructions: null
             label: null
@@ -22,9 +26,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 1470c7ef-577f-4dc1-b0a5-7ec29cdb5149
+            userCondition: null
             warning: null
             width: 50
           -
+            elementCondition: null
             fieldUid: 91922a85-68db-4cd1-a6a0-54a12b645469 # Show Listing Excerpt
             instructions: null
             label: null
@@ -32,10 +38,12 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 6ce1f50c-bcd0-4023-8989-4e0a53d6dcb9
+            userCondition: null
             warning: null
             width: 50
         name: Content
         uid: 418411af-99e8-4f06-8157-efce4c7023bd
+        userCondition: null
 fields:
   91922a85-68db-4cd1-a6a0-54a12b645469: # Show Listing Excerpt
     columnSuffix: xindqofy
@@ -103,4 +111,4 @@ fields:
     type: craft\fields\Entries
 handle: entries
 name: Entries
-sortOrder: 8
+sortOrder: 9

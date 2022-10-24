@@ -1,0 +1,70 @@
+{% import '_macros' as macros %}
+{% set htmlClass = 'newsItem' %}
+{% extends "_layout" %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		{#
+			Eager Load fields on the Entry itself
+			https://nystudio107.com/docs/eager-beaver/#do-it-natively
+
+			{% do craft.app.elements.eagerLoadElements(
+				className(entry),
+				[entry],
+				['assetsField', 'categoriesField.assetField', 'matrixField.blockType:assetsField']
+			) %}
+		#}
+
+		<div class="dc_constrain-centre dc_layout-padding-both dc_grid-1-3 main-right">
+			<div class="col1">
+				<h1>{{ entry.title }}</h1>
+				<div class="meta">
+					<p>
+						Published: {{ entry.postDate|date('d.m.Y') }}
+						( {{ craft.app.formatter.asRelativeTime( entry.postDate ) }} )
+					</p>
+				</div>
+
+				{% cache %}
+					{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': entry } %}
+				{% endcache %}
+
+				{% cache %}
+					{% set newsCriteria = craft.entries.section('newsItems').orderBy('postDate asc') %}
+					{% set prevEntry = entry.getPrev(newsCriteria) %}
+					{% set nextEntry = entry.getNext(newsCriteria) %}
+
+					{% if prevEntry or nextEntry %}
+						<div class="pagination-controls">
+							<h3>Pagination</h3>
+
+							<ul>
+								<li class="link prev">
+									{% if prevEntry %}
+										<a href="{{ prevEntry.url }}" class="prev dc_button">Older News</a>
+									{% endif %}
+								</li>
+
+								<li class="paginationInfo">
+									{% include '_partials/social-share' %}
+								</li>
+
+								<li class="link next">
+									{% if nextEntry %}
+										<a href="{{ nextEntry.url }}" class="next dc_button">Newer News</a>
+									{% endif %}
+								</li>
+							</ul>
+						</div><!-- .pagination -->
+					{% endif %}
+				{% endcache %}
+			</div>
+
+			<div class="col2">
+				{% include 'news/_nav-categories' %}
+				{% include 'news/_nav-archive' %}
+				{% include '_partials/social-share' %}
+			</div>
+		</div>
+	</main>
+{% endblock %}

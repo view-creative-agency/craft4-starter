@@ -3,8 +3,10 @@ fieldLayouts:
   40fff434-404d-4ccb-ad98-e943d59418cd:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 1865e161-9efb-43b3-a4be-59383a6674f7 # Quotation
             instructions: null
             label: null
@@ -12,9 +14,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 2e6f31ce-9671-49bc-a2bf-7fc037df8907
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: bb1cad82-345d-45ce-8868-7e95321e0dde # Attribution
             instructions: null
             label: null
@@ -22,9 +26,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 166841e2-9928-4f6c-b76a-3d33bbf94262
+            userCondition: null
             warning: null
             width: 50
           -
+            elementCondition: null
             fieldUid: 83b0902d-25fa-4ce1-a72b-0857d3f51d45 # Link To
             instructions: null
             label: null
@@ -32,10 +38,12 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 89db0c32-6c9a-4b2b-a37d-1ee4134c9b9d
+            userCondition: null
             warning: null
             width: 50
         name: Content
         uid: a27de109-bb69-407c-946c-d483d1648b19
+        userCondition: null
 fields:
   83b0902d-25fa-4ce1-a72b-0857d3f51d45: # Link To
     columnSuffix: mfamaazj

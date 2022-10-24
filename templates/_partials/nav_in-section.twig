@@ -1,0 +1,296 @@
+{#
+	This template outputs nested navigation for any Structure
+	section of the site.
+
+	Just include it in other templates as needed. e.g.,
+
+	{% include "_partials/nav_in-section" with {
+		'method': 'allInSection|allInSectionTree|branchOnly|branchPlusAllTopLevels',
+		'excludeTopLevel': true
+	} %}
+
+
+	Example SCSS:
+		.nav-in-section {
+			width: 100%; padding-top: 1em; padding-bottom: 1em;
+			background-color: black; color: white;
+
+			h2 {
+				@include hide-element;
+			}
+
+			ul {
+				@include uppercase();
+				list-style: none;
+				display: flex; gap: 1em; justify-content: center; flex-wrap: wrap;
+				margin-bottom: 0;
+				text-align: center;
+
+				ul {
+					border-top: 1px solid hsla( var(--white), 0.2 );
+				}
+
+				a {
+					display: inline-block; padding: 0.5em;
+				}
+			}
+		}
+#}
+
+{% if
+	( method is defined and method == 'allInSection' )
+	or method is not defined
+%}
+	{# List everything inside the Structure, with all nesting #}
+	{% if entry.getSection.type == 'structure' %}
+		<div class="nav-in-section">
+			<h2 class="h3">{{ "In this section" | t }}</h2>
+
+			{% set currentSection = entry.getSection %}
+			{% set pages          = craft.entries.section( currentSection ).all() %}
+			<ul>
+				{% nav page in pages %}
+					<li>
+						{{ page.getLink() }}
+
+						{% ifchildren %}
+							<ul>
+								{% children %}
+							</ul>
+						{% endifchildren %}
+					</li>
+				{% endnav %}
+			</ul>
+		</div><!-- .section.inSection -->
+	{% endif %}
+{% endif %}
+
+{% if ( method is defined and method == 'allInSectionTree' ) %}
+	{# List everything inside the Structure, with all nesting #}
+	{% if entry.getSection.type == 'structure' %}
+		{% set currentSection = entry.getSection %}
+		{% set pages          = craft.entries.section( currentSection ).all() %}
+		{% set segments       = craft.app.request.getSegments %}
+
+		{# {% js "/assets/javascript/modern/treeview/treeview-min.js" at head with {
+			defer: true
+		} %} #}
+		{% js "/assets/javascript/modern/treeview/src/treeLinks.js" at head with {
+			defer: true
+		} %}{% js "/assets/javascript/modern/treeview/src/treeitemLinks.js" at head with {
+			defer: true
+		} %}
+
+		<div class="nav-in-section">
+			<h2 class="h3" id="{{ entry.slug }}Navigation">{{ "In this section" | t }}</h2>
+
+			<ul role="tree" aria-labelledby="{{ entry.slug }}Navigation">
+				{% nav page in pages %}
+					<li
+						{% if page.children | length %}
+							class="hasChildren pageLink {{ page.slug == (segments|last) ? 'currentPage' }}"
+							role="treeitem"
+							{% if ( page.slug in segments ) %}
+								aria-expanded="true"
+							{% else %}
+								aria-expanded="false"
+							{% endif %}
+						{% else %}
+							role="none"
+							class="{{ page.slug == (segments|last) ? 'currentPage' }}"
+						{% endif %}
+					>
+						{% if page.children | length %}
+							{# <div class="pageLink"> You can't wrap it an have it still work as JS... uggggh #}
+								<span class="pageControl">toggle</span>
+
+								<a href="{{ page.url }}" role="treeitem">
+									{{ page.title }}
+								</a>
+							{# </div> #}
+						{% else %}
+							{{ page.getLink() }}
+						{% endif %}
+
+						{% ifchildren %}
+							<ul role="group">
+								{% children %}
+							</ul>
+						{% endifchildren %}
+					</li>
+				{% endnav %}
+			</ul>
+		</div><!-- .section.inSection -->
+	{% endif %}
+{% endif %}
+
+{% if
+	( method is defined and method == 'branchOnly' )
+	or
+	( method is defined and method == 'branchPlusAllTopLevels' )
+%}
+	{# list the full nested structure for the branch you're in #}
+	{% if entry.getSection.type == 'structure' %}
+		{% set currentSection = entry.getSection %}
+		{% set topLevelPages  = craft.entries.section(currentSection).level(1).all() %}
+
+		{% if entry.level > 1 %}{# currently on a sub page #}
+			{% set hasSubPages = 'yes' %}
+			{% set thisBranch  = craft.entries.section(currentSection).descendantOf(entry.ancestors[0].id) %}
+			{% set topPage     = entry.ancestors[0] %}
+		{% else %}{# currently at the top of the structure #}
+			{% set thisBranch = craft.entries.section(currentSection).descendantOf(entry).all() %}
+			{% set topPage    = entry %}
+			{% if thisBranch | length %}
+				{% set hasSubPages = 'yes' %}
+			{% endif %}
+		{% endif %}
+
+		{% for topLevel in topLevelPages %}
+			{% if loop.first %}
+				<div class="nav-in-section">
+					<h2 class="h6">{{ "In this section" | t }}</h2>
+					<ul>
+			{% endif %}
+
+			{% if topLevel.id == topPage.id %}{# The current branch #}
+				{% if not excludeTopLevel %}
+					<li class="
+						{%- if entry.level == 1 %}active {% endif -%}
+						{{- topLevel.hasDescendants ? ' hasChildren' -}}
+					">
+						<a href="{{ topPage.url }}">{{ topPage.title }}</a>
+				{% endif %}
+
+				{% if thisBranch | length %}
+						<ul>
+							{% set lastPageLevel = 2 %}{# it starts at lvl 2 in the branch #}
+
+							{% for page in thisBranch %}
+								{% if not page.hidePageFromNavigation %}{# the page hasn't been set to not listed in the CMS #}
+									{% if page.level == lastPageLevel %}
+										</li>
+									{% endif %}
+
+									{% if page.level < lastPageLevel %}
+											</li>
+										</ul>
+									{% endif %}
+
+									{% if page.level > lastPageLevel %}
+										<ul>
+									{% endif %}
+
+									<li class="
+										{%- if page.id == entry.id %}active{% endif -%}
+										{{- page.hasDescendants ? ' hasChildren' -}}
+									">
+										<a href="{{ page.url }}" class="dc_anchor2">{{ page.title }}</a>
+
+									{% if loop.last %}
+										</li>
+									{% endif %}
+								{% endif %}
+
+								{% set lastPageLevel = page.level %}
+							{% endfor %}
+						</ul>
+					{% endif %}
+
+					{# OLD and I *think* buggy when more than two levels deep
+						{% if thisBranch | length %}
+							{% if not excludeTopLevel %}
+								<ul>
+							{% endif %}
+								{% nav page in thisBranch %}
+									<li class="
+										{%- if page.id == entry.id %}active{% endif %}
+										{{- page.hasDescendants ? ' hasChildren' -}}
+									">
+										{{ page.getLink() }}
+
+										{% ifchildren %}
+											<ul>
+												{% children %}
+											</ul>
+										{% endifchildren %}
+									</li>
+								{% endnav %}
+							{% if not excludeTopLevel %}
+								</ul>
+							{% endif %}
+						{% endif %}
+					#}
+
+				{% if not excludeTopLevel %}
+					</li>
+				{% endif %}
+			{% else %}{# some other top level page #}
+				{% if method == 'branchPlusAllTopLevels' %}
+					<li class="{{- topLevel.hasDescendants ? 'hasChildren' -}}">
+						<a href="{{ topLevel.url }}">{{ topLevel.title }}</a>
+					</li>
+				{% endif %}
+			{% endif %}
+
+			{% if loop.last %}
+					</ul>
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endif %}
+
+
+
+
+
+{# OLD:
+   List current page and its children at the top, then show sibling pages - optionally show child pages of the siblings
+# }
+{% if entry.getSection.type == 'structure' %}
+	<div class="nav-in-section">
+		<h3>In this section</h3>
+
+		{% if entry.parent %}{# show a link to the parent entry if there is one # }
+			<p><a href="{{ entry.parent.url  }}">{{ entry.parent.title }}</a></p>
+		{% endif %}
+
+		<ul>
+			<li class="active">
+				<a href="{{ entry.url }}">{{ entry.title }}</a>
+				{% for child in entry.children.all() %}{# list all the child pages of this page # }
+					{% if loop.first %}
+						<ul>
+					{% endif %}
+
+					{% if not child.hideFromSectionNavigation %}
+						<li><a href="{{ child.url }}">{{ child.title }}</a></li>
+					{% endif %}
+
+					{% if loop.last %}
+						</ul>
+					{% endif %}
+				{% endfor %}
+			</li>
+
+			{% for sibling in entry.siblings.all() %}{# list sibling pages of the current page i.e., brothers and sisters... # }
+				{% if not sibling.hideFromSectionNavigation %}
+					<li>
+						<a href="{{ sibling.url }}">{{ sibling.title }}</a>
+						{# {% for child in sibling.children %}List the children of the siblings? i.e., nephew's and neices...
+							{% if loop.first %}
+								<ul>
+							{% endif %}
+							<li><a href="{{ child.url }}">{{ child.title }}</a></li>
+							{% if loop.last %}
+								</ul>
+							{% endif %}
+						{% endfor %} # }
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+{% endif %}
+#}

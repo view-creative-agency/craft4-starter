@@ -1,0 +1,21 @@
+{#
+	This template outputs hreflang for language and regional URLs.
+	SEE: https://support.google.com/webmasters/answer/189077?hl=en
+
+	Just include it in _layout in the <head>. e.g.,
+	{% include "_partials/language-alternatives" %}
+#}
+<link rel="alternate" hreflang="x-default" href="{{ craft.i18n.primarySiteLocale }}" />
+{% if entry is defined %}{# workaround because locales need to be done on an Entry element #}
+	{% set allLocales = craft.i18n.getSiteLocaleIds() %}
+	{% for locale in allLocales %}
+		{% set localeEntry = craft.entries.id(entry.id).locale(locale).first %}{# Find the current entry in the other locale #}
+
+		{% if localeEntry is defined and
+		      localeEntry.locale is defined and
+		      locale is defined and
+		      localeEntry.locale == locale %}{# Make sure that it's actually localized to this locale #}
+			<link rel="alternate" hreflang="{{ locale }}" href="{{ localeEntry.getUrl() }}" />
+		{% endif %}
+	{% endfor %}
+{% endif %}

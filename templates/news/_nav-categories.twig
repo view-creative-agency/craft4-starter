@@ -1,0 +1,13 @@
+{% cache %}
+	{% set categories = craft.categories.group('newsCategories').all() %}
+	{% if categories | length %}
+		<div class="categories widget">
+			<h2>News Categories</h2>
+			<ul>
+				{% for category in categories %}
+				<li><a href="{{ category.url }}">{{ category.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</div><!-- .categories -->
+	{% endif %}
+{% endcache %}

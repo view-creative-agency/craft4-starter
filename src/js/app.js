@@ -2,7 +2,8 @@
 import "@js/parts/css";
 
 /* JS
-import "@js/parts/lazyloading"; */
+import "@js/parts/lazyloading";
+import "@js/parts/fetch-wrapper"; */
 
 /**
  * Alpine JS
@@ -18,7 +19,9 @@ Alpine.start();
  * Accept HMR as per: https://vitejs.dev/guide/api-hmr.html
  */
 if (import.meta.hot) {
-  import.meta.hot.accept(() => {
-    console.log("HMR");
-  });
+	import.meta.hot.accept(() => {
+		console.log("HMR");
+	});
 }
+
+console.log('this is a test');

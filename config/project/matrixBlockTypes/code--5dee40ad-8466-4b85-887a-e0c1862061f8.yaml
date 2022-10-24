@@ -3,8 +3,10 @@ fieldLayouts:
   55dc1e3e-e35c-47f2-b736-d93164b4740d:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 61e390b2-9faf-4b6c-9381-6e7f4e207fbb # Code
             instructions: null
             label: null
@@ -12,10 +14,12 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: afaddaad-e22a-47c7-9c68-2698e23c982f
+            userCondition: null
             warning: null
             width: 100
         name: Content
         uid: 076c975c-9a9b-4ccf-8887-09b2e773f413
+        userCondition: null
 fields:
   61e390b2-9faf-4b6c-9381-6e7f4e207fbb: # Code
     columnSuffix: tmalogcu
@@ -39,4 +43,4 @@ fields:
     type: craft\fields\PlainText
 handle: code
 name: Code
-sortOrder: 11
+sortOrder: 12

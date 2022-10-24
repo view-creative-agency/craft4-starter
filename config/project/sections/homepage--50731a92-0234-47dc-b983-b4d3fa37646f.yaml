@@ -16,7 +16,7 @@ previewTargets:
         - '1'
 propagationMethod: all
 siteSettings:
-  6ac2852d-9212-4f02-89d2-35cd874150e9: # Craft4 Test
+  6ac2852d-9212-4f02-89d2-35cd874150e9: # $SYSTEM_NAME
     enabledByDefault: true
     hasUrls: true
     template: index.twig

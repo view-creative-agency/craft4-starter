@@ -1,0 +1,42 @@
+{#
+	{% include '_partials/social-share' with {
+		showIntro: true|false,
+		type:      'brand-compliant|outline',
+		title:     'Custom Title'
+	} %}
+#}
+
+{% set useType = type ??? 'brand-compliant' %}
+{% set fullUrl = siteUrl ~ craft.app.request.pathInfo | url_encode %}
+{% set useTitle = title ??? entry.title ??? category.title ??? '' %}
+
+<div class="sm share {{ useType }}">
+	{% if showIntro is defined and showIntro == true %}
+		<div class="intro">
+			<h3 class="h4">{{ 'Share This' | t }}</h3>
+		</div>
+	{% endif %}
+
+	<ul>
+		<li>
+			<a class="js-social-share" href="https://www.facebook.com/sharer/sharer.php?u={{ fullUrl }}" target="_blank" rel="noopener">
+				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/facebook.svg') }}
+			</a>
+		</li>
+		<li>
+			<a class="js-social-share" href="https://twitter.com/intent/tweet/?text={{ useTitle }}&url={{ fullUrl }}" target="_blank" rel="noopener">
+				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/twitter.svg') }}
+			</a>
+		</li>
+		<li class="sm_pinterest">
+			<a class="js-social-share" href="https://www.pinterest.com/pin/create/button/?url={{ craft.app.request.absoluteUrl | url_encode}}" target="_blank" rel="noopener">
+				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/pinterest.svg') }}
+			</a>
+		</li>
+		<li>
+			<a class="js-social-share" href="mailto:?subject={{ useTitle }}&amp;body={{ fullUrl }}">
+				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/mail.svg') }}
+			</a>
+		</li>
+	</ul>
+</div><!-- .share -->

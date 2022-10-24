@@ -1,18 +1,9 @@
 /* CMS textblock - Styling the contents of a Redactor / Rich Text field. */
 	.cms-textblock {
-		& > *:last-child {
-			margin-bottom: 0;
-		}
-
 		& h1:before { content: "h1 not allowed here!"; color: red; }
 
 		& a {
-			text-decoration: underline; color: inherit;
-
-			&:hover,
-			&:focus {
-				text-decoration: none;
-			}
+			text-decoration: underline;
 		}
 
 		/* Style links to uploaded assets that are inside the redactor field */

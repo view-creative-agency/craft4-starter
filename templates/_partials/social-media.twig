@@ -23,8 +23,8 @@
 			{% if sm.url | length %}
 				<li>
 					<a href="{{ sm.url }}">
-						<span>Find {{ siteName }} on {{ sm.siteName }}</span>
-						{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/' ~ sm.handle ~ '.svg') }}
+						<span class="uc_hide-visually">Find {{ siteName }} on {{ sm.siteName }}</span>
+						{{ svg('@webroot/dist/images/smicons/' ~ useType ~ '/' ~ sm.handle ~ '.svg') }}
 					</a>
 				</li>
 			{% endif %}

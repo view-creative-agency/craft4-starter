@@ -1,5 +1,8 @@
 ### Defined here so that if anyone deletes folders with a .gitignore inside, the folder contents REMAIN ignored if the folder is re-created - otherwise you can end up with a load of stuff in GIT that should not be in GIT, simply because someone didn't realise that deleting the folder also deletes the ignore file ###
 
+# Don't save package-lock, when we're fresh installing.
+# package-lock.json
+
 ### General files and folders ###
 /.env
 /.idea

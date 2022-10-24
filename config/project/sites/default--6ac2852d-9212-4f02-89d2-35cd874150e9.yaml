@@ -1,8 +1,9 @@
 baseUrl: $PRIMARY_SITE_URL
+enabled: true
 handle: default
 hasUrls: true
 language: en-GB
-name: 'Craft4 Test'
+name: $SYSTEM_NAME
 primary: true
-siteGroup: b331abc3-406d-4f08-9b2c-7c672bf0de0e # Craft4 Test
+siteGroup: b331abc3-406d-4f08-9b2c-7c672bf0de0e # Primary
 sortOrder: 1

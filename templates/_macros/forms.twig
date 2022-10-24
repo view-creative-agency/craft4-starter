@@ -1,32 +1,35 @@
 {% macro htmlRadioset(params) %}{# Also works for checkboxes #}
-	{% import _self as macros %}
+	{% import _self as formHelper %}
 	{#
 		HTML scaffolding for consistent form radio / checkbox options output.
 		This macro does nothing clever, it only templates out the passed in data.
 
 		USAGE:
-		{% import '_macros' as macros %}
+		{% import '_macros/forms' as formHelper %}
 
-		{{ macros.htmlRadioset({
+		{{ formHelper.htmlRadioset({
 			legend      : 'Radio Group Legend',
-			legendStyle: 'h3',
+			legendStyle : 'h3',
 			instructions: 'This is a hint of some sort',
-			options: [
+			error       : model and model.getErrors(fieldname) ? model.getErrors(fieldname)[0] : null
+			options     : [
 				{
-					type: 'radio',
-					label: 'option label',
-					value: 'option value',
-					name: 'fieldName',
-					id: 'fieldName1',
-					checked: false
+					type    : 'radio',
+					name    : 'fieldName',
+					label   : 'option label',
+					value   : 'option value',
+					id      : 'fieldName1',
+					checked : false,
+					required: true
 				},
 				{
-					type: 'radio',
-					label: 'option label 2',
-					value: 'option value 2',
-					name: 'fieldName',
-					id: 'fieldName2',
-				}
+					type    : 'radio',
+					name    : 'fieldName',
+					label   : 'option label 2',
+					value   : 'option value 2',
+					id      : 'fieldName2',
+					checked : true
+				},
 			]
 		}) }}
 	#}
@@ -43,7 +46,9 @@
 				and
 				params.error | length > 0
 			%}
-				<div class="fieldgroup-error-message">{{ params.error }}</div>
+				<div class="fieldgroup-error-message">
+					{{ params.error }}
+				</div>
 			{% endif %}
 
 			{% if
@@ -58,7 +63,7 @@
 
 			<div class="theOptions">
 				{% for option in params.options %}
-					{{- macros.htmlField(option) -}}
+					{{- formHelper.htmlField(option) -}}
 				{% endfor %}
 			</div>
 		</fieldset>
@@ -71,48 +76,201 @@
 		This macro does nothing clever, it only templates out the passed in data.
 
 		USAGE:
-		{% import '_partials/macros' as macros %}
+		{% import '_macros/forms' as formHelper %}
 
-		{{ macros.htmlField({
-			type        : 'text',
-			id          : 'fieldId',
-			name        : 'fieldName',
-			value       : previousValue
-			required    : true,
-			label       : 'Field Label',
-			instructions: 'This is a hint of some sort'
-		}}
+		{{ formHelper.htmlField({
+			type         : 'text',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			value        : previousValue,
+			required     : true,
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			placeholder  : 'e.g., Example Text',
+			error        : model and model.getErrors(fieldname) ? model.getErrors(fieldname)[0] : null
+		}) }}
 
-		{{ macros.htmlField({
-			type   : 'select',
-			id     : 'fieldId',
-			name   : 'fieldName',
-			label  : 'Field Label',
+		{{ formHelper.htmlField({
+			type         : 'email',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			value        : previousValue,
+			required     : true,
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			placeholder  : 'e.g., Example Text',
+			error        : model and model.getErrors(fieldname) ? model.getErrors(fieldname)[0] : null
+		}) }}
+
+		{{ formHelper.htmlField({
+			type         : 'password',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			value        : previousValue,
+			required     : true,
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			placeholder  : 'e.g., Example Text',
+			error        : model and model.getErrors(fieldname) ? model.getErrors(fieldname)[0] : null
+		}) }}
+
+		{{ formHelper.htmlField({
+			type         : 'select',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			error        : model and model.getErrors(fieldName) ? model.getErrors(fieldName)[0] : null,
+			multiple     : true,
 			options: [
 				{
-					label: 'option label',
-					value: 'option value',
-					selected: true
+					label    : 'option label',
+					value    : 'option value',
+					selected : true,
+					disabled : true
 				},
 				{
-					label: 'option label 2',
-					value: 'option value 2'
+					...
+				},
+				{
+					optgroup: {
+						groupLabel: 'Ford Cars',
+						options: [
+							{
+								label    : 'option label',
+								value    : 'option value',
+								selected : true,
+								disabled : true
+							},
+							{
+								...
+							}
+						]
+					}
+				},
+				{
+					optgroup: {
+						groupLabel: 'Tesla Cars',
+						options: [
+							{
+								label    : 'option label',
+								value    : 'option value',
+								selected : true,
+								disabled : true
+							},
+							{
+								...
+							}
+						]
+					}
 				}
 			]
 		}) }}
 
+		{{ formHelper.htmlField({
+			type         : 'textarea',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			value        : previousValue
+			required     : true,
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			placeholder  : 'e.g., Example Text',
+			error        : model and model.getErrors(fieldname) ? model.getErrors(fieldname)[0] : null
+		}) }}
+
+		NOTE: for groups of radio or checkbox, use the htmlRadioset macro
+		      below are examples for individual checkbox/radio fields
+
+		{{ formHelper.htmlField({
+			type         : 'checkbox',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			value        : previousValue,
+			required     : true,
+			checked      : true,
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			error        : model and model.getErrors(fieldName) ? model.getErrors(fieldName)[0] : null
+		}) }}
+
+		{{ formHelper.htmlField({
+			type         : 'radio',
+			name         : 'fieldName',
+			label        : 'Field Label',
+			value        : previousValue,
+			required     : true,
+			checked      : true,
+			id           : 'fieldId',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			error        : model and model.getErrors(fieldName) ? model.getErrors(fieldName)[0] : null
+		}) }}
+
 		{{ macros.htmlField({
-			type : 'date',
-			id   : 'startFrom',
-			name : 'startFrom',
-			label: 'Starting from',
-			value: craft.app.request.getDate('startFrom') ??? null
+			type         : 'number',
+			name         : 'quantity',
+			label        : 'Quantity',
+			value        : previousValue ??? null,
+			required     : true,
+			id           : 'startFrom',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			error        : model and model.getErrors(quantity) ? model.getErrors(quantity)[0] : null,
+			placeholder  : 'e.g., 2',
+			numberOptions: {
+				min : 0,
+				max : 10,
+				step: 2
+			}
+		}) }}
+
+		{{ macros.htmlField({
+			type         : 'date',
+			name         : 'startFrom',
+			label        : 'Starting from',
+			value        : previousValue ??? null,
+			required     : true,
+			id           : 'startFrom',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			error        : model and model.getErrors(startFrom) ? model.getErrors(startFrom)[0] : null
+		}) }}
+
+		{{ macros.htmlField({
+			type         : 'file',
+			name         : 'uploadFile',
+			label        : 'Upload File',
+			value        : previousValue ??? null,
+			required     : true,
+			id           : 'uploadFile',
+			class        : 'wrapper-class',
+			inputClass   : 'input-class',
+			instructions : 'This is a hint of some sort',
+			error        : model and model.getErrors(uploadFile) ? model.getErrors(uploadFile)[0] : null
 		}) }}
 	#}
 	<div class="htmlField
 		{{- " " ~ params.type -}}
-		{%- if params.error    is defined and params.error | length > 0 %} hasError{% endif -%}
-		{%- if params.required is defined and params.required == true %} required{% endif -%}
+		{%- if params.error        is defined and params.error | length > 0 %} hasError{% endif -%}
+		{%- if params.instructions is defined and params.instructions | length > 0 %} hasInstructions{% endif -%}
+		{%- if params.required     is defined and params.required == true %} required{% endif -%}
+		{%- if params.class        is defined %} {{ params.class }}{% endif -%}
 	">
 		<div class="fieldWrapper">
 			{% switch params.type %}{# https://craftcms.com/docs/3.x/dev/tags.html#accessing-the-parent-loop-variable #}
@@ -123,13 +281,27 @@
 							id="{{ params.id }}"
 							name="{{ params.name }}"
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{{ (params.multiple is defined and params.multiple == true) ? 'multiple' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 						>
 							{% for option in params.options %}
-								<option
-									value="{{ option.value }}"
-									{{ (option.selected is defined and option.selected) ? 'selected'}}
-									{{ (option.disabled is defined and option.disabled) ? 'disabled' }}
-								>{{ option.label }}</option>
+								{% if option.optGroup is defined %}
+									<optgroup label="{{ option.optGroup.groupLabel}}">
+										{% for subOption in option.optGroup.options %}
+											<option
+												value="{{ subOption.value }}"
+												{{ (subOption.selected is defined and subOption.selected) ? 'selected'}}
+												{{ (subOption.disabled is defined and subOption.disabled) ? 'disabled' }}
+											>{{ subOption.label | raw }}</option>
+										{% endfor %}
+									</optgroup>
+								{% else %}
+									<option
+										value="{{ option.value }}"
+										{{ (option.selected is defined and option.selected) ? 'selected'}}
+										{{ (option.disabled is defined and option.disabled) ? 'disabled' }}
+									>{{ option.label | raw }}</option>
+								{% endif %}
 							{% endfor %}
 						</select>
 					</label>
@@ -143,6 +315,7 @@
 							placeholder="{{ params.placeholder ??? null }}"
 							rows="5"
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 						>{{ params.value }}</textarea>
 					</label>
 
@@ -153,10 +326,11 @@
 							type="{{ params.type }}"
 							name="{{ params.name }}"
 							value="{{ params.value }}"
-							{{ (params.checked is defined and params.checked == true) ? 'checked' : null }}
+							{{ (params.checked  is defined and params.checked  == true) ? 'checked'  : null }}
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 						/>
-						<span>{{ params.label }}</span>
+						<span>{{ params.label | raw }}</span>
 					</label>
 
 				{% case "number" %}
@@ -172,10 +346,14 @@
 								{% if params.numberOptions.max is defined %}
 									max={{ params.numberOptions.max }}
 								{% endif %}
+								{% if params.numberOptions.step is defined %}
+									step={{ params.numberOptions.step }}
+								{% endif %}
 							{% endif %}
 							name="{{ params.name }}"
 							placeholder="{{ params.placeholder ??? null }}"
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 							value="{{ params.value ??? null }}"
 						/>
 					</label>
@@ -197,6 +375,7 @@
 							name="{{ params.name }}"
 							placeholder="{{ params.placeholder ??? null }}"
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 							value="{{ params.value ??? null }}"
 						/>
 					</label>
@@ -210,6 +389,7 @@
 							name="{{ params.name }}"
 							placeholder="{{ params.placeholder ??? null }}"
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 							value="{{ params.value }}"
 						/>
 					</label>
@@ -223,6 +403,7 @@
 							name="{{ params.name }}"
 							placeholder="{{ params.placeholder ??? null }}"
 							{{ (params.required is defined and params.required == true) ? 'required' : null }}
+							{% if params.inputClass is defined %}class="{{ params.inputClass }}"{% endif %}
 							value="{{ params.value }}"
 						/>
 					</label>
@@ -236,7 +417,7 @@
 				params.instructions | length > 0
 			%}
 				<div class="form-instructions">
-					{{ params.instructions }}
+					{{ params.instructions | raw }}
 				</div>
 			{% endif %}
 		</div>

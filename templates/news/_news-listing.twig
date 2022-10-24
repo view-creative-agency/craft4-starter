@@ -1,0 +1,59 @@
+{# Get the news items and cache them as long as possible - caching taken care of outside this include #}
+{% set newsItemsEager = craft.entries
+	.section('newsItems')
+	.limit(2)
+	.orderBy('postDate desc')
+	.with([
+		'listingImage',
+	])
+%}
+
+{% paginate newsItemsEager as paginationInfo, paginationEntries %}
+{% do seomatic.helper.paginate(paginationInfo) %}
+
+{% if paginationInfo.currentPage != 1 %}{# Paginated URLs should not be indexed, but their links should be followed #}
+	{% do seomatic.meta.robots("noindex,follow") %}
+{% endif %}
+
+{% for newsItem in paginationEntries %}
+	{% if loop.first %}
+		<div class="section newsItems">
+			<div class="container">
+			<h2>News Items</h2>
+	{% endif %}
+
+	<div class="newsItem">
+		{# output a lazy-loaded webp/jpeg image which becomes a fixed 200px square at breapoint3 #}
+		{{ macros.imageChangesShape({
+			theImage     : newsItem.listingImage[0] ??? website.missingImageFallback[0],
+			transforms   : [
+				{ media: '(max-width: 479px)',  width: 480,  height: 240 },
+				{ media: '(min-width: 700px)',  width: 400,  height: 400 },
+				{ media: '(min-width: 480px)',  width: 700,  height: 400 },
+			],
+			className: 'media'
+		}) }}
+
+		<div class="text">
+			<h3>{{ newsItem.title }}</h3>
+			<p class="meta">
+				Published on {{ newsItem.postDate | date('l jS F Y') }} at {{ newsItem.postDate | date('g:i A') }}
+			</p>
+			<div class="listingExcerpt">
+				{{ newsItem.listingExcerpt }}
+			</div>
+			<p>
+				<a href="{{ newsItem.url }}" class="dc_more">
+					Read more<span> about {{ newsItem.title }}</span>
+				</a>
+			</p>
+		</div><!-- .text -->
+	</div><!-- .newsItem -->
+
+	{% if loop.last %}
+			</div><!-- .container -->
+		</div><!-- .section.newsItems -->
+	{% endif %}
+{% endfor %}
+
+{% include '_partials/pagination-controls' %}

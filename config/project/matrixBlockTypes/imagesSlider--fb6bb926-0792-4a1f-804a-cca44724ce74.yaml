@@ -1,0 +1,75 @@
+field: b0a51bbc-452f-4c28-90cb-be69261fa068 # Mixed Content
+fieldLayouts:
+  a3fc0ded-b483-427e-993e-fc1e2977f9bc:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: aa3fec5f-bca4-49d9-818a-7e96cac33be9 # Images
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3ce3a7c4-0e12-4553-a54f-60c5bb0e0f07
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c8c57190-2f3f-461b-8242-ef5d9b61397d
+        userCondition: null
+fields:
+  aa3fec5f-bca4-49d9-818a-7e96cac33be9: # Images
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: images
+    instructions: null
+    name: Images
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds:
+        - photos
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 9
+      minRelations: 1
+      previewMode: full
+      restrictFiles: true
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose images'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: imagesSlider
+name: 'Images: Slider'
+sortOrder: 6

@@ -1,0 +1,56 @@
+{% import '_macros/helpers' as helpers %}
+
+<div
+	class="mixedContent_textByImage"
+	id="block-{{ block.id }}"
+	data-text-position="{{ block.textPosition }}"
+	data-reveal-on-scroll
+>
+		{% set jpgs  = craft.imagerx.transformImage( block.image[0], 'textByImageJpg') %}
+		{% set webps = craft.imagerx.transformImage( block.image[0], 'textByImageWebp') %}
+
+		<picture>
+			<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
+			<source
+				media="(max-width: 719px)"
+				srcset="{{ webps[0].url }}"
+				type="{{ webps[0].mimeType }}"
+				width="{{ webps[0].width }}"
+				height="{{ webps[0].height }}">
+			<source
+				media="(min-width: 720px)"
+				srcset="{{ webps[1].url }}"
+				type="{{ webps[1].mimeType }}"
+				width="{{ webps[1].width }}"
+				height="{{ webps[1].height }}">
+
+			<!-- jpg fallbacks -->
+			<source
+				media="(max-width: 719px)"
+				srcset="{{ jpgs[0].url }}"
+				type="{{ jpgs[0].mimeType }}"
+				width="{{ jpgs[0].width }}"
+				height="{{ jpgs[0].height }}">
+			<source
+				media="(min-width: 720px)"
+				srcset="{{ jpgs[1].url }}"
+				type="{{ jpgs[1].mimeType }}"
+				width="{{ jpgs[1].width }}"
+				height="{{ jpgs[1].height }}">
+
+			<img
+				loading="lazy"
+				decoding="async"
+				src="{{ jpgs[0].url }}"
+				width="{{ jpgs[0].width }}"
+				height="{{ jpgs[0].height }}"
+				alt="{{ block.image.one().alt }}"
+			/>
+		</picture>
+
+	<div class="text">
+		<div class="richText cms-textblock l_stack">
+			{{ block.text }}
+		</div>
+	</div>
+</div>

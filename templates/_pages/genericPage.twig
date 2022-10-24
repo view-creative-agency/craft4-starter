@@ -4,31 +4,38 @@
 
 {%- block content %}<!-- Template: {{ _self }}.twig -->
 	<main id="main">
-		<h1>{{ entry.title }}</h1>
+		<div class="row l_constrain">
+			<h1 class="font-size:heading-large">{{ entry.title }}</h1>
 
-		<div class="cms-textblock l_stack">
-			<h2>Coding images that can generate transforms when saved in the CMS</h2>
-			<p>We can't keep using the old (but convenient) image macros, there is no way to make them perform well. The problem is that most "single images" end up with between four and twelve transforms needing to be created. The creation of those transforms happens the first time thay image is requested on the front end. Meaning, massive delays to the first page load and huge CPU spikes.</p>
-			<p>This can be avoided using <strong>ImagerX</strong>'s Pro version, which allows for <em>transform generation</em>. It means we have to specify our image transforms in a config file, rather than in a Macro on the page.</p>
-			<p>You can set <em>named transforms</em> in the <code>/config/imager-x-transforms.php</code> file. You specify a name for the transform - such as "headerImages", and what image transforms you want to be generated for that name.</p>
-			<p>You can then set <em>generated transforms</em> in a config file <code>/config/imager-x-generate.php</code>.</p>
-			<p>You can tell it to watch for <em>specific fields</em> being saved in the CMS, and when they are - to run any number of <em>named transforms</em> on those images, at that time. For example, you can have it watch the listingImage field in the Pages section, and when it is saved generate from that image the <em>bannerImages</em> and <em>thumbnailImages</em> transforms that are set up in the <code>/config/imager-x-transforms.php</code> file.</p>
-			<p>In this way, the images transforms are done when the pages are saved, and this helps stop slow initial page loads.</p>
-			<p>See the code below for an example on how to use these transforms:</p>
-			{#<ul>
+			<div class="l_padding-block">
+				{% cache %}
+					{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': entry } %}
+				{% endcache %}
+			</div>
+
+			<div class="l_stack">
+				<h2 class="font-size:promoted">Coding images that can generate transforms when saved in the CMS</h2>
+				<p>We can't keep using the old (but convenient) image macros, there is no way to make them perform well. The problem is that most "single images" end up with between four and twelve transforms needing to be created. The creation of those transforms happens the first time the image is requested on the front end. Meaning, massive delays to the first page load and huge CPU spikes.</p>
+				<p>This can be avoided using <strong>ImagerX</strong>'s Pro version, which allows for <em>transform generation</em>. It means we have to specify our image transforms in a config file, rather than in a Macro on the page.</p>
+				<p>You can set <em>named transforms</em> in the <code>/config/imager-x-transforms.php</code> file. You specify a name for the transform - such as "headerImages", and what image transforms you want to be generated for that name.</p>
+				<p>You can then set <em>generated transforms</em> in a config file <code>/config/imager-x-generate.php</code>.</p>
+				<p>You can tell it to watch for <em>specific fields</em> being saved in the CMS, and when they are - to run any number of <em>named transforms</em> on those images, at that time. For example, you can have it watch the listingImage field in the Pages section, and when it is saved generate from that image the <em>bannerImages</em> and <em>thumbnailImages</em> transforms that are set up in the <code>/config/imager-x-transforms.php</code> file.</p>
+				<p>In this way, the images transforms are done when the pages are saved, and this helps stop slow initial page loads.</p>
+				<p>See the code below for an example on how to use these transforms:</p>
+
+				<ul>
 					<li>Browser Support for WEBP: {{ craft.imager.clientSupports('webp') ? 'yes' : 'no' }}</li>
 					<li>Browser Support for AVIF: {{ craft.imager.clientSupports('avif') ? 'yes' : 'no' }}</li>
 					<li>Browser Support for JPEG XL: {{ craft.imager.clientSupports('jxl') ? 'yes' : 'no' }}</li>
 					<li>Server Support for WEBP: {{ craft.imager.serverSupportsWebp() ? 'yes' : 'no' }}</li>
 					<li>Server Support for AVIF: {{ craft.imager.serverSupportsAvif() ? 'yes' : 'no' }}</li>
 					<li>Server Support for JPEG XL: {{ craft.imager.serverSupportsJxl() ? 'yes' : 'no' }}</li>
-				</ul>#}
+				</ul>
+			</div>
 
 			{% if entry.listingImage | length %}
 				{% set jpgs  = craft.imagerx.transformImage( entry.listingImage.one(), 'bannerImageJpg') %}
 				{% set webps = craft.imagerx.transformImage( entry.listingImage.one(), 'bannerImageWebp') %}
-
-				<style>picture > img { width: 100%; height: auto; }</style>
 				<picture>
 					<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
 					<source media="(max-width: 359px)" srcset="{{ webps[0].url }}" type="{{ webps[0].mimeType }}" width="{{ webps[0].width }}" height="{{ webps[0].height }}">

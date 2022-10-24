@@ -1,0 +1,20 @@
+<div class="mixedContent_files fileCount_{{ block.files|length }} l_liquid-grid" id="block-{{ block.id }}" data-reveal-on-scroll>
+	{% for file in block.files %}
+		<div class="file uc_card l_stack l_stack" id="id-{{ block.id }}">
+			<div class="text">
+				<div class="top">
+					<p class="font-size:heading-small">{{ file.title }}</p>
+					<p class="font-size:diminished">{{ file.kind }}, {{ file.size | filesize }}</p>
+				</div>
+			</div><!-- .text -->
+
+			<div class="split-stack">
+				<a href="{{ file.url }}" class="uc_button" rel="noopener" target="_blank">
+					<img src="/dist/svg/document-download.svg" alt="" />
+					Download
+					<span class="uc_hide-visually">{{ file.title }}</span>
+				</a>
+			</div>
+		</div><!-- .entry -->
+	{% endfor %}
+</div><!-- .block.rowTextImage -->

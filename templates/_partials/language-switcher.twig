@@ -1,0 +1,49 @@
+{#
+	This template outputs a language switcher for the current page.
+	Just include it in other templates as needed. e.g.,
+
+	{% include "_partials/language-switcher" %}
+#}
+
+{#
+	HELP:
+	https://craftcms.com/docs/3.x/sites.html#creating-a-site
+	https://nystudio107.com/docs/seomatic/Using.html#helper-functions-seomatic-helper
+
+	BUG REPORT:
+	https://github.com/nystudio107/craft-seomatic/issues/783
+#}
+
+{# DEBUGGING
+{{ dump( seomatic.helper.getLocalizedUrls() ) }}
+{{ dump( currentSite ) }}
+#}
+
+{% set localizedUrlsArray = seomatic.helper.getLocalizedUrls() %}
+{% for localizedUrls in localizedUrlsArray %}
+	{# {% if loop.first %}
+		<p class="language-switcher">
+	{% endif %} #}
+
+	{% if localizedUrls['language'] != craft.app.language %}
+		{#{% if craft.app.i18n.getIsIntlLoaded() %} PHP's i18n extension is available, we can use it to spit out the actual language name dynamically from the language code # }
+			<a href="{{ localizedUrls['url'] }}" lang="{{ localizedUrls['language'] }}">
+				{{ craft.app.i18n.getLocaleById( localizedUrls['language'] ) }}
+			</a>
+		{% else %}{# But as OSX's UINX base is outdated with missing options, we might need to manually do it for every language option #}
+			{% if localizedUrls['language'] == 'en-GB' %}
+				<a href="{{ localizedUrls['url'] }}" lang="en-GB">
+					English
+				</a>
+			{% elseif localizedUrls['language'] == 'cy-GB' %}
+				<a href="{{ localizedUrls['url'] }}" lang="cy-GB">
+					Cymraeg
+				</a>
+			{% endif %}
+		{# {% endif %} #}
+	{% endif %}
+
+	{# {% if loop.last %}
+		</p><!-- .language-switcher -->
+	{% endif %} #}
+{% endfor %}

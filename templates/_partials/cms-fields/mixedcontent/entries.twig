@@ -1,0 +1,50 @@
+<div class="mixedContent_files entriesCount_{{ block.files|length }} l_liquid-grid" id="block-{{ block.id }}" data-reveal-on-scroll>
+	{% for page in block.entries %}
+		<div class="entry l_stack" id="id-{{ block.id }}">
+			{% if block.showListingImage %}
+				{% set listingImage = page.listingImage[0] ??? website.missingImageFallback[0] %}
+				{% set jpgs  = craft.imagerx.transformImage( listingImage, 'imageListingExcerptJpg') %}
+				{% set webps = craft.imagerx.transformImage( listingImage, 'imageListingExcerptWebp') %}
+				<picture>
+					<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
+					<source
+						srcset="{{ webps[0].url }}"
+						type="{{ webps[0].mimeType }}"
+						width="{{ webps[0].width }}"
+						height="{{ webps[0].height }}">
+
+					<!-- jpg fallbacks -->
+					<source
+						srcset="{{ jpgs[0].url }}"
+						type="{{ jpgs[0].mimeType }}"
+						width="{{ jpgs[0].width }}"
+						height="{{ jpgs[0].height }}">
+
+					<img
+						loading="lazy"
+						decoding="async"
+						src="{{ jpgs[0].url }}"
+						width="{{ jpgs[0].width }}"
+						height="{{ jpgs[0].height }}"
+						alt="{{ listingImage.alt }}"
+					/>
+				</picture>
+			{% endif %}
+
+			<div class="cms-textblock font-size:diminished">
+				<h2 class="font-size:heading-small">{{ page.title }}</h2>
+
+				{% if block.showListingExcerpt %}
+					{{ page.listingExcerpt }}
+				{% endif %}
+			</div><!-- .text -->
+
+			<div class="split-stack">
+				<a href="{{ page.url }}" class="uc_button">
+					Read more
+					<span class="uc_hide-visually">from "{{ page.title }}"</span>
+				</a>
+			</div>
+		</div><!-- .entry -->
+	{% endfor %}
+</div><!-- .block.rowTextImage -->

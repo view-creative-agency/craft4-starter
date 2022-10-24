@@ -10,8 +10,11 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 2
 
 # https://github.com/pixelandtonic/CodingStandards
+# We override their preference for spaces as tabs. That is objectively a bad choice that disrespects end user preferences and has accessibility impact. Use tab characters.
 [*.php]
 indent_style = tab
 indent_size = 2

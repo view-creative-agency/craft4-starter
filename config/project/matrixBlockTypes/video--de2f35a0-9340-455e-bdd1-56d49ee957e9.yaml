@@ -3,8 +3,10 @@ fieldLayouts:
   345d48a5-735a-4aea-91b1-3c8a60989e4c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: ae9dfd77-941c-4707-8fb0-e4fce617b424 # Youtube/Vimeo Video URL
             instructions: null
             label: null
@@ -12,9 +14,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: b24e2402-0e9a-4e67-9ef5-36c2b71e3c18
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 2219b27c-3104-49fc-9b26-270a35789282 # Autoplay
             instructions: null
             label: null
@@ -22,9 +26,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 8ef72edb-fcc1-4309-97d0-66e3de3f0588
+            userCondition: null
             warning: null
             width: 25
           -
+            elementCondition: null
             fieldUid: 68c0b17f-8401-4068-a0b6-10c4781f5744 # Loop Video
             instructions: null
             label: null
@@ -32,9 +38,11 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 146df568-c238-422b-9f47-112bafcdf6e6
+            userCondition: null
             warning: null
             width: 25
           -
+            elementCondition: null
             fieldUid: 3d35622b-6607-4a05-81f0-93d712f18eed # Minimal UI
             instructions: null
             label: null
@@ -42,10 +50,24 @@ fieldLayouts:
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: bd9b66c3-e008-469a-a86a-f7b52aa883d1
+            userCondition: null
+            warning: null
+            width: 25
+          -
+            elementCondition: null
+            fieldUid: 9f1920f0-78f1-47cd-b259-887b1de32c74 # Aspect Ratio
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1360ef88-324f-4570-b442-9ebc3c1f6ad1
+            userCondition: null
             warning: null
             width: 25
         name: Content
         uid: ea69857d-fe5d-4f57-b8d9-5cc2f58d0a6a
+        userCondition: null
 fields:
   3d35622b-6607-4a05-81f0-93d712f18eed: # Minimal UI
     columnSuffix: kihnuapr
@@ -62,6 +84,63 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Lightswitch
+  9f1920f0-78f1-47cd-b259-887b1de32c74: # Aspect Ratio
+    columnSuffix: xhdjhvyv
+    contentColumnType: string
+    fieldGroup: null
+    handle: aspectRatio
+    instructions: null
+    name: 'Aspect Ratio'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - widescreen
+            -
+              - value
+              - widescreen
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - cinema185
+            -
+              - value
+              - cinema185
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - cinema239
+            -
+              - value
+              - cinema239
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - super
+            -
+              - value
+              - super
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
   68c0b17f-8401-4068-a0b6-10c4781f5744: # Loop Video
     columnSuffix: jbgfmdye
     contentColumnType: boolean
@@ -109,4 +188,4 @@ fields:
     type: craft\fields\Url
 handle: video
 name: Video
-sortOrder: 6
+sortOrder: 7

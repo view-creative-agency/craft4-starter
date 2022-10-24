@@ -3,94 +3,115 @@ fieldLayouts:
   bb05aae9-c53a-4321-98d1-be7a51021c32:
     tabs:
       -
+        elementCondition: null
         elements:
           -
-            fieldUid: 6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4 # Image
+            elementCondition: null
+            fieldUid: 6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4 # Uncropped
             instructions: null
             label: null
-            required: true
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             uid: 00c3d4bd-597a-429f-be36-c6d15c115639
+            userCondition: null
             warning: null
-            width: 50
+            width: 100
           -
-            fieldUid: 4ca648ee-78d8-4b4e-be42-119bdc9ac095 # Crop
+            elementCondition: null
+            fieldUid: 3876604f-baf6-4dcb-a75d-380ed5b026b3 # Landscape 3:2
             instructions: null
             label: null
-            required: true
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3133b6da-b665-4802-889c-ff9486dc6154
+            uid: fcc18143-a3f3-4c3f-9e41-181df7cb233f
+            userCondition: null
             warning: null
-            width: 50
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 08a13d2e-584d-4d56-a8fe-3b355f04e0c7 # Landscape 16:9
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d6342a19-6ce8-4b33-8f33-3e321fabde73
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5aacad15-f360-4977-9943-6c56e7ceaa59 # Landscape: 2.39:1
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dc5238c0-1aca-482c-88e2-0aca02477c45
+            userCondition: null
+            warning: null
+            width: 100
         name: Content
         uid: 1cc3093d-fcf8-4128-bb31-74b91aff8630
+        userCondition: null
 fields:
-  4ca648ee-78d8-4b4e-be42-119bdc9ac095: # Crop
-    columnSuffix: cvsknatk
+  5aacad15-f360-4977-9943-6c56e7ceaa59: # Landscape: 2.39:1
+    columnSuffix: jvuuzcgs
     contentColumnType: string
     fieldGroup: null
-    handle: crop
-    instructions: "How the image should be cropped.\r\n\"No crop\" will output the image in the same shape as it is uploaded."
-    name: Crop
+    handle: landscape2391
+    instructions: 'The image will be cropped to a 2.39:1 ratio (like a movie)'
+    name: 'Landscape: 2.39:1'
     searchable: false
     settings:
-      options:
-        -
-          __assoc__:
-            -
-              - label
-              - 'No crop'
-            -
-              - value
-              - noCrop
-            -
-              - default
-              - '1'
-        -
-          __assoc__:
-            -
-              - label
-              - 'Landscape Photo 3:2'
-            -
-              - value
-              - landscapePhoto32
-            -
-              - default
-              - ''
-        -
-          __assoc__:
-            -
-              - label
-              - 'Widescreen 16:9'
-            -
-              - value
-              - widescreen169
-            -
-              - default
-              - ''
-        -
-          __assoc__:
-            -
-              - label
-              - 'Cinema 2.39:1'
-            -
-              - value
-              - cinema2391
-            -
-              - default
-              - ''
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 1
+      minRelations: null
+      previewMode: full
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
     translationKeyFormat: null
-    translationMethod: none
-    type: craft\fields\Dropdown
-  6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: # Image
+    translationMethod: site
+    type: craft\fields\Assets
+  6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: # Uncropped
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
-    handle: image
-    instructions: 'An image that will be displayed full width.'
-    name: Image
+    handle: uncropped
+    instructions: 'The image will retain the same shape'
+    name: Uncropped
     searchable: false
     settings:
       allowSelfRelations: false
@@ -102,7 +123,7 @@ fields:
       defaultUploadLocationSubpath: null
       localizeRelations: false
       maxRelations: 1
-      minRelations: 1
+      minRelations: null
       previewMode: full
       restrictFiles: true
       restrictLocation: false
@@ -125,7 +146,106 @@ fields:
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       source: null
-      sources: '*'
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  08a13d2e-584d-4d56-a8fe-3b355f04e0c7: # Landscape 16:9
+    columnSuffix: xswldgsn
+    contentColumnType: string
+    fieldGroup: null
+    handle: landscape169
+    instructions: 'The image will be cropped to a 16:9 ratio (like a TV)'
+    name: 'Landscape 16:9'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds:
+        - photos
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 1
+      minRelations: null
+      previewMode: full
+      restrictFiles: true
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  3876604f-baf6-4dcb-a75d-380ed5b026b3: # Landscape 3:2
+    columnSuffix: ipyzzpfd
+    contentColumnType: string
+    fieldGroup: null
+    handle: landscape32
+    instructions: 'The image will be cropped to a 3:2 ratio (like a photo)'
+    name: 'Landscape 3:2'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowSubfolders: false
+      allowUploads: true
+      allowedKinds:
+        - photos
+      defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      defaultUploadLocationSubpath: null
+      localizeRelations: false
+      maxRelations: 1
+      minRelations: null
+      previewMode: full
+      restrictFiles: true
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
+      restrictedLocationSubpath: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Asset
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\assets\AssetCondition
+      selectionLabel: 'Choose an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      source: null
+      sources:
+        - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
       targetSiteId: null
       validateRelatedElements: false
       viewMode: list

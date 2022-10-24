@@ -1,0 +1,22 @@
+{% import '_macros/helpers' as helpers %}
+
+<div
+	class="mixedContent_form"
+	id="block-{{ block.id }}"
+	data-reveal-on-scroll
+>
+	{% if not sprig is defined %}
+		Sprig is required but not installed.
+	{% else %}
+		{{ sprig('_sprig/wheelForm',
+			{
+				formId: block.form.id,
+				formRedirect: block.redirectOnSuccess[0].url ??? null,
+				success: craft.app.session.hasFlash('wheelformSuccess') ? "{{ craft.app.session.getFlash('wheelformSuccess') }}" : false
+			},
+			{
+				's-trigger': 'load'
+			}
+		) }}
+	{% endif %}
+</div>
