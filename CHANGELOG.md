@@ -15,9 +15,29 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## [1.0.8] - 2022-10-24
+## [1.0.10] - 2022-10-26
 
-This release marks the first attempt at a properly complete project ready to actually use.
+### Changed
+
+- Stopped the `seed.sql` from making it into new repositories, it's only needed for initial set-up
+
+### Fixed
+
+- Updated the README.md with more details about how to use this project
+- Clarified what needs editing in the `.env.ddev` file after running this project
+
+## [1.0.9] - 2022-10-25
+
+### Added
+
+- `make seed` command to populate the project with a starter database
+
+### Fixed
+
+- Duplicate key-value pair in .env.ddev
+- Makefile mistake with seed command
+
+## [1.0.8] - 2022-10-24
 
 ### Added
 
