@@ -3,6 +3,9 @@
 # Don't save package-lock, when we're fresh installing.
 # package-lock.json
 
+# We only need the seed.sql for the initial creation of a project, it shouldn't be in the actual repo
+/seed.sql
+
 ### General files and folders ###
 /.env
 /.idea
@@ -43,6 +46,10 @@ prepros-6.config
 
 /web/cache/*
 !/web/cache/.gitignore
+
+/web/dist/*
+!/web/dist/.gitignore
+!/web/dist/README.md
 
 ### Craft system directories ###
 /vendor

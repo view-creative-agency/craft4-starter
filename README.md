@@ -115,10 +115,6 @@ rm CHANGELOG.md && rm LICENSE.md && rm README.md
 
 ## Configuring DDEV
 
-_Note: This section is optional. If you are simply test-driving this project, feel free to skip to the next section. ⚡_
-
-To configure your project to operate on a domain other than `https://craftcms.ddev.site`, run:
-
 ```shell
 ddev config
 ```
@@ -127,11 +123,19 @@ Follow the prompts.
 
 - **Project name:** e.g. `mysite` would result in a project URL of `https://mysite.ddev.site` (make note of this for later in the installation process)
 - **Docroot location:** defaults to `web`, keep as-is
-- **Project Type:** defaults to `php`, keep as-is
+- **Project Type:** defaults to `craftcms`, keep as-is
 
 ## Installing Craft
 
-To install a clean version of Craft, run:
+### Getting the existing example CMS with data included (recommended):
+
+```shell
+make seed
+```
+
+This will install everything you need, and start up your browser with the project running.
+
+### To install a clean version of Craft with a totally blank database:
 
 ```shell
 make install
