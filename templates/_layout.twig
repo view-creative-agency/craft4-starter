@@ -51,21 +51,16 @@
 			});
 		</script>
 
-		{#<script src="/dist/javascript/helpers.js" type="module" defer></script>#}
-		{#<script src="/dist/javascript/details-element.js" type="module" defer></script>#}
+		{{ craft.vite.script('src/js/modules/helpers.js', false) }}
+		{{ craft.vite.script('src/js/modules/details-element.js', false) }}
+		{# {{ craft.vite.script('src/js/modules/responsive-navigation.js', false) }} #}
 
 		{% if sprig is defined %}
 			{{ sprig.script }}
 		{% endif %}
 
-		{# Fancy JS loaded navigation if needed...
-			<script src="/dist/javascript/modern/responsive-navigation.js" type="module" defer></script>
-		#}
-
 		<!-- Styling for all devices -->
 		{{ craft.vite.script('src/js/app.js', false) }}{# Generates the CSS link, in dev will use Vite, in prod proper CSS #}
-		{{ craft.vite.script('src/js/modules/helpers.js', false) }}
-		{{ craft.vite.script('src/js/modules/details-element.js', false) }}
 
 		<!-- Favicons [ See: https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df ] -->
 		<!-- <link rel="icon" href="data:,"> no favicon, blocking automatic browser request -->
