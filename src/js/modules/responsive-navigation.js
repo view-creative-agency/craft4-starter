@@ -25,7 +25,8 @@ function doMobileNavigation() {
 		theMenu.setAttribute("aria-labelledby", "mainNavToggle");
 
 	// handle clicks on the menu toggle button
-		navToggle.addEventListener("click", function(e) {
+		navToggle.addEventListener("click", function (e) {
+			let newNavStatus;
 			let navIsOpen = document.querySelector('html').classList.contains("nav-active"); // returns true|false
 			newNavStatus  = !navIsOpen; // inverts the value
 			navToggle.setAttribute("aria-expanded", newNavStatus); // applies new value
@@ -67,7 +68,7 @@ if( screenWidth.matches ) {
 
 // watch for changes in window size
 screenWidth.addEventListener("change", (e) => {
-	if( e.matches) {
+	if( e.matches ) {
 		doMobileNavigation();
 	} else {
 		undoMobileNavigation();
