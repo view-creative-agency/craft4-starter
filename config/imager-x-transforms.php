@@ -11,7 +11,7 @@ return [
 			'jpegQuality' => 80
 		],
 		'transforms' => [
-			['width' => 480, 'ratio' => '16/9'],
+			['width' => 480, 'ratio' => 16/9],
 			['width' => 960],
 			['width' => 1500],
 			['width' => 2200]
@@ -33,7 +33,7 @@ return [
 			'jpegQuality' => 80
 		],
 		'transforms' => [
-			['width' => 720, 'ratio' => '16 / 9'],
+			['width' => 720, 'ratio' => 16/9],
 			['width' => 960]
 		]
 	],
