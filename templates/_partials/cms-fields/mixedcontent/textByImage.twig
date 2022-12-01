@@ -1,4 +1,5 @@
 {% import '_macros/helpers' as helpers %}
+{% import '_macros/images' as imageHelper %}
 
 <div
 	class="mixedContent_textByImage"
@@ -6,7 +7,7 @@
 	data-text-position="{{ block.textPosition }}"
 	data-reveal-on-scroll
 >
-		{% set jpgs  = craft.imagerx.transformImage( block.image[0], 'textByImageJpg') %}
+		{# {% set jpgs  = craft.imagerx.transformImage( block.image[0], 'textByImageJpg') %}
 		{% set webps = craft.imagerx.transformImage( block.image[0], 'textByImageWebp') %}
 
 		<picture>
@@ -46,7 +47,12 @@
 				height="{{ jpgs[0].height }}"
 				alt="{{ block.image.one().alt }}"
 			/>
-		</picture>
+		</picture> #}
+
+	{{ imageHelper.basic({
+		transform: 'textByImage',
+		source: block.image[0]
+	}) }}
 
 	<div class="text">
 		<div class="richText cms-textblock l_stack">

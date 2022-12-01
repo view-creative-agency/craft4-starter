@@ -15,6 +15,15 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.13] - 2022-11-30
+
+## Added
+
+- `_macros/images.twig` for handling HTML output of imagerX named transforms
+## Changed
+
+- Adjusted variouis templates to use the new image macro rather than hardcode the image HTML per instance of use
+
 ## [1.0.12] - 2022-11-30
 
 ## Changed

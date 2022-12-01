@@ -1,3 +1,5 @@
+{% import '_macros/images' as imageHelper %}
+
 <div
 	class="mixedContent_imagesGrid l_liquid-grid"
 	id="block-{{ block.id }}"
@@ -5,14 +7,14 @@
 	data-reveal-on-scroll
 >
 	{% for image in block.images %}
-		{% set jpgs  = craft.imagerx.transformImage( image, 'imagesGridJpg') %}
-		{% set webps = craft.imagerx.transformImage( image, 'imagesGridWebp') %}
+		{# {% set jpgs  = craft.imagerx.transformImage( image, 'imagesGridJpg') %}
+		{% set webps = craft.imagerx.transformImage( image, 'imagesGridWebp') %} #}
 
 		<a
 			href="/responsive-image/{{ image.id }}" id="id-{{ block.id }}-{{ loop.index }}"
 			class="popup"
 		>
-			<picture>
+			{# <picture>
 				<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
 				<source
 					srcset="{{ webps[0].url }}"
@@ -35,7 +37,12 @@
 					height="{{ jpgs[0].height }}"
 					alt="{{ image.alt }}"
 				/>
-			</picture>
+			</picture> #}
+
+			{{ imageHelper.basic({
+				transform: 'imagesGrid',
+				source: image
+			}) }}
 		</a>
 	{% endfor %}
 </div>

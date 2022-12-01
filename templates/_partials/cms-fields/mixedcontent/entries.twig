@@ -1,9 +1,11 @@
+{% import '_macros/images' as imageHelper %}
+
 <div class="mixedContent_files entriesCount_{{ block.files|length }} l_liquid-grid" id="block-{{ block.id }}" data-reveal-on-scroll>
 	{% for page in block.entries %}
 		<div class="entry l_stack" id="id-{{ block.id }}">
 			{% if block.showListingImage %}
 				{% set listingImage = page.listingImage[0] ??? website.missingImageFallback[0] %}
-				{% set jpgs  = craft.imagerx.transformImage( listingImage, 'imageListingExcerptJpg') %}
+				{# {% set jpgs  = craft.imagerx.transformImage( listingImage, 'imageListingExcerptJpg') %}
 				{% set webps = craft.imagerx.transformImage( listingImage, 'imageListingExcerptWebp') %}
 				<picture>
 					<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
@@ -28,7 +30,12 @@
 						height="{{ jpgs[0].height }}"
 						alt="{{ listingImage.alt }}"
 					/>
-				</picture>
+				</picture> #}
+
+				{{ imageHelper.basic({
+					transform: 'imageListingExcerpt',
+					source: listingImage
+				}) }}
 			{% endif %}
 
 			<div class="cms-textblock font-size:diminished">

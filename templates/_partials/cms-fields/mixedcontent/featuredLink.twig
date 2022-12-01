@@ -1,4 +1,5 @@
 {% import '_macros/helpers' as helpers %}
+{% import '_macros/images' as imageHelper %}
 
 <div
 	class="mixedContent_featuredLink"
@@ -7,7 +8,7 @@
 	data-reveal-on-scroll
 >
 	<div class="image">
-		{% set jpgs  = craft.imagerx.transformImage( block.backgroundImage[0], 'bannerImageJpg') %}
+		{# {% set jpgs  = craft.imagerx.transformImage( block.backgroundImage[0], 'bannerImageJpg') %}
 		{% set webps = craft.imagerx.transformImage( block.backgroundImage[0], 'bannerImageWebp') %}
 		<picture>
 			<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
@@ -28,7 +29,13 @@
 				height="{{ jpgs[0].height }}"
 				alt="{{ block.backgroundImage[0].alt }}"
 			/>
-		</picture>
+		</picture> #}
+
+		{{ imageHelper.basic({
+			transform: 'bannerImage',
+			source: block.backgroundImage[0]
+		}) }}
+
 	</div>
 
 	<div class="text l_stack">
