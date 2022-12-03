@@ -1,0 +1,166 @@
+{% macro basic( options ) %}
+	{#
+		USAGE:
+		{% import '_macros/images' as imageHelper %}
+
+		{{ imageHelper.basic({
+			transform: 'bannerImage',
+			source:    entry.bannerImage[0]
+		}) }}
+
+		OR
+
+		{{ imageHelper.basic({
+			transform: 'bannerImage',
+			source:    entry.bannerImage[0],
+			loading:   'eager'
+		}) }}
+
+		The 'loading' parameter is optional and defaults to 'lazy'.
+		It should be set to eager only when the image is known to be "above the fold".
+
+		NOTE:
+		These marry up to the breakpoints set in
+		/config/imager-x-transforms.php
+	#}
+
+	{% switch options.transform %}
+		{% case 'bannerImage' %}
+			{% set breakpoints = [
+				'max-width: 479px',
+				'min-width: 480px',
+				'min-width: 960px',
+				'min-width: 1500px'
+			] %}
+		{% case 'textByImage' %}
+			{% set breakpoints = [
+				'max-width: 719px',
+				'min-width: 720px'
+			] %}
+		{% case 'imageSingleUncropped' %}
+			{% set breakpoints = [
+				'max-width: 719px',
+				'min-width: 720px',
+				'min-width: 1280px'
+			] %}
+		{% case 'imageSingleLandscape32' %}
+			{% set breakpoints = [
+				'max-width: 719px',
+				'min-width: 720px',
+				'min-width: 1280px'
+			] %}
+		{% case 'imageSingleLandscape169' %}
+			{% set breakpoints = [
+				'max-width: 719px',
+				'min-width: 720px',
+				'min-width: 1280px'
+			] %}
+		{% case 'imageSingleLandscape2391' %}
+			{% set breakpoints = [
+				'max-width: 719px',
+				'min-width: 720px',
+				'min-width: 1280px'
+			] %}
+		{% case 'imageGrid' %}
+			{% set breakpoints = [
+				'min-width: 1px'
+			] %}
+		{% case 'imageListingExcerpt' %}
+			{% set breakpoints = [
+				'min-width: 1px'
+			] %}
+		{% default %}
+			{% set breakpoints = [
+				'min-width: 1px'
+			] %}
+	{% endswitch %}
+
+	{% set jpgs  = craft.imagerx.transformImage( options.source, options.transform ~ 'Jpg') %}
+	{% set webps = craft.imagerx.transformImage( options.source, options.transform ~ 'Webp') %}
+
+	<picture>
+		{# prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules #}
+		{% for bp in breakpoints %}
+			{% if loop.first %}{# First one is a max-width and needs the first transform #}
+				<source
+					media="({{ breakpoints[0] }})"
+					srcset="{{ webps[0].url }}"
+					type="{{ webps[0].mimeType }}"
+					width="{{ webps[0].width }}"
+					height="{{ webps[0].height }}"
+				/>
+			{% else %}{# The others work backward so the "largest" is the fiest to match, i.e., we work backward for the rest #}
+				<source
+					media="({{ breakpoints[ loop.length - loop.index0 ] }})"
+					srcset="{{ webps[ loop.length - loop.index0 ].url }}"
+					type="{{ webps[ loop.length - loop.index0 ].mimeType }}"
+					width="{{ webps[ loop.length - loop.index0 ].width }}"
+					height="{{ webps[ loop.length - loop.index0 ].height }}"
+				/>
+			{% endif %}
+		{% endfor %}
+
+		{# jpg fallback. Order matters, first media to match is what's rendered - opposite of CSS rules #}
+		{% for bp in breakpoints %}
+			{% if loop.first %}{# First one is a max-width and needs the first transform #}
+				<source
+					media="({{ breakpoints[0] }})"
+					srcset="{{ jpgs[0].url }}"
+					type="{{ jpgs[0].mimeType }}"
+					width="{{ jpgs[0].width }}"
+					height="{{ jpgs[0].height }}"
+				/>
+			{% else %}{# The others work backward so the "largest" is the fiest to match, i.e., we work backward for the rest #}
+				<source
+					media="({{ breakpoints[ loop.length - loop.index0 ] }})"
+					srcset="{{ jpgs[ loop.length - loop.index0 ].url }}"
+					type="{{ jpgs[ loop.length - loop.index0 ].mimeType }}"
+					width="{{ jpgs[ loop.length - loop.index0 ].width }}"
+					height="{{ jpgs[ loop.length - loop.index0 ].height }}"
+				/>
+			{% endif %}
+		{% endfor %}
+
+		<img
+			loading="{{ options.loading ??? 'lazy' }}"
+			decoding="async"
+			src="{{ jpgs[0].url }}"
+			width="{{ jpgs[0].width }}"
+			height="{{ jpgs[0].height }}"
+			alt="{{ options.source.alt }}"
+		/>
+	</picture>
+{% endmacro %}
+
+{% macro withCaption( options ) %}
+	{% import _self as imageHelper %}
+	{#
+		USAGE:
+		{% import '_macros/images' as imageHelper %}
+
+		{{ imageHelper.withCaption({
+			transform: 'bannerImage',
+			source:    entry.bannerImage[0],
+			caption:   entry.captionField
+		}) }}
+
+		NOTE:
+		Mark-up approach taken from W3C guidance:
+		https://www.w3.org/WAI/tutorials/images/complex/
+
+		NOTE:
+		This is more an example of how to call a macro from a macro
+	#}
+
+	<figure role="group">
+		{{ imageHelper.basic({
+			transform: options.transform,
+			source:    options.source,
+			loading:   options.loading ??? null
+		}) }}
+
+		<figcaption>
+			{{ options.caption }}
+		</figcaption>
+	</figure>
+{% endmacro %}

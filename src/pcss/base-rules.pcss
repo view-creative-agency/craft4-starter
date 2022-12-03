@@ -508,12 +508,11 @@
 	}
 
 /* Layouts -------------------------------------------------------------------------------------
-   These are special types of utility class, that effect the positioning and spacing of elements in relation
-   to each other.
+   These are special types of utility class, that effect the positioning and spacing of elements in relation to each other.
 */
 	.l_constrain {
 		/* Standardised gutters on the outer vertical edges, restricts the maximum width, and centers the block */
-		padding-inline: var(--gap, 1rem); max-width: var(--row-max-width, 1280px); margin-inline: auto;
+		padding-inline: var(--gap, 1rem); width: 100%; max-width: var(--row-max-width, 1280px); margin-inline: auto;
 	}
 
 	.l_padding-block {
@@ -581,7 +580,7 @@
 		Use the Cluster to align any groups of horizontally laid out elements to the left, right, or center.
 	*/
 	.l_cluster {
-		display:         flex; flex-wrap: wrap; gap: var(--gap, 1rem);
+		display: flex; flex-wrap: wrap; gap: var(--gap, 1rem);
 		justify-content: flex-start; align-items: center;
 
 		&.cluster-apart {

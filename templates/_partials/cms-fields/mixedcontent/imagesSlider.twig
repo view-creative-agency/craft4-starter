@@ -1,3 +1,5 @@
+{% import '_macros/images' as imageHelper %}
+
 <div
 	class="mixedContent_imagesSlider"
 	id="block-{{ block.id }}"
@@ -40,8 +42,8 @@
 	{% endjs %}
 
 	{% for image in block.images %}
-		{% set jpgs  = craft.imagerx.transformImage( image, 'imageSingleLandscape169Jpg') %}
-		{% set webps = craft.imagerx.transformImage( image, 'imageSingleLandscape169Webp') %}
+		{# {% set jpgs  = craft.imagerx.transformImage( image, 'imageSingleLandscape169Jpg') %}
+		{% set webps = craft.imagerx.transformImage( image, 'imageSingleLandscape169Webp') %} #}
 
 		{% if loop.first %}
 			<div class="swiper">
@@ -50,7 +52,7 @@
 
 		<div class="swiper-slide">
 			{#<a href="/responsive-image/{{ image.id }}" id="id-{{ block.id }}-{{ loop.index }}">#}
-				<picture>
+				{# <picture>
 					<!-- prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules -->
 					<source
 						media="(max-width: 719px)"
@@ -99,7 +101,12 @@
 						height="{{ jpgs[0].height }}"
 						alt="{{ image.alt }}"
 					/>
-				</picture>
+				</picture> #}
+
+				{{ imageHelper.basic({
+					transform: 'imageSingleLandscape169',
+					source: image
+				}) }}
 			{#</a>#}
 		</div>
 

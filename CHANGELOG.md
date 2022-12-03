@@ -15,6 +15,27 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.13] - 2022-11-30
+
+## Added
+
+- `_macros/images.twig` for handling HTML output of imagerX named transforms
+## Changed
+
+- Adjusted variouis templates to use the new image macro rather than hardcode the image HTML per instance of use
+
+## [1.0.12] - 2022-11-30
+
+## Changed
+
+- Minor refactor of \_layout head
+
+### Fixed
+
+- Fixed broken ImagerX transforms using strings when numbers should have been used
+- Fixed broken responsive-navigation.js
+- layout class l_constrain now takes up 100% of available space by default
+
 ## [1.0.11] - 2022-11-29
 
 ### Changed
