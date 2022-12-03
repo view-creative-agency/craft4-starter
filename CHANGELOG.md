@@ -20,9 +20,11 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 ## Added
 
 - `_macros/images.twig` for handling HTML output of imagerX named transforms
+- Added example image macro for "nested" macros
+
 ## Changed
 
-- Adjusted variouis templates to use the new image macro rather than hardcode the image HTML per instance of use
+- Adjusted various templates to use the new image macro rather than hardcode the image HTML per instance of use
 
 ## [1.0.12] - 2022-11-30
 
