@@ -33,12 +33,18 @@
 					<li>Server Support for AVIF: {{ craft.imager.serverSupportsAvif() ? 'yes' : 'no' }}</li>
 					<li>Server Support for JPEG XL: {{ craft.imager.serverSupportsJxl() ? 'yes' : 'no' }}</li>
 				</ul>
-			</div>
 
-			{{ imageHelper.basic({
-				transform: 'bannerImage',
-				source: entry.listingImage.one()
-			}) }}
+				{{ imageHelper.basic({
+					transform: 'bannerImage',
+					source: entry.listingImage.one()
+				}) }}
+
+				{{ imageHelper.withCaption({
+					transform: 'bannerImage',
+					source: entry.listingImage.one(),
+					caption: "This is a test caption to go with the image."
+				}) }}
+			</div>
 		</div>
 	</main>
 {% endblock -%}
