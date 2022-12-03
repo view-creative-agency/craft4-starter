@@ -1,4 +1,4 @@
-dateModified: 1666351382
+dateModified: 1669809371
 elementSources:
   craft\elements\Asset:
     -
@@ -19,6 +19,9 @@ elementSources:
       type: native
   craft\elements\Entry:
     -
+      defaultSort:
+        - postDate
+        - desc
       disabled: false
       key: '*'
       tableAttributes:
@@ -218,7 +221,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: GU3G5MIJS5STPUZR12QOD5N3
-    schemaVersion: 2.0.4
+    schemaVersion: 2.0.6
   redactor:
     edition: standard
     enabled: true
@@ -327,4 +330,4 @@ system:
   name: $SYSTEM_NAME
   retryDuration: null
   schemaVersion: 4.0.0.9
-  timeZone: America/Los_Angeles
+  timeZone: Europe/London
