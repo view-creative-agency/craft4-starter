@@ -41,6 +41,18 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 50
+          -
+            elementCondition: null
+            fieldUid: 9d7f6cee-b6c7-4558-bfd9-79804796377d # Expansion Method
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c50c8601-9e92-4972-87e2-d786402a4fc8
+            userCondition: null
+            warning: null
+            width: 100
         name: Content
         uid: b9e49baa-2b82-473f-a1d5-f5670a422921
         userCondition: null
@@ -93,6 +105,63 @@ fields:
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Assets
+  9d7f6cee-b6c7-4558-bfd9-79804796377d: # Expansion Method
+    columnSuffix: gmdvecna
+    contentColumnType: string
+    fieldGroup: null
+    handle: expansionMethod
+    instructions: 'When you have text that''s taller than the image would be when they are side by side, how should the image behave?'
+    name: 'Expansion Method'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Scale to fill'
+            -
+              - value
+              - scaleToFill
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 'Stay at the top'
+            -
+              - value
+              - stayAtTheTop
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Stay in the middle'
+            -
+              - value
+              - stayInTheMiddle
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Stay at the bottom'
+            -
+              - value
+              - stayAtTheBottom
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
   303f6bf0-2c29-459c-afef-f03fb0298d24: # Text Position
     columnSuffix: utvketff
     contentColumnType: string
@@ -137,7 +206,7 @@ fields:
     name: Text
     searchable: true
     settings:
-      availableTransforms: '*'
+      availableTransforms: ''
       availableVolumes: '*'
       columnType: text
       configSelectionMode: choose

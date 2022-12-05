@@ -169,7 +169,7 @@ permissions:
     enabled: '1'
   verbb\navigation\nodetypes\PassiveType:
     enabled: '1'
-propagateNodes: false
+propagationMethod: none
 siteSettings:
   6ac2852d-9212-4f02-89d2-35cd874150e9: # $SYSTEM_NAME
     enabled: true

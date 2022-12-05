@@ -50,6 +50,9 @@ settings:
               -
                 - value
                 - '2200'
+              -
+                - maxValue
+                - ''
           -
             __assoc__:
               -
@@ -64,6 +67,9 @@ settings:
               -
                 - value
                 - '2200'
+              -
+                - maxValue
+                - ''
   selectionLabel: 'Choose a photo'
   showSiteMenu: true
   showUnpermittedFiles: false

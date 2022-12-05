@@ -29,6 +29,9 @@
 		->errorTemplatePrefix('_errors')
 		->postCpLoginRedirect('entries')
 		->testToEmailAddress(App::env('TEST_TO_EMAIL_ADDRESS'))
+		->accessibilityDefaults([
+			'useShapes' => true,
+		])
 		->aliases([
 			'@web'     => rtrim(APP::env('PRIMARY_SITE_URL'), '/'), // explicitly set to avoid cache poisoning vulnerability
 			'@webroot' => rtrim(APP::env('PRIMARY_SITE_WEB_ROOT'), '/'), // console command compat
