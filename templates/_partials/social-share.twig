@@ -20,22 +20,22 @@
 	<ul>
 		<li>
 			<a class="js-social-share" href="https://www.facebook.com/sharer/sharer.php?u={{ fullUrl }}" target="_blank" rel="noopener">
-				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/facebook.svg') }}
+				{{ svg('@webroot/dist/images/smicons/' ~ useType ~ '/facebook.svg') }}
 			</a>
 		</li>
 		<li>
 			<a class="js-social-share" href="https://twitter.com/intent/tweet/?text={{ useTitle }}&url={{ fullUrl }}" target="_blank" rel="noopener">
-				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/twitter.svg') }}
+				{{ svg('@webroot/dist/images/smicons/' ~ useType ~ '/twitter.svg') }}
 			</a>
 		</li>
 		<li class="sm_pinterest">
 			<a class="js-social-share" href="https://www.pinterest.com/pin/create/button/?url={{ craft.app.request.absoluteUrl | url_encode}}" target="_blank" rel="noopener">
-				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/pinterest.svg') }}
+				{{ svg('@webroot/dist/images/smicons/' ~ useType ~ '/pinterest.svg') }}
 			</a>
 		</li>
 		<li>
 			<a class="js-social-share" href="mailto:?subject={{ useTitle }}&amp;body={{ fullUrl }}">
-				{{ svg('@webroot/assets/images/smicons/' ~ useType ~ '/mail.svg') }}
+				{{ svg('@webroot/dist/images/smicons/' ~ useType ~ '/mail.svg') }}
 			</a>
 		</li>
 	</ul>

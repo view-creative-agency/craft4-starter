@@ -1,4 +1,4 @@
-dateModified: 1669809371
+dateModified: 1670254085
 elementSources:
   craft\elements\Asset:
     -
@@ -99,6 +99,7 @@ meta:
     6ac2852d-9212-4f02-89d2-35cd874150e9: $SYSTEM_NAME # $SYSTEM_NAME
     7fe58c02-d209-4e1a-9883-dd49189d500c: Form # Form
     08a13d2e-584d-4d56-a8fe-3b355f04e0c7: 'Landscape 16:9' # Landscape 16:9
+    9d7f6cee-b6c7-4558-bfd9-79804796377d: 'Expansion Method' # Expansion Method
     9eca21d8-3abf-426e-b46d-580dcdb2681d: 'Rich Text' # Rich Text
     9f1920f0-78f1-47cd-b259-887b1de32c74: 'Aspect Ratio' # Aspect Ratio
     14cfd869-dfee-4009-afee-8350c15d51ad: SEO # SEO
@@ -221,7 +222,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: GU3G5MIJS5STPUZR12QOD5N3
-    schemaVersion: 2.0.6
+    schemaVersion: 2.0.7
   redactor:
     edition: standard
     enabled: true

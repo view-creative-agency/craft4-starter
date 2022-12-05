@@ -15,6 +15,20 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.14] - 2022-12-05
+
+### Fixed
+
+- Bug in markup for the JPG output of image macro
+- Incorrect path for SVGs on social-share include
+
+### Changed
+
+- Updated seed database with new test-page content
+- New options for image handling on Text by Image matrix blocks
+- Always use shapes in the CMS and not just colours
+- New example image macro that calls a sibling macro
+
 ## [1.0.13] - 2022-11-30
 
 ## Added
