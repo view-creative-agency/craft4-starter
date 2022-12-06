@@ -1,11 +1,22 @@
 {#
 	USE:
+	groupSeries, seriesProperties are optional
+
 	{% cache %}
-		{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': entry } %}
+		{% include '_partials/cms-fields/mixed-content.twig' with {
+			'parent': entry,
+			'groupSeries': true,
+			'seriesProperties': {
+				'classes': 'l_stack',
+				'dataStackSize': 'large'
+			}
+		} %}
 	{% endcache %}
 
 	{% cache %}
-		{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': category } %}
+		{% include '_partials/cms-fields/mixed-content.twig' with {
+			'parent': category
+		} %}
 	{% endcache %}
 #}
 
@@ -30,9 +41,30 @@
 		])
 		.collect()
 	%}
+	{% set doGrouping = (groupSeries is defined and groupSeries) ??? false %}
+
 	<div class="mixedContent l_stack" data-stack-size="large">
 		{% for block in mixedContent %}
-			{% include '_partials/cms-fields/mixedcontent/' ~ block.type ignore missing %}
+			{% set prevBlockType    = block.prev.type.handle ??? 'none' %}
+			{% set nextBlockType    = block.next.type.handle ??? 'none' %}
+			{% set currentBlockType = block.type %}
+
+			{% if doGrouping %}
+				{% if prevBlockType != currentBlockType %}
+					<div
+						class="{{ block.type }}Series {{ seriesProperties.classes ??? null }}"
+						data-stack-size="{{ seriesProperties.dataStackSize ??? null }}"
+					>
+				{% endif %}
+			{% endif %}
+
+			{% include '_partials/cms-fields/mixedcontent/' ~ currentBlockType ignore missing %}
+
+			{% if doGrouping %}
+				{% if nextBlockType != currentBlockType %}
+					</div>
+				{% endif %}
+			{% endif %}
 		{% endfor %}
 	</div><!-- .mixedContent -->
 {% endcache %}

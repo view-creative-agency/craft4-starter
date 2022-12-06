@@ -11,7 +11,14 @@
 
 			<div class="l_padding-block">
 				{% cache %}
-					{% include '_partials/cms-fields/mixed-content.twig' with { 'parent': entry } %}
+					{% include '_partials/cms-fields/mixed-content.twig' with {
+						'parent': entry,
+						'groupSeries': true,
+						'seriesProperties': {
+							'classes': 'l_stack',
+							'dataStackSize': 'large'
+						}
+					} %}
 				{% endcache %}
 			</div>
 
