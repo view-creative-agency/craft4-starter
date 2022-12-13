@@ -23,6 +23,15 @@
 			</div>
 
 			<div class="l_stack">
+				<div class="cardExample">
+					<div class="wrapper l_stack l_padding-full">
+						<p>This is just an example of how we can now use CSS Container Queries for styling.</p>
+						<p>The background colour changes depent on the width <em>of the <code>.cardExample</code></em> itself, and not the width of the viewport!</p>
+						<p>These are not media queries or JavaScript.</p>
+						<p>We can <a href="https://lab.ishadeed.com/container-queries/">see some demos</a> or <a href="https://ishadeed.com/article/container-queries-are-finally-here/">learn more</a>.</p>
+					</div>
+				</div>
+
 				<h2 class="font-size:promoted">Coding images that can generate transforms when saved in the CMS</h2>
 				<p>We can't keep using the old (but convenient) image macros, there is no way to make them perform well. The problem is that most "single images" end up with between four and twelve transforms needing to be created. The creation of those transforms happens the first time the image is requested on the front end. Meaning, massive delays to the first page load and huge CPU spikes.</p>
 				<p>This can be avoided using <strong>ImagerX</strong>'s Pro version, which allows for <em>transform generation</em>. It means we have to specify our image transforms in a config file, rather than in a Macro on the page.</p>
