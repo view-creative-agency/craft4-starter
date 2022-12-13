@@ -7,16 +7,18 @@
 >
 	{# Using https://swiperjs.com/swiper-api rather than jQuery and Slick #}
 
-	{# Register the CSS file with Craft #}
-	{% css "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" %}
+	{# Register the CSS file with Craft. Can't use Vite doing it this way, but that's not and issue either as this is a third party library. #}
+	{# {% css "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" %} #}
+	{% css "/dist/javascript/third-party/swiper/swiper-bundle.min.css" %}
 	{% css %}
 		:root {
 			--swiper-theme-color: hsl( var(--white, 0 100% 100%) );
 		}
 	{% endcss %}
 
-	{# Register the JS file with Craft #}
-	{% js "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" %}
+	{# Register the JS file with Craft. Can't use Vite doing it this way, but that's not and issue either as this is a third party library. #}
+	{# {% js "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" %} #}
+	{% js "/dist/javascript/third-party/swiper/swiper-bundle.min.js" %}
 	{% js %}
 		const swiper = new Swiper('.mixedContent_imagesSlider .swiper', {
 			// Optional parameters
