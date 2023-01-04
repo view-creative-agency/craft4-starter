@@ -42,10 +42,10 @@ if [ "$carryOn" != "y" ]; then
 	exit 0;
 fi
 
-echo -e "\nRetrieving new and changed files from /web/content\n"
-rsync --recursive --human-readable --update --verbose --times --omit-dir-times --rsh --exclude=".DS_Store" ssh "$LIVE_SERVER_SSH":/websites/"$REPO"/web/content/ ../web/content/
-echo -e "\nRetrieving new and changed files from /web/imager\n"
-rsync --recursive --human-readable --update --verbose --times --omit-dir-times --rsh --exclude=".DS_Store" ssh "$LIVE_SERVER_SSH":/websites/"$REPO"/web/imager/ ../web/imager/
+echo -e "\nRetrieving new and changed files from /web/content"
+rsync --archive --compress --partial --update --verbose --human-readable --exclude=".DS_Store" "$LIVE_SERVER_SSH":/websites/"$REPO"/web/content/ ../web/content/
+echo -e "\nRetrieving new and changed files from /web/imager"
+rsync --archive --compress --partial --update --verbose --human-readable --exclude=".DS_Store" "$LIVE_SERVER_SSH":/websites/"$REPO"/web/imager/ ../web/imager/
 
 echo -e "${GREEN}Complete"
 
