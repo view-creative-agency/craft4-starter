@@ -43,9 +43,9 @@ if [ "$carryOn" != "y" ]; then
 fi
 
 echo -e "Uploading new and changed files in /web/content\n"
-rsync --archive --compress --partial --update --verbose --human-readable --exclude=".DS_Store" ../web/content "$STAGING_SERVER_SSH":/websites/"$REPO"/web/content
+rsync --archive --compress --partial --update --verbose --human-readable --exclude=".DS_Store" ../web/content "$STAGING_SERVER_SSH":/websites/"$REPO"/web
 echo -e "Uploading new and changed files in /web/dist\n"
-rsync --archive --compress --partial --update --verbose --human-readable --exclude=".DS_Store" ../web/dist "$STAGING_SERVER_SSH":/websites/"$REPO"/web/dist
+rsync --archive --compress --partial --update --verbose --human-readable --exclude=".DS_Store" ../web/dist "$STAGING_SERVER_SSH":/websites/"$REPO"/web
 
 echo -e "\n${GREEN}Complete"
 
