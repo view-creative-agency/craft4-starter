@@ -89,7 +89,7 @@
 					width="{{ webps[0].width }}"
 					height="{{ webps[0].height }}"
 				/>
-			{% else %}{# The others work backward so the "largest" is the fiest to match, i.e., we work backward for the rest #}
+			{% else %}{# The others work backward so the "largest" is the first to match, i.e., we work backward for the rest #}
 				<source
 					media="({{ breakpoints[ loop.length - loop.index0 ] }})"
 					srcset="{{ webps[ loop.length - loop.index0 ].url }}"
@@ -110,7 +110,7 @@
 					width="{{ jpgs[0].width }}"
 					height="{{ jpgs[0].height }}"
 				/>
-			{% else %}{# The others work backward so the "largest" is the fiest to match, i.e., we work backward for the rest #}
+			{% else %}{# The others work backward so the "largest" is the first to match, i.e., we work backward for the rest #}
 				<source
 					media="({{ breakpoints[ loop.length - loop.index0 ] }})"
 					srcset="{{ jpgs[ loop.length - loop.index0 ].url }}"
