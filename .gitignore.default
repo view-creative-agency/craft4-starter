@@ -51,6 +51,9 @@ prepros-6.config
 !/web/dist/.gitignore
 !/web/dist/README.md
 
+/backups/*
+!/backups/.gitignore
+
 ### Craft system directories ###
 /vendor
 composer.phar
