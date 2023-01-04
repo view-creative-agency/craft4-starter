@@ -51,6 +51,7 @@
 			});
 		</script>
 
+		{# remember that new scripts used here need to be added to the vite.config.js file, so it's aware of them #}
 		{{ craft.vite.script('src/js/modules/helpers.js', false) }}
 		{{ craft.vite.script('src/js/modules/details-element.js', false) }}
 		{{ craft.vite.script('src/js/third-party/container-query-polyfill.modern.js', false) }}
