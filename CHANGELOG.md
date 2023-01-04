@@ -15,6 +15,25 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.15] - 2023-01-04
+
+### Added
+
+- Container Query Polyfill is now included, and example PCSS and HTML exist to illustrate the use of Container Queries
+- `/scripts` have been added to aid some common tasks
+  - `pull-from-staging.sh` downloads `/web/content` to local from staging
+  - `push-to-staging.sh` uploads `/web/content` and `/web/dist` from local to staging
+  - `pull-from-live.sh` downloads `/web/content` to local from live
+  - `push-to-live.sh` uploads `/web/content` and `/web/dist` from local to live
+  - `backup.sh` backs up `/web/content` and a database dump to `/backups`
+
+### Changed
+
+- Mixed Content macro now wraps common-series of the same block type for styling purposes
+  - e.g., "image, text, faq, faq, faq, text" would get the faq's wrapped in a container div
+- Craft template caches are now enabled in any environment that is not Dev
+- The Swiper library is now loaded from local files and not a CDN
+
 ## [1.0.14] - 2022-12-05
 
 ### Fixed
