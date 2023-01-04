@@ -2,13 +2,13 @@
 
 These scripts automate some common tasks.
 
-## Go Live Steps
+## Steps to use these sctipts
 
-- on the live server:
+- on each machine the scripts will be run from:
   - copy the `.env.sh.example` file as `.env.sh`
   - update the values in `.env.sh`
 
-.env.sh should never be in GIT.
+> `.env.sh` should never be in GIT, which is why this is done manually per machine
 
 ## Notes
 
@@ -42,3 +42,12 @@ These files are written to the `PROJECT/backups` folder.
 - Files in the `PROJECT/web/*` directory are never deleted, so if a client accidentally deleted source images via the CMS, they will remain here.
 - Files in the `PROJECT/web/*` directory DO reflect changes; so if a client changes an image which retains the same filename, the backup copy will also be updated.
 - We do not back up the `imager` directory, as they can be regenerated from the source images
+
+### Expected use
+
+`./backup.sh` can be executed manually, or via CRON
+
+```bash
+3 1 * * * /websites/REPO/scripts/backup.sh >/dev/null 2>&1
+  # at 01:03am daily, run the script
+```
