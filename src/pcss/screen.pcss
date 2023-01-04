@@ -274,6 +274,23 @@
 		}
 	}
 
+	/* An example of using CSS Container Queries */
+	.cardExample {
+		container-type: inline-size; /* The .cardExample div itself is "the container" */
+
+		& a { text-decoration: underline; }
+
+		& .wrapper {
+			background-color: green;
+		}
+
+		@container (min-width: 1000px) {
+			& .wrapper {
+				background-color: red;
+			}
+		}
+	}
+
 /*	html.js-supportsIntersectionObserver {
 		& [data-reveal-on-scroll] { !* opacity is safe to animate for everyone *!
 			will-change: opacity, filter, translate;

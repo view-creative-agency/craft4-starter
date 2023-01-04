@@ -24,7 +24,7 @@
 		->disallowRobots(!$isProd)
 		->maxRevisions(10)
 		->maxBackups(10)
-		->enableTemplateCaching($isProd)
+		->enableTemplateCaching(!$isDev)
 		->translationDebugOutput(false)
 		->errorTemplatePrefix('_errors')
 		->postCpLoginRedirect('entries')
