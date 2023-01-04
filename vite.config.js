@@ -27,10 +27,13 @@ export default defineConfig(({command}) => ({
 		rollupOptions: {
 			input: {
 				app: path.resolve(__dirname, 'src/js/app.js'),
+
 				fetchWrapper: path.resolve(__dirname, 'src/js/modules/fetch-wrapper.js'),
 				helpers: path.resolve(__dirname, 'src/js/modules/helpers.js'),
 				responsiveNavigation: path.resolve(__dirname, 'src/js/modules/responsive-navigation.js'),
-				detailsElement: path.resolve(__dirname, 'src/js/modules/details-element.js')
+				detailsElement: path.resolve(__dirname, 'src/js/modules/details-element.js'),
+
+				containerQueryPolyfill: path.resolve(__dirname, 'src/js/third-party/container-query-polyfill.modern.js')
 			},
 			output: {
 				sourcemap: true
