@@ -12,7 +12,7 @@
 
 		'manifestPath'    => Craft::getAlias('@webroot') . '/dist/manifest.json',
 		'devServerPublic' => Craft::getAlias('@web') . ':3000',
-		'serverPublic'    => Craft::getAlias('@web') . '/dist/',
+		'serverPublic'    => '/dist/',
 		'errorEntry'      => 'src/js/app.js',
 		'useDevServer'    => $isDev,
 	];
