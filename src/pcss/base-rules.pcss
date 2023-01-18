@@ -473,10 +473,11 @@
 		font-size: 0.875em;
 	}
 
-	:where(.uc_hide-visually) { /* screen readers still get the content */
-		position: absolute; left: -200vw; top: 0;
-		display: block; width: 1px; height: 1px;
-		overflow: hidden;
+	:where(.uc_hide-visually):not(:focus):not(:active) { /* screen readers still get the content */
+		/* Source: https://www.tpgi.com/the-anatomy-of-visually-hidden/ */
+		position: absolute;
+		height: 1px; width: 1px; clip-path: inset(50%);
+		overflow: hidden; white-space: nowrap;
 	}
 
 	:where(.uc_hide-for-everyone) { /* screen readers also get the content hidden */
