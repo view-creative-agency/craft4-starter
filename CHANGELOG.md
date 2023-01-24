@@ -25,7 +25,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 ### Changed
 
 - More accessible "visually hidden" CSS
-- user `expose` instead of `ports` for more secure DDEV configuration
+- Use `expose` instead of `ports` for more secure DDEV configuration
 - Moved the `composer install` and `npm install` steps into DDEV hooks, rather than as steps in the Makefile
 
 ## [1.0.18] - 2023-01-11
