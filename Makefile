@@ -46,8 +46,6 @@ up:
 	if [ ! "$$(ddev describe | grep OK)" ]; then \
 		ddev auth ssh; \
 		ddev start; \
-		ddev composer install; \
-		ddev exec npm install; \
 	fi
 %:
 	@:
