@@ -15,6 +15,38 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.19] - 2023-01-24
+
+### Added
+
+- scripts to automate Permissions tasks
+- `ll` now works inside DDEV ssh sessions
+
+### Changed
+
+- More accessible "visually hidden" CSS
+- user `expose` instead of `ports` for more secure DDEV configuration
+- Moved the `composer install` and `npm install` steps into DDEV hooks, rather than as steps in the Makefile
+
+## [1.0.18] - 2023-01-11
+
+## Changed
+
+- Updated the seed database for Gaz's user account preferences
+- made Vite `serverPublic` relative so asset paths work on multisite projects
+
+## [1.0.17] - 2023-01-04
+
+### Fixed
+
+- Sync scripts (for real this time)
+
+## [1.0.16] - 2023-01-04
+
+### Fixed
+
+- Sync scripts
+
 ## [1.0.15] - 2023-01-04
 
 ### Added
