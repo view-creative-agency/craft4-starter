@@ -31,9 +31,9 @@ find ../backups/database/* -mtime +7 -exec rm {} \;
 
 # use Craft itself to make a database backup and compress it as a zip
 timestamp=$(date '+%Y%m%d-%H%M%S')
-php ../craft db/backup ../backups/database/"$REPO"-"${timestamp}".sql --zip
+php ../craft db/backup ../backups/database/"${timestamp}".sql --zip
 
-echo -e "Database backup written to ../backups/database/$REPO-${timestamp}.sql.zip" >> script.log
+echo -e "Database backup written to ../backups/database/${timestamp}.sql.zip" >> script.log
 
 # Normal exit
 exit 0
