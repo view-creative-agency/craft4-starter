@@ -474,7 +474,9 @@
 	}
 
 	:where(.uc_hide-visually):not(:focus):not(:active) { /* screen readers still get the content */
-		/* Source: https://www.tpgi.com/the-anatomy-of-visually-hidden/ */
+		/* Source: 
+		   https://www.tpgi.com/the-anatomy-of-visually-hidden/
+			 https://www.a11yproject.com/posts/how-to-hide-content/ */
 		position: absolute;
 		height: 1px; width: 1px; clip-path: inset(50%);
 		overflow: hidden; white-space: nowrap;
