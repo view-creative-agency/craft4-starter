@@ -291,9 +291,27 @@
 		}
 	}
 
-/*	html.js-supportsIntersectionObserver {
-		& [data-reveal-on-scroll] { !* opacity is safe to animate for everyone *!
-			will-change: opacity, filter, translate;
+/* Animations */
+	@keyframes scale {
+		from { transform: scale(1.3) }
+		to { transform: scale(1) }
+	}
+
+	@media screen and (prefers-reduced-motion: no-preference) { /* only animate motion if the user is OK with it */
+		.uc_pulseEffect { /* Subtle scaling on images */
+			overflow: hidden;
+
+			& img {
+				animation: scale 30s infinite;
+				animation-direction: alternate;
+			}
+		}
+	}
+
+	html.js-supportsIntersectionObserver {
+		& [data-reveal-on-scroll=""] { /* default reveal effect if no named effect is defined */
+			/* opacity is safe to animate for everyone (in terms of a11y issues) */
+			will-change: opacity, filter;
 			opacity: 0.2; filter: grayscale(1);
 			transition: all var(--slow, 0.6s); transition-delay: 0.1s;
 
@@ -302,13 +320,30 @@
 			}
 		}
 
-		@media screen and (prefers-reduced-motion: no-preference) { !* only animate motion if the user is OK with it *!
-			& [data-reveal-on-scroll] {
-				transform: translateY(-50px);
+		@media screen and (prefers-reduced-motion: no-preference) { /* only animate motion if the user is OK with it */
+			/*
+				Swipe based animations
+				The overshoot for the poly coords is so that any box-shadow shows, rather than being clipped
+			*/
+				& [data-reveal-on-scroll^="swipe"] {
+					will-change: clip-path; transition: all var(--slow, 0.6s); transition-delay: 0.1s;
 
-				&.js-inViewport {
-					transform: translateY(0);
+					&.js-inViewport { /* the end state for all "swipe" animations */
+						clip-path: polygon(-5% -5%, 105% -5%, 105% 105%, -5% 105%) !important;
+					}
 				}
-			}
+
+				& [data-reveal-on-scroll="swipeFromLeft"] {
+					clip-path: polygon(-5% -5%, -5% -5%, -5% 105%, -5% 105%);
+				}
+				& [data-reveal-on-scroll="swipeFromRight"] {
+					clip-path: polygon(105% -5%, 105% -5%, 105% 105%, 105% 105%);
+				}
+				& [data-reveal-on-scroll="swipeFromTop"] {
+					clip-path: polygon(-5% -5%, 105% -5%, 105% -5%, -5% -5%);
+				}
+				& [data-reveal-on-scroll="swipeFromBottom"] {
+					clip-path: polygon(-5% 105%, 105% 105%, 105% 105%, -5% 105%);
+				}
 		}
-	}*/
+	}
