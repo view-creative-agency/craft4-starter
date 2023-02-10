@@ -4,12 +4,6 @@
 # To execute this script, cd into this directory in Terminal and:
 # ./backup-db.sh
 
-# prompt colours
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-GREEN='\033[0;32m'
-NC='\033[0m' # No Color
-
 # Get the directory of the currently executing script
 DIR="$(dirname "${BASH_SOURCE[0]}")"
 
