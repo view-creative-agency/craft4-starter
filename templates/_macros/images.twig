@@ -13,11 +13,11 @@
 		{{ imageHelper.basic({
 			transform: 'bannerImage',
 			source:    entry.bannerImage[0],
-			loading:   'eager'
+			aboveTheFold: true
 		}) }}
 
-		The 'loading' parameter is optional and defaults to 'lazy'.
-		It should be set to eager only when the image is known to be "above the fold".
+		The 'aboveTheFold' parameter is optional and defaults to 'false'.
+		It should be set to true only when the image is known to be "above the fold".
 
 		NOTE:
 		These marry up to the breakpoints set in
@@ -122,7 +122,11 @@
 		{% endfor %}
 
 		<img
-			loading="{{ options.loading ??? 'lazy' }}"
+			{% if options.aboveTheFold is defined and options.aboveTheFold == true %}
+				fetchpriority="high"
+			{% else %}
+				loading="lazy"
+			{% endif %}
 			decoding="async"
 			src="{{ jpgs[0].url }}"
 			width="{{ jpgs[0].width }}"
@@ -154,9 +158,9 @@
 
 	<figure role="group">
 		{{ imageHelper.basic({
-			transform: options.transform,
-			source:    options.source,
-			loading:   options.loading ??? null
+			transform:    options.transform,
+			source:       options.source,
+			aboveTheFold: options.aboveTheFold ??? false
 		}) }}
 
 		<figcaption>
