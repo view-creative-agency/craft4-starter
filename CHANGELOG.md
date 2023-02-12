@@ -15,6 +15,24 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.20] - 2023-02-12
+
+### Added
+
+- New animations for loading in sections on scroll
+- All possible Email config is now controlled from `.env`
+### Fixed
+
+- /scripts/backup-db.sh database filename
+- CRON is now able to run `scripts/backup.sh`
+- "TEST_TO_EMAIL_ADDRESS" is now only applied when in a dev environment
+
+### Changed
+
+- Simplified all scripts
+- Improved the `_macros/images.twig` to use an `aboveTheFold` parameter, controlling lazy-loading and fetch-priority
+- Removed now pointless "HTML5 block elements" reset, browsers don't need it anymore
+
 ## [1.0.19] - 2023-01-24
 
 ### Added
