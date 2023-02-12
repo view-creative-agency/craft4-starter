@@ -28,7 +28,7 @@
 		->translationDebugOutput(false)
 		->errorTemplatePrefix('_errors')
 		->postCpLoginRedirect('entries')
-		->testToEmailAddress(App::env('TEST_TO_EMAIL_ADDRESS'))
+		->testToEmailAddress($isDev ? App::env('TEST_TO_EMAIL_ADDRESS') : null)
 		->accessibilityDefaults([
 			'useShapes' => true,
 		])
