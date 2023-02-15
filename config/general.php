@@ -13,6 +13,13 @@
 
 	$isDev  = App::env('CRAFT_ENVIRONMENT') === 'dev';
 	$isProd = App::env('CRAFT_ENVIRONMENT') === 'production';
+	$blitzCacheEnabled = App::env('BLITZ_CACHE_ENABLED') === 'true';
+
+	// Do we want the templateCaching disabled (i.e., if Blitz is enabled or we are in dev)
+	$enableTemplateCaching = true;
+	if ( $blitzCacheEnabled or $isDev ) {
+		$enableTemplateCaching = false;
+	}
 
 	return GeneralConfig::create()
 		->omitScriptNameInUrls(true)
@@ -24,7 +31,7 @@
 		->disallowRobots(!$isProd)
 		->maxRevisions(10)
 		->maxBackups(10)
-		->enableTemplateCaching(!$isDev)
+		->enableTemplateCaching($enableTemplateCaching)
 		->translationDebugOutput(false)
 		->errorTemplatePrefix('_errors')
 		->postCpLoginRedirect('entries')
