@@ -266,6 +266,30 @@
 				& .text { order: 1; }
 				& picture { order: 2; }
 			}
+
+			&[data-expansion-method='scaleToFill'] {
+				& picture img {
+					object-fit: cover;
+				}
+			}
+
+			&[data-expansion-method='stayAtTheTop'] {
+				& > div {
+					align-items: start;
+				}
+			}
+
+			&[data-expansion-method='stayInTheMiddle'] {
+				& > div {
+					align-items: center;
+				}
+			}
+
+			&[data-expansion-method='stayAtTheBottom'] {
+				& > div {
+					align-items: end;
+				}
+			}
 		}
 	}
 }
