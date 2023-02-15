@@ -40,7 +40,7 @@ return [
 	],
 
 	'dev' => [
-		// 'mockImage' => App::env('PATH_TO_MOCK_IMAGE'),
+		'mockImage' => App::env('PATH_TO_MOCK_IMAGE') ?: null,
 		'cacheEnabled' => true,
 		'suppressExceptions' => false
 	],
