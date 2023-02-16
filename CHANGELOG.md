@@ -15,12 +15,31 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.21] -
+
+### Changed
+
+- `uc_popup` now displays better.
+
+### Added
+
+- Example `_singles/contact.twig` template using Sprig and Wheelform so it's safe to use with Blitz
+- Default config for Blitz, should it get installed for the project
+	- `enableTemplateCaching` config setting is automatically disabled if Blitz is enabled, or the project is in a dev environment
+- PATH_TO_MOCK_IMAGE - when in a dev environment, and set; replaces all images with this one (to allow dev work without needing all the content images).
+
+### Fixed
+
+- Added missing CSS to respect the choice of "text by image" expansion method within Mixed Content fields
+- Added missing `.env` parameter for PATH_TO_CWEBP which is needed only on staging and live servers; Ubuntu doesn't have WebP support compiled into ImageMagik.
+
 ## [1.0.20] - 2023-02-12
 
 ### Added
 
 - New animations for loading in sections on scroll
 - All possible Email config is now controlled from `.env`
+
 ### Fixed
 
 - /scripts/backup-db.sh database filename
