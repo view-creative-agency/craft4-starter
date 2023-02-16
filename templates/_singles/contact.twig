@@ -1,0 +1,59 @@
+{% import '_macros/helpers' as helpers -%}
+{% import '_macros/images'  as imageHelper %}
+
+{%- extends "_layout" -%}
+{%- set htmlClass = entry.type -%}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<div class="row main l_padding-block l_constrain">
+			<div class="col1">
+				{# All forms should be Sprig powered so that we can safely Blitz sites at any time #}
+				{% if not sprig is defined %}
+					Sprig is required but not installed.
+				{% else %}
+					{{ sprig('_sprig/wheelForm',
+						{
+							formId: 1,
+							formRedirect: null,
+							success: craft.app.session.hasFlash('wheelformSuccess') ? "{{ craft.app.session.getFlash('wheelformSuccess') }}" : false
+						},
+						{
+							's-trigger': 'load'
+						}
+					) }}
+				{% endif %}
+			</div>
+
+			<div class="col2">
+				<div class="cms-textblock">
+					{% cache %}
+						<p>
+							For further information call us on
+							{{ seomatic.site.identity.genericTelephone }}
+							or
+							<a href="mailto:{{ seomatic.site.identity.genericEmail }}">Email us</a>
+						</p>
+						<p class="formattedAddress">
+							<strong>Address:</strong><br/>
+							{% if website is defined and website.formattedAddress | length %}
+								{{ website.formattedAddress | nl2br }}
+							{% else %}
+								{% if seomatic.site.identity.genericName | length %}
+									<b>{{ seomatic.site.identity.genericName }}</b><br/>
+								{% endif %}
+								{% if seomatic.site.identity.genericStreetAddress | length %}
+									{% if seomatic.site.identity.genericStreetAddress | length %}{{ seomatic.site.identity.genericStreetAddress }},{% endif %}
+									{% if seomatic.site.identity.genericAddressLocality | length %}{{ seomatic.site.identity.genericAddressLocality }},{% endif %}
+									{% if seomatic.site.identity.genericAddressRegion | length %}{{ seomatic.site.identity.genericAddressRegion }},{% endif %}
+									{% if seomatic.site.identity.genericAddressCountry | length %}{{ seomatic.site.identity.genericAddressCountry }},{% endif %}
+									{% if seomatic.site.identity.genericPostalCode | length %}{{ seomatic.site.identity.genericPostalCode }}{% endif %}
+								{% endif %}
+							{% endif %}
+						</p>
+					{% endcache %}
+				</div>
+			</div>
+		</div>
+	</main><!-- .section.main_content -->
+{% endblock %}
