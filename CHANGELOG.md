@@ -15,7 +15,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## [1.0.21] -
+## [1.0.21] - 2023-02-16
 
 ### Changed
 
