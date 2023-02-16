@@ -474,7 +474,7 @@
 	}
 
 	:where(.uc_hide-visually):not(:focus):not(:active) { /* screen readers still get the content */
-		/* Source: 
+		/* Source:
 		   https://www.tpgi.com/the-anatomy-of-visually-hidden/
 			 https://www.a11yproject.com/posts/how-to-hide-content/ */
 		position: absolute;
@@ -507,6 +507,58 @@
 
 		&:hover {
 			background-color: hsl( var(--brand-colour) / 1 );
+		}
+	}
+
+	.uc_popup:has(img) {
+		position: relative;
+		display: block;
+
+		&:before {
+			content: "";
+			position: absolute; top: 11px; right: 9px; z-index: 2;
+			display: block; width: 30px; height: 30px;
+			background: url(/dist/images/maximize-black.svg);
+			background-size: contain; filter: blur(2px);
+			opacity: 0; transform: scale(0.75); transition: all 0.3s; pointer-events: none;
+		}
+
+		&:after {
+			content: "";
+			position: absolute; top: 10px; right: 10px; z-index: 3;
+			display: block; width: 30px; height: 30px;
+			background: url(/dist/images/maximize-white.svg);
+			background-size: contain;
+			opacity: 0; transform: scale(0.75); transition: all 0.3s; pointer-events: none;
+		}
+
+		&:hover,
+		&:focus {
+			&:before {
+				opacity: 0.5; transform: scale(1)
+			}
+			&:after {
+				opacity: 1; transform: scale(1)
+			}
+		}
+	}
+	dialog#lightbox { /* The AJAX loaded popup container */
+		inset: clamp(1vw, 10%, 10vh) clamp(1vw, 10%, 10vh);
+
+		&::backdrop {
+			background-color: hsl( 0 0% 0% / 0.66 );
+			backdrop-filter: blur(0.2rem);
+		}
+
+		& form {
+			position: absolute; top: 0; right: 0;
+			z-index: 2;
+
+			& button {
+				display: flex; align-items: center; justify-content: center;
+				width: 42px; height: 42px; padding: 0; margin: 0;
+				background: url('/dist/svg/x-white.svg') 50% calc(50% + 1px) / 24px 24px no-repeat;
+			}
 		}
 	}
 
