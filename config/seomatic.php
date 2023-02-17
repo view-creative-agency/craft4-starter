@@ -2,7 +2,11 @@
 
 use craft\helpers\App;
 
+$isProd = App::env('CRAFT_ENVIRONMENT') === 'production'; // Evaluates to true or false
+
 return [
-    'pluginName' => 'SEO',
-    'environment' => (bool) App::env('SEOMATIC_IS_LIVE') ? 'live' : 'local',
+	'pluginName'      => 'SEO',
+	'environment'     => $isProd ? 'live' : 'local',
+	'renderEnabled'   => $isProd,
+	'sitemapsEnabled' => $isProd,
 ];
