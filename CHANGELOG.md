@@ -15,6 +15,12 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.22] - 2023-02-17
+
+### Changed
+
+- SEOmatic auto-detects a live env and configures accordingly
+
 ## [1.0.21] - 2023-02-16
 
 ### Changed
