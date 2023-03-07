@@ -1,9 +1,36 @@
-{% set crumbs = entry.ancestors|default([]) %}
-{% if crumbs|length %}
-	<ul class="l_cluster" role="list">
-		<li><a href="{{ siteUrl }}">Home</a></li>
-		{% for crumb in crumbs %}
-			<li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
-		{% endfor %}
-	</ul>
+{#
+	{% include '_partials/breadcrumbs' with {
+		crumbs: entry
+	} %}
+
+	OR
+
+	{% include '_partials/breadcrumbs' with {
+		crumbs: [
+			{
+				url: '/top-level', title: 'Top Level'
+			},
+			{
+				url: '/second-level', title: 'Second Level'
+			}
+		]
+	} %}
+#}
+
+{% if crumbs is instance of('craft\\elements\\Entry') %}
+	{% set theCrumbs = entry.ancestors|default([]) %}
+{% else %}
+	{% set theCrumbs = crumbs %}
 {% endif %}
+
+{#{% if crumbs|length %}#}
+	<div class="breadcrumbs">
+		<ul class="l_cluster" role="list">
+			<li><a href="{{ siteUrl }}">Home</a></li>
+			{% for crumb in theCrumbs %}
+				<li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+			{% endfor %}
+			<li>{{ entry.title }}</li>
+		</ul>
+	</div>
+{#{% endif %}#}
