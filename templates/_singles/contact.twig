@@ -5,6 +5,14 @@
 {%- set htmlClass = entry.type -%}
 
 {% block content %}<!-- Template: {{ _self }}.twig -->
+	{% do craft.app.elements.eagerLoadElements(
+		className(entry),
+		[entry],
+		[
+			'listingImage'
+		]
+	) %}
+
 	<main id="main">
 		<div class="row main l_padding-block l_constrain">
 			<div class="col1">

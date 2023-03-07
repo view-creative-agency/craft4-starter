@@ -5,6 +5,26 @@
 {%- set htmlClass = 'pages ' ~ entry.type -%}
 
 {%- block content %}<!-- Template: {{ _self }}.twig -->
+	{# Eager load the entries own fields #}
+	{% do craft.app.elements.eagerLoadElements(
+		className(entry),
+		[entry],
+		[
+			'mixedContent.imageSingle:uncropped',
+			'mixedContent.imageSingle:landscape32',
+			'mixedContent.imageSingle:landscape169',
+			'mixedContent.imageSingle:landscape2391',
+			'mixedContent.imagesGrid:images',
+			'mixedContent.imagesSlider:images',
+			'mixedContent.entries:entries.listingImage',
+			'mixedContent.files:files',
+			'mixedContent.textByImage:image',
+			'mixedContent.textByImage:linkTo',
+			'mixedContent.featuredLink:backgroundImage',
+			'mixedContent.form:redirectOnSuccess'
+		]
+	) %}
+
 	<main id="main">
 		{{ imageHelper.basic({
 			transform: 'bannerImage',
@@ -58,13 +78,15 @@
 
 				{{ imageHelper.basic({
 					transform: 'bannerImage',
-					source: entry.listingImage.one()
+					source: entry.listingImage.one(),
+					pictureProperty: "data-reveal-on-scroll=swipeFromLeft"
 				}) }}
 
 				{{ imageHelper.withCaption({
 					transform: 'bannerImage',
 					source: entry.listingImage.one(),
-					caption: "This is a test caption to go with the image."
+					caption: "This is a test caption to go with the image.",
+					pictureProperty: "data-reveal-on-scroll=swipeFromRight"
 				}) }}
 			</div>
 		</div>

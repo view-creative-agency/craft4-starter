@@ -3,6 +3,26 @@
 {%- set htmlClass = 'pages ' ~ entry.type -%}
 
 {%- block content %}<!-- Template: {{ _self }}.twig -->
+	{# Eager load the entries own fields
+	{% do craft.app.elements.eagerLoadElements(
+		className(entry),
+		[entry],
+		[
+			'mixedContent.imageSingle:uncropped',
+			'mixedContent.imageSingle:landscape32',
+			'mixedContent.imageSingle:landscape169',
+			'mixedContent.imageSingle:landscape2391',
+			'mixedContent.imagesGrid:images',
+			'mixedContent.imagesSlider:images',
+			'mixedContent.entries:entries.listingImage',
+			'mixedContent.files:files',
+			'mixedContent.textByImage:image',
+			'mixedContent.textByImage:linkTo',
+			'mixedContent.featuredLink:backgroundImage',
+			'mixedContent.form:redirectOnSuccess'
+		]
+	) %}
+	#}
 	<main id="main">
 		<div class="row l_constrain l_block-padding">
 			<h1>This is the homepage</h1>
