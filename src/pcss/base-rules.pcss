@@ -455,6 +455,18 @@
 		}
 	}
 
+	.sprigFetching {
+		position: relative; aspect-ratio: 16/9;
+
+		&:before {
+			position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+			content: ""; display: block; width: 64px; height: 64px; margin: 8px;
+			border-radius: 50%; border: 6px solid #fff;
+			border-color: #fff transparent #fff transparent;
+			animation: loadingSpinner var(--slow, 0.9s) linear infinite;
+		}
+	}
+
 /* Utility classes ----------------------------------------------------------------------------- */
 	.font-size\:diminished {    font-size: var(--font-size-diminished) !important; }
 	.font-size\:base {          font-size: var(--font-size-base) !important; }
@@ -510,7 +522,7 @@
 		}
 	}
 
-	.uc_popup:has(img) {
+		.uc_popup:has(img) {
 		position: relative;
 		display: block;
 
