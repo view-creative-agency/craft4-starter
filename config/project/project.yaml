@@ -1,4 +1,4 @@
-dateModified: 1670254085
+dateModified: 1678208827
 elementSources:
   craft\elements\Asset:
     -
@@ -54,18 +54,18 @@ elementSources:
         - uri
       type: native
 email:
-  fromEmail: $TEST_TO_EMAIL_ADDRESS
-  fromName: $SYSTEM_FROM_NAME
-  replyToEmail: null
-  template: ''
+  fromEmail: $SYSTEM_EMAIL_ADDRESS
+  fromName: $SYSTEM_SENDER_NAME
+  replyToEmail: $SYSTEM_REPLY_TO_ADDRESS
+  template: $SYSTEM_HTML_EMAIL_TEMPLATE
   transportSettings:
-    encryptionMethod: none
+    encryptionMethod: $SYSTEM_ENCRYPTION_METHOD
     host: $SMTP_HOST
-    password: ''
+    password: $SMTP_PASSWORD
     port: $SMTP_PORT
     timeout: '10'
-    useAuthentication: '0'
-    username: ''
+    useAuthentication: $SYSTEM_USE_AUTH
+    username: $SMTP_USERNAME
   transportType: craft\mail\transportadapters\Smtp
 fs:
   localFileUploads:
@@ -164,6 +164,11 @@ meta:
     fc9fe069-509c-41d5-ab17-fb401bf818e1: 'Allow hard to read line lengths' # Allow hard to read line lengths
     ff214a18-a91f-4bdf-b3bf-2904b0be331a: 'Public Schema' # Public Schema
 plugins:
+  blitz:
+    edition: standard
+    enabled: true
+    licenseKey: $LICENSE_KEY_BLITZ
+    schemaVersion: 4.4.0
   blitz-recommendations:
     edition: standard
     enabled: true
@@ -212,7 +217,7 @@ plugins:
   imager-x:
     edition: pro
     enabled: true
-    licenseKey: XALSCXLH9Q68U9UY3TCMOHAP
+    licenseKey: $LICENSE_KEY_IMAGERX
     schemaVersion: 4.0.0
   minify:
     edition: standard
@@ -221,7 +226,7 @@ plugins:
   navigation:
     edition: standard
     enabled: true
-    licenseKey: GU3G5MIJS5STPUZR12QOD5N3
+    licenseKey: $LICENSE_KEY_NAVIGATION
     schemaVersion: 2.0.7
   redactor:
     edition: standard
@@ -230,7 +235,7 @@ plugins:
   seomatic:
     edition: standard
     enabled: true
-    licenseKey: V4SOTXCJEXUQLL2VSV7B5J28
+    licenseKey: $LICENSE_KEY_SEOMATIC
     schemaVersion: 3.0.11
     settings:
       addHrefLang: true
