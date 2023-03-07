@@ -15,7 +15,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## UNRELEASED
+## [1.0.23] - 2023-03-07
 
 ### Removed
 
@@ -25,6 +25,13 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 - Generator (in line with the base Pixel & Tonic Craft build)
   - More info: [Generator documentation](https://craftcms.com/docs/4.x/extend/generator.html)
+
+### Changed
+
+- Store Plugin license keys in the .env file rather than in the Database
+- Added Eager loading for "self loaded fields" on Entries
+- Visually improved Sprig loaded forms (they get a spinner and 16:9 layout while loading)
+- Breadcrumbs now have an ability to be manually defined or automatically generated
 
 ## [1.0.22] - 2023-02-17
 
