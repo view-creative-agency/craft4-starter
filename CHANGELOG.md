@@ -15,7 +15,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## [1.0.24] 2023-03-14
+## [1.0.25] 2023-03-14
 
 ### Added
 
@@ -29,7 +29,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 - Re-named triggers for "data on scroll" to be more consistent
 - Updated seed.sql
 
-## [1.0.23] - 2023-03-07
+## [1.0.23] & [1.0.24] - 2023-03-07
 
 ### Removed
 
