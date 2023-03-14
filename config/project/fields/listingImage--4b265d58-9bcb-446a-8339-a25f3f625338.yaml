@@ -11,9 +11,11 @@ settings:
   allowUploads: true
   allowedKinds:
     - photos
+  branchLimit: null
   defaultUploadLocationSource: 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
   defaultUploadLocationSubpath: null
   localizeRelations: false
+  maintainHierarchy: false
   maxRelations: 1
   minRelations: null
   previewMode: full
@@ -74,7 +76,6 @@ settings:
   showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
-  source: null
   sources:
     - 'volume:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
   targetSiteId: null

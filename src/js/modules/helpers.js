@@ -50,7 +50,7 @@ if(!!window.IntersectionObserver){
 		});
 	}, {rootMargin: "0px 0px -20% 0px"});
 
-	document.querySelectorAll('[data-reveal-on-scroll]').forEach(watchTarget => {
+	document.querySelectorAll('[data-scroll-reveal]').forEach(watchTarget => {
 		observer.observe(watchTarget);
 	});
 }
@@ -81,30 +81,34 @@ document.querySelectorAll('a.popup').forEach( popupLink => {
 		e.preventDefault();
 		let clickedLink = e.currentTarget;
 		let parser = new DOMParser();
+		clickedLink.classList.add('js-loading');
 
 		thisWebsiteAPI.getHtml( clickedLink.getAttribute('href') ).then(response => {
 			let responseAsDom = parser.parseFromString( response, "text/html" );
-			let imageWeWant = responseAsDom.querySelector('#ajaxcontent').outerHTML;
-			let lightbox = document.querySelector('#lightbox') ?? null;
+			let imageWeWant   = responseAsDom.querySelector('#ajaxcontent').outerHTML;
+			let lightbox      = document.querySelector('#lightbox') ?? null;
 
 			if( lightbox ) {
 				document.querySelector('#lightbox .content').innerHTML = imageWeWant;
 				lightbox.showModal();
+				clickedLink.classList.remove('js-loading');
 			} else {
 				document.querySelector('body').insertAdjacentHTML('afterbegin', `
 					<dialog id="lightbox">
-						<div class="content">
+						<div class="wrapper">
+							<div class="content">
 							${imageWeWant}
+							</div>
+							<form method="dialog">
+								<button><img src="/dist/svg/x.svg" alt="Close"></button>
+							</form>
 						</div>
-
-						<form method="dialog">
-							<button><img src="/dist/svg/x.svg" alt="Close"></button>
-						</form>
 					</dialog>
 				`);
 
 				let lightbox = document.querySelector('#lightbox');
 				lightbox.showModal();
+				clickedLink.classList.remove('js-loading');
 			}
 		}).catch(error => {
 			console.error( error );

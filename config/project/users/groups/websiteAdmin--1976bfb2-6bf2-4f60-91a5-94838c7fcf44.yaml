@@ -18,8 +18,8 @@ permissions:
   - 'deletepeerentries:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
   - 'deletepeerentrydrafts:50731a92-0234-47dc-b983-b4d3fa37646f' # Homepage
   - 'deletepeerentrydrafts:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
-  - 'editglobalset:136bd771-2d6d-4fbf-bdab-627335611e32' # Website
-  - 'editglobalset:cb14981f-573d-46a0-b437-65a5a962b0e2' # Email
+  - 'editglobalset:136bd771-2d6d-4fbf-bdab-627335611e32'
+  - 'editglobalset:cb14981f-573d-46a0-b437-65a5a962b0e2'
   - 'editimages:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images
   - 'editimages:f465523b-77c1-45ed-a308-bffb975c28b4' # Files
   - 'editpeerimages:22079320-7090-4cd8-bbb4-27a18a70f38f' # Images

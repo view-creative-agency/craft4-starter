@@ -66,7 +66,7 @@
 		/* Animation speeds */
 		--fast:                    0.3s;
 		--slow:                    0.6s;
-		--very-slow:               1.3s;
+		--very-slow:               2s;
 
 		/*
 			Text sizes based on the Modular Scale, with fluid base size.
@@ -174,14 +174,6 @@
 		}
 	}
 
-	dialog.modal {
-		position: sticky; inset: 0;
-		max-width: 40ch; border: 0; padding: var(--gap);
-		background-color: hsl( var(--black) / 0.2 );
-		box-shadow: 0 0 var( --gap ) hsl( var(--black) / 0.6 );
-		backdrop-filter: blur(10px);
-	}
-
 	[v-cloak] {
 		display: none;
 	}
@@ -230,8 +222,8 @@
 		}
 		picture:before {
 			position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
-			content: ""; display: block; width: 64px; height: 64px; margin: 8px;
-			border-radius: 50%; border: 6px solid #fff;
+			content: ""; display: block; width: 64px; height: 64px;
+			border-radius: 50%; border: 8px solid #fff;
 			border-color: #fff transparent #fff transparent;
 			animation: loadingSpinner var(--slow, 0.9s) linear infinite;
 		}
@@ -522,7 +514,7 @@
 		}
 	}
 
-		.uc_popup:has(img) {
+	.uc_popup:has(img) {
 		position: relative;
 		display: block;
 

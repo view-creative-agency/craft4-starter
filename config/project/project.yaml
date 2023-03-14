@@ -1,4 +1,4 @@
-dateModified: 1678208827
+dateModified: 1678810817
 elementSources:
   craft\elements\Asset:
     -
@@ -35,6 +35,9 @@ elementSources:
       heading: Structures
       type: heading
     -
+      defaultSort:
+        - title
+        - asc
       disabled: false
       key: singles
       tableAttributes:
@@ -44,6 +47,9 @@ elementSources:
         - uri
       type: native
     -
+      defaultSort:
+        - structure
+        - asc
       disabled: false
       key: 'section:78e1ba52-479b-48f4-b0a6-3659f3838ff1' # Pages
       tableAttributes:
@@ -53,6 +59,29 @@ elementSources:
         - revisionCreator
         - uri
       type: native
+    -
+      heading: 'Site Wide'
+      type: heading
+    -
+      condition:
+        class: craft\elements\conditions\entries\EntryCondition
+        conditionRules:
+          -
+            class: craft\elements\conditions\entries\SectionConditionRule
+            operator: in
+            uid: 7ce3a8bb-ad5a-4d02-bcf3-517b399c3e4c
+            values:
+              - f1d8fe85-91fd-4f12-9b2e-b04e172ed43d # Email
+              - 7cfd5653-c4b9-4a46-9471-a2cae1b97003 # Website
+        elementType: craft\elements\Entry
+        fieldContext: global
+      defaultSort:
+        - title
+        - asc
+      key: 'custom:e7907b73-07b3-45e9-9d4c-5632495765fb'
+      label: Globals
+      tableAttributes: '-'
+      type: custom
 email:
   fromEmail: $SYSTEM_EMAIL_ADDRESS
   fromName: $SYSTEM_SENDER_NAME
@@ -87,6 +116,7 @@ meta:
     0ad765ce-da18-4b42-8883-7c75e67bc6c7: Files # Files
     0da6de33-e9ae-4ac5-a7dc-63322767738d: Blockquote # Blockquote
     0f6f6a63-845d-449f-b5f6-c0b17a402227: Images # Images
+    1b8a29c5-f1bf-4f03-a061-90b6190c1018: Email # Email
     2b187454-5e81-41a2-bb5a-67f435df8ad2: Image # Image
     3d35622b-6607-4a05-81f0-93d712f18eed: 'Minimal UI' # Minimal UI
     4b265d58-9bcb-446a-8339-a25f3f625338: 'Listing Image' # Listing Image
@@ -97,6 +127,7 @@ meta:
     5e75ab6f-700d-4d71-a119-8486e41862d4: 'Images: Grid' # Images: Grid
     6a04ef9a-c473-4a5b-bee9-fd7e5caaa7b4: Uncropped # Uncropped
     6ac2852d-9212-4f02-89d2-35cd874150e9: $SYSTEM_NAME # $SYSTEM_NAME
+    7cfd5653-c4b9-4a46-9471-a2cae1b97003: Website # Website
     7fe58c02-d209-4e1a-9883-dd49189d500c: Form # Form
     08a13d2e-584d-4d56-a8fe-3b355f04e0c7: 'Landscape 16:9' # Landscape 16:9
     9d7f6cee-b6c7-4558-bfd9-79804796377d: 'Expansion Method' # Expansion Method
@@ -114,7 +145,6 @@ meta:
     75d17d41-4e28-4fbc-90ae-74102376b880: 'Link URL' # Link URL
     78e1ba52-479b-48f4-b0a6-3659f3838ff1: Pages # Pages
     83b0902d-25fa-4ce1-a72b-0857d3f51d45: 'Link To' # Link To
-    136bd771-2d6d-4fbf-bdab-627335611e32: Website # Website
     303f6bf0-2c29-459c-afef-f03fb0298d24: 'Text Position' # Text Position
     344da3ee-6f97-44b2-b4ae-8decb263506d: 'Show Newsletter CTA' # Show Newsletter CTA
     702f0f38-1282-4085-8e00-5baaa7256063: 'Background Image' # Background Image
@@ -124,6 +154,7 @@ meta:
     1976bfb2-6bf2-4f60-91a5-94838c7fcf44: 'Website Admin' # Website Admin
     2219b27c-3104-49fc-9b26-270a35789282: Autoplay # Autoplay
     6079e509-0ab3-4f71-ae20-eae74d724613: 'Spacer Size' # Spacer Size
+    8678d15f-e8dc-4773-b25d-947e3c414e3b: Website # Website
     50731a92-0234-47dc-b983-b4d3fa37646f: Homepage # Homepage
     72579a5f-3f21-4476-9c2f-4de146cc0cba: Form # Form
     91922a85-68db-4cd1-a6a0-54a12b645469: 'Show Listing Excerpt' # Show Listing Excerpt
@@ -141,7 +172,6 @@ meta:
     b582704c-66aa-4611-a6e1-79f208db6ab7: 'Link Description' # Link Description
     bb1cad82-345d-45ce-8868-7e95321e0dde: Attribution # Attribution
     bb85a1cd-c2b6-49d2-8f4c-221e447e0124: 'Generic Page' # Generic Page
-    cb14981f-573d-46a0-b437-65a5a962b0e2: Email # Email
     d0c2725f-cc81-4c85-a467-3179e7b41c85: Entries # Entries
     d9e8808e-2fe2-41ab-b75f-4c7501b6b7d8: 'Public Schema' # Public Schema
     d77dcb20-938f-42b0-8c62-deed91622131: 'Show Listing Image' # Show Listing Image
@@ -153,6 +183,7 @@ meta:
     eba994c9-4a51-4ee1-8574-0e9a8d04b1c1: 'Newsletter CTA text' # Newsletter CTA text
     ed578c38-afc8-4e66-b8b8-9dece35fc627: 'Footer Navigation' # Footer Navigation
     f0a903f2-fd7a-4d92-9df6-958587df9b3b: Homepage # Homepage
+    f1d8fe85-91fd-4f12-9b2e-b04e172ed43d: Email # Email
     f4eb0191-de34-435f-8f7c-dae20b322c0d: 'Redirect on success' # Redirect on success
     f6b9e281-1629-4b01-9358-328790bed358: Text # Text
     f54d2cc3-2e99-4524-812d-c5a604169d7a: 'Question and Answer' # Question and Answer
@@ -335,5 +366,5 @@ system:
   live: true
   name: $SYSTEM_NAME
   retryDuration: null
-  schemaVersion: 4.0.0.9
+  schemaVersion: 4.4.0.4
   timeZone: Europe/London

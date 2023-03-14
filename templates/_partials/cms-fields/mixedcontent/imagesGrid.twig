@@ -4,12 +4,12 @@
 	class="mixedContent_imagesGrid l_liquid-grid"
 	id="block-{{ block.id }}"
 	data-grid-style="{{ block.gridStyle }}"
-	data-reveal-on-scroll
+	data-scroll-reveal
 >
 	{% for image in block.images %}
 		<a
 			href="/responsive-image/{{ image.id }}" id="id-{{ block.id }}-{{ loop.index }}"
-			class="uc_popup"
+			class="popup"
 		>
 			{{ imageHelper.basic({
 				transform: 'imagesGrid',

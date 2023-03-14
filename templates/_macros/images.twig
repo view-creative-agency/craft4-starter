@@ -13,7 +13,9 @@
 		{{ imageHelper.basic({
 			transform: 'bannerImage',
 			source:    entry.bannerImage[0],
-			aboveTheFold: true
+			aboveTheFold: true,
+			pictureClass: 'customClass',
+			pictureProperty: 'data-scroll-reveal="swipeFromTop"'
 		}) }}
 
 		The 'aboveTheFold' parameter is optional and defaults to 'false'.
@@ -78,7 +80,14 @@
 	{% set jpgs  = craft.imagerx.transformImage( options.source, options.transform ~ 'Jpg') %}
 	{% set webps = craft.imagerx.transformImage( options.source, options.transform ~ 'Webp') %}
 
-	<picture>
+	<picture
+		{% if options.pictureProperty is defined and options.pictureProperty | length -%}
+			{{- options.pictureProperty | raw -}}
+		{%- endif %}
+		{% if options.pictureClass is defined and options.pictureClass | length -%}
+			class="{{- options.pictureClass -}}"
+		{%- endif -%}
+	>
 		{# prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules #}
 		{% for bp in breakpoints %}
 			{% if loop.first %}{# First one is a max-width and needs the first transform #}
@@ -158,9 +167,11 @@
 
 	<figure role="group">
 		{{ imageHelper.basic({
-			transform:    options.transform,
-			source:       options.source,
-			aboveTheFold: options.aboveTheFold ??? false
+			transform:       options.transform,
+			source:          options.source,
+			aboveTheFold:    options.aboveTheFold    ??? false,
+			pictureClass:    options.pictureClass    ??? false,
+			pictureProperty: options.pictureProperty ??? false
 		}) }}
 
 		<figcaption>

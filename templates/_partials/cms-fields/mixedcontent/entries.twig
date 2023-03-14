@@ -1,6 +1,6 @@
 {% import '_macros/images' as imageHelper %}
 
-<div class="mixedContent_files entriesCount_{{ block.files|length }} l_liquid-grid" id="block-{{ block.id }}" data-reveal-on-scroll>
+<div class="mixedContent_files entriesCount_{{ block.files|length }} l_liquid-grid" id="block-{{ block.id }}" data-scroll-reveal>
 	{% for page in block.entries %}
 		<div class="entry l_stack" id="id-{{ block.id }}">
 			{% if block.showListingImage %}

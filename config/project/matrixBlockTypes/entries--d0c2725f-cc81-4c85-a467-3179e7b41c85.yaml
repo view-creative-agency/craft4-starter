@@ -85,7 +85,9 @@ fields:
     searchable: true
     settings:
       allowSelfRelations: false
+      branchLimit: null
       localizeRelations: false
+      maintainHierarchy: false
       maxRelations: 3
       minRelations: 1
       selectionCondition:
@@ -101,7 +103,6 @@ fields:
             - craft\elements\conditions\entries\EntryCondition
       selectionLabel: 'Choose Entries'
       showSiteMenu: true
-      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false

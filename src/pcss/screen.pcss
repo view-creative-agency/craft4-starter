@@ -5,7 +5,7 @@
 /* Individual UI components */
 @import "components/cms-textblock.pcss";
 @import "components/mixed-content.pcss";
-@import "legacy/ajax-popups.pcss";
+@import "components/ajax-popups.pcss";
 
 /* Handy tricks with modern CSS
 	.container:not(:has(*)) {
@@ -38,7 +38,7 @@
 }
 
 /* stop transitions playing on page load */
-	html:not( .load-complete ) * {
+	html:not( .load-complete ) *:not( [data-on-load=""] ) {
 		transition: none !important;
 	}
 
@@ -260,21 +260,7 @@
 		}
 	}
 
-	dialog#lightbox {
-		inset: clamp(1vw, 10%, 10vh) clamp(1vw, 10%, 10vh);
-
-		&::backdrop {
-			background-color: hsl( 0 0% 0% / 0.66 );
-			backdrop-filter: blur(0.2rem);
-		}
-
-		& form {
-			position: absolute; top: 0; right: 0;
-			z-index: 2;
-		}
-	}
-
-	/* An example of using CSS Container Queries */
+/* An example of using CSS Container Queries */
 	.cardExample {
 		container-type: inline-size; /* The .cardExample div itself is "the container" */
 
@@ -293,8 +279,8 @@
 
 /* Animations */
 	@keyframes scale {
-		from { transform: scale(1.3) }
-		to { transform: scale(1) }
+		from { transform: scale(1.3); }
+		to   { transform: scale(1); }
 	}
 
 	@media screen and (prefers-reduced-motion: no-preference) { /* only animate motion if the user is OK with it */
@@ -309,11 +295,13 @@
 	}
 
 	html.js-supportsIntersectionObserver {
-		& [data-reveal-on-scroll=""] { /* default reveal effect if no named effect is defined */
+		& [data-scroll-reveal=""] { /* default reveal effect if no named effect is defined */
 			/* opacity is safe to animate for everyone (in terms of a11y issues) */
 			will-change: opacity, filter;
 			opacity: 0.2; filter: grayscale(1);
-			transition: all var(--slow, 0.6s); transition-delay: 0.1s;
+			transition-property: opacity, filter;
+			transition-duration: var(--slow, 0.6s);
+			transition-delay: 0.1s;
 
 			&.js-inViewport {
 				opacity: 1; filter: grayscale(0);
@@ -321,28 +309,40 @@
 		}
 
 		@media screen and (prefers-reduced-motion: no-preference) { /* only animate motion if the user is OK with it */
+			&.load-complete picture[data-load-reveal=""] {
+				overflow: hidden;
+
+				& img {
+					animation: var(--slow) 1 forwards scale;
+					animation-timing-function: cubic-bezier(0.5, 0.5, 0.355, 1);
+				}
+			}
+
 			/*
 				Swipe based animations
-				The overshoot for the poly coords is so that any box-shadow shows, rather than being clipped
+				The overshoot for the poly coords is so that any box-shadow shows etc that break out of the area won't be clipped
 			*/
-				& [data-reveal-on-scroll^="swipe"] {
-					will-change: clip-path; transition: all var(--slow, 0.6s); transition-delay: 0.1s;
+				& [data-scroll-reveal^="swipe"] {
+					will-change: clip-path;
+					transition-property: clip-path;
+					transition-duration: var(--slow, 0.6s);
+					transition-delay: 0.1s;
 
 					&.js-inViewport { /* the end state for all "swipe" animations */
 						clip-path: polygon(-5% -5%, 105% -5%, 105% 105%, -5% 105%) !important;
 					}
 				}
 
-				& [data-reveal-on-scroll="swipeFromLeft"] {
+				& [data-scroll-reveal="swipeFromLeft"] {
 					clip-path: polygon(-5% -5%, -5% -5%, -5% 105%, -5% 105%);
 				}
-				& [data-reveal-on-scroll="swipeFromRight"] {
+				& [data-scroll-reveal="swipeFromRight"] {
 					clip-path: polygon(105% -5%, 105% -5%, 105% 105%, 105% 105%);
 				}
-				& [data-reveal-on-scroll="swipeFromTop"] {
+				& [data-scroll-reveal="swipeFromTop"] {
 					clip-path: polygon(-5% -5%, 105% -5%, 105% -5%, -5% -5%);
 				}
-				& [data-reveal-on-scroll="swipeFromBottom"] {
+				& [data-scroll-reveal="swipeFromBottom"] {
 					clip-path: polygon(-5% 105%, 105% 105%, 105% 105%, -5% 105%);
 				}
 		}

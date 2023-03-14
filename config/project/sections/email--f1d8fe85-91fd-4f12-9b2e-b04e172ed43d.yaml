@@ -1,0 +1,21 @@
+defaultPlacement: end
+enableVersioning: true
+handle: email
+name: Email
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+propagationMethod: all
+siteSettings:
+  6ac2852d-9212-4f02-89d2-35cd874150e9: # $SYSTEM_NAME
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+type: single

@@ -15,6 +15,19 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## Unreleased
+
+### Added
+
+- New CSS to handle animation on page load for hero images
+
+### Changed
+
+- Adjusted default spacing between grouped elements in Mixed Content
+- Globals are now Entries, in line with their scheduled removal from Craft 5
+- Improved "AJAX" pop-up look and behaviour
+- Re-named triggers for "data on scroll" to be more consistent
+
 ## [1.0.23] - 2023-03-07
 
 ### Removed

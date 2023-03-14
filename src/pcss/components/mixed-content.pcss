@@ -1,19 +1,19 @@
 .mixedContent {
 	& .mixedContent_richText {
 		& a[href^="http" i]:not([href*="craft4-vca" i]) {
-		/* links to external websites */
-		color: blue;
+			/* links to external websites */
+			color: blue;
 
-		&::after {
-			content: "";
-			vertical-align: top;
-			display: inline-block;
-			width: calc(1ch);
-			height: 1ch;
-			margin-inline-start: 0.25ch;
-			background: transparent url('/dist/svg/globe-alt.svg') 0 0 / contain no-repeat;
+			&::after {
+				content: "";
+				vertical-align: top;
+				display: inline-block;
+				width: calc(1ch);
+				height: 1ch;
+				margin-inline-start: 0.25ch;
+				background: transparent url('/dist/svg/globe-alt.svg') 0 0 / contain no-repeat;
+			}
 		}
-	}
 
 		& a[href*="craft4-vca" i] {
 			/* links to other pages on this domain */
@@ -258,13 +258,8 @@
 				}
 			}
 
-			& .theImage {
+			& picture {
 				margin-bottom: 0;
-			}
-
-			&[data-text-position='left'] {
-				& .text { order: 1; }
-				& picture { order: 2; }
 			}
 
 			&[data-expansion-method='scaleToFill'] {
@@ -274,21 +269,20 @@
 			}
 
 			&[data-expansion-method='stayAtTheTop'] {
-				& > div {
-					align-items: start;
-				}
+				align-items: start;
 			}
 
 			&[data-expansion-method='stayInTheMiddle'] {
-				& > div {
-					align-items: center;
-				}
+				align-items: center;
 			}
 
 			&[data-expansion-method='stayAtTheBottom'] {
-				& > div {
-					align-items: end;
-				}
+				align-items: end;
+			}
+
+			&[data-text-position='left'] {
+				& .text { order: 1; }
+				& picture { order: 2; }
 			}
 		}
 	}

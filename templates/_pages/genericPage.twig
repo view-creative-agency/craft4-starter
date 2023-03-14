@@ -27,9 +27,10 @@
 
 	<main id="main">
 		{{ imageHelper.basic({
-			transform: 'bannerImage',
-			source:    entry.listingImage[0],
-			aboveTheFold: true
+			transform:       'bannerImage',
+			source:          entry.listingImage[0],
+			aboveTheFold:    true,
+			pictureProperty: "data-load-reveal=''"
 		}) }}
 
 		<div class="row l_constrain">
@@ -42,7 +43,7 @@
 						'groupSeries': true,
 						'seriesProperties': {
 							'classes': 'l_stack',
-							'dataStackSize': 'large'
+							'dataStackSize': 'small'
 						}
 					} %}
 				{% endcache %}
@@ -79,14 +80,14 @@
 				{{ imageHelper.basic({
 					transform: 'bannerImage',
 					source: entry.listingImage.one(),
-					pictureProperty: "data-reveal-on-scroll=swipeFromLeft"
+					pictureProperty: "data-scroll-reveal=swipeFromLeft"
 				}) }}
 
 				{{ imageHelper.withCaption({
 					transform: 'bannerImage',
 					source: entry.listingImage.one(),
 					caption: "This is a test caption to go with the image.",
-					pictureProperty: "data-reveal-on-scroll=swipeFromRight"
+					pictureProperty: "data-scroll-reveal=swipeFromRight"
 				}) }}
 			</div>
 		</div>

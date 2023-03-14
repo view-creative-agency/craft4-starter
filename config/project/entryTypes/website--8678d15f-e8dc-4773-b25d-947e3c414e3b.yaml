@@ -1,9 +1,35 @@
 fieldLayouts:
-  f35b77eb-d78b-4eae-a5a0-b4189090dcfd:
+  03f74d12-a4cd-488f-a51c-b2a5f2a4eae9:
     tabs:
       -
         elementCondition: null
         elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: dbdfcce4-36f1-4ebc-a460-b413c25e9342
+            userCondition: null
+            warning: null
+            width: 100
           -
             elementCondition: null
             fieldUid: f87a627c-8252-450e-bedd-74bb08e21d9d # Formatted Address
@@ -12,7 +38,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 394af2aa-f495-4e74-9247-fda42fb9b06b
+            uid: c99a38b7-afe8-44dd-864f-1032be4832b8
             userCondition: null
             warning: null
             width: 100
@@ -24,12 +50,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2e205a7f-4e18-4462-9f24-0323e576112c
+            uid: 56d178c9-5636-4e21-8ecb-4b5088a8fbda
             userCondition: null
             warning: null
             width: 100
         name: 'General Settings'
-        uid: be650588-19b7-43a8-b976-fcb1869e7130
+        uid: 2e4ea918-2b3f-4c65-bf3d-51ab39f89c8c
         userCondition: null
       -
         elementCondition: null
@@ -42,7 +68,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ec824cfb-349b-41ef-9f0c-28438b2acf80
+            uid: 977708c5-41c2-485f-b121-684aa8ab56a7
             userCondition: null
             warning: null
             width: 100
@@ -54,13 +80,18 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 89d914b1-09e4-4469-8c4d-f105b52988e2
+            uid: dbd12dd9-7cc5-4fb8-8a9e-61f53d68cc76
             userCondition: null
             warning: null
             width: 100
         name: Newsletter
-        uid: fef8650b-c162-497e-8b0a-f58c619daaea
+        uid: 4b386861-0f98-4074-ba39-da98a4f41d5d
         userCondition: null
 handle: website
+hasTitleField: false
 name: Website
-sortOrder: 2
+section: 7cfd5653-c4b9-4a46-9471-a2cae1b97003 # Website
+sortOrder: 1
+titleFormat: '{section.name|raw}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

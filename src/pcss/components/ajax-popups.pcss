@@ -1,0 +1,71 @@
+.popup:has(img) {
+	position: relative;
+	display: block;
+
+	& img {
+		transition: opacity var(--fast);
+	}
+
+	&:before {
+		content: "";
+		position: absolute; top: 11px; right: 9px; z-index: 2;
+		display: block; width: 30px; height: 30px;
+		background: url(/dist/images/maximize-black.svg);
+		background-size: contain; filter: blur(2px);
+		opacity: 0; transform: scale(0.75); transition: transform, opacity, var(--fast); pointer-events: none;
+	}
+
+	&:after {
+		content: "";
+		position: absolute; top: 10px; right: 10px; z-index: 3;
+		display: block; width: 30px; height: 30px;
+		background: url(/dist/images/maximize-white.svg);
+		background-size: contain;
+		opacity: 0; transform: scale(0.75); transition: transform, opacity, var(--fast); pointer-events: none;
+	}
+
+	&:hover,
+	&:focus {
+		&:before {
+			opacity: 0.5; transform: scale(1)
+		}
+		&:after {
+			opacity: 1; transform: scale(1)
+		}
+	}
+
+	&.js-loading {
+		& img {
+			opacity: 0;
+		}
+		&:before,
+		&:after {
+			opacity: 0;
+		}
+	}
+}
+
+dialog#lightbox:modal {
+	position: fixed; inset: 0;
+	display: grid; place-items: center;
+	padding: calc(2 * var(--gap) );
+
+	/* Undo browser defaults, but they're sensible for most other dialog's so only undo this one */
+	width: 100%; height: 100%;
+	max-width: none; max-height: none;
+	background: transparent;
+
+	& .wrapper {
+		position: relative;
+	}
+
+	&::backdrop {
+		background-color: transparent;
+		backdrop-filter: blur(0.5rem) grayscale(1) contrast(0.5);
+	}
+
+	& form {
+		position: absolute; top: 0; right: 0;
+		z-index: 2;
+	}
+}

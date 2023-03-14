@@ -2,6 +2,15 @@
 {%- minify %}<!doctype html>{# {{ dump(_context|keys) }} DEBUG #}
 {% set devModeIsOn = craft.app.config.general.devMode ??? false %}
 
+{# As of Craft 4.4 the path has been laid for the removal of Globals, Tags, and Categories #}
+{% set website = craft.entries
+	.section('website')
+	.with([
+		'missingImageFallback'
+	])
+	.one()
+%}
+
 {# UPDATED REFERENCE
    https://www.matuzo.at/blog/html-boilerplate/
    ALSO SEE https://twitter.com/mmatuzo/status/1567065039718211584 for optimal HEAD order
@@ -51,7 +60,7 @@
 			});
 		</script>
 
-		{# remember that new scripts used here need to be added to the vite.config.js file, so it's aware of them #}
+		{# remember that new scripts need to be added to the vite.config.js file #}
 		{{ craft.vite.script('src/js/modules/helpers.js', false) }}
 		{{ craft.vite.script('src/js/modules/details-element.js', false) }}
 		{{ craft.vite.script('src/js/third-party/container-query-polyfill.modern.js', false) }}
