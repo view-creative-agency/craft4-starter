@@ -15,7 +15,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## Unreleased
+## [1.0.24] 2023-03-14
 
 ### Added
 
@@ -27,6 +27,7 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 - Globals are now Entries, in line with their scheduled removal from Craft 5
 - Improved "AJAX" pop-up look and behaviour
 - Re-named triggers for "data on scroll" to be more consistent
+- Updated seed.sql
 
 ## [1.0.23] - 2023-03-07
 

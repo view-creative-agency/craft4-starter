@@ -1,12 +1,10 @@
 # Craft4 Starter
 
-NOTE: THIS PROJECT IS NOT COMPLETE, DO NOT USE IT YET
-
 This is the base project from which all VCA projects using Craft4 are built.
 
 The templates/css/config etc are a from-scratch rebuild starting from a beta of Craft4. It is not an upgrade from our previous Craft3 based starter project, though it does re-use some code.
 
-For our development environment we are switching from Pixel & Tonic's "Nitro", which is limited and seems to be more or less abandoned, to a DDEV based system which is heavily copied from onedarnleyroad/craftcms - but with our own customisations (we don't use Tailwind, Alpine etc).
+For our development environment we are switching from Pixel & Tonic's "Nitro", which has been deprecated, to a DDEV based system which is heavily copied from onedarnleyroad/craftcms - but with our own customisations (we don't use Tailwind, Alpine etc).
 
 ## VCA Staff Orientation
 
@@ -95,7 +93,7 @@ rm -rf .git
 Last, clean up and set some default files for use:
 
 ```shell
-cp .env.example .env
+cp .env.ddev .env
 mv -f composer.json.default composer.json
 mv -f .gitignore.default .gitignore
 rm CHANGELOG.md && rm LICENSE.md && rm README.md
@@ -107,7 +105,7 @@ Download a copy of the repo to your local machine and move to where you want to 
 
 ```shell
 cd PATH
-cp .env.example .env
+cp .env.ddev .env
 mv -f composer.json.default composer.json
 mv -f .gitignore.default .gitignore
 rm CHANGELOG.md && rm LICENSE.md && rm README.md
