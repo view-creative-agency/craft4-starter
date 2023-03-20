@@ -1,0 +1,14 @@
+{# As of Craft 4.4 the path has been laid for the removal of Globals, Tags, and Categories #}
+{%- set website = craft.entries
+	.section('email')
+	.with([
+		'emailHeader'
+	])
+	.one()
+-%}
+{% import '_macros' as macros %}
+{% extends "_emails/_layout" %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	{{ body }}
+{% endblock %}

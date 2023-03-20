@@ -1,0 +1,248 @@
+{% import '_macros/helpers' as helpers -%}
+{# This is an example search template; it won't work without you customising it to your needs.
+   It's a single page that is both the search form and the results page in one. It will pre-populate the form for repeat and refined searches.
+
+   We are using GET rather than POST for the search form, so that people can bookmark and share their searches.
+
+	 The way this works is to build a search query from the passed URI variables, once the query is built we run it in order to get the results.
+
+	 NOTE: You can't search Craft's built in "checkboxes" field, so don't use them if you can help it, try lightswitches instead.
+#}
+{% extends "_layout" %}
+{% set htmlClass = 'search' %}
+{% block content %}<!-- Template: {{ _self }}.twig -->
+
+{#
+	Set the common parts of the search query ahead of time. It's still a "search" even if you're on the landing page and haven't submitted the form...
+
+	Use Eager Loading if you're going to display Relational fields on this results page, otherwise searches get expensive and time-out https://craftcms.com/docs/templating/eager-loading-elements
+
+	The 'with' field lists any Relational field type that is used in the display of results, it has no impact on the search itself.
+#}
+	{% set paginationLimit = 9 %}
+
+	{% set searchQuery = craft.entries
+		.section('entries')
+		.with([
+			'listingImage',
+			'categoryField',
+			'assetField'
+		])
+		.limit(paginationLimit)
+	%}
+
+{# if there is a query string in the URL we need to append criteria to our searchResults query #}
+	{% if craft.app.request.queryStringWithoutPath | length %}
+		{# 1)
+			If there are relational fields among our conditions, how are wanting them to be handled?
+			'and' means all relational field search options must be matched, 'or' means any option can be matched
+		#}
+			{% set relatedToParam = ['and'] %}
+			{#
+				e.g., Has to at least be related to the current Entry via a productCategory field
+				{% set relatedToParam = relatedToParam|merge([{ targetElement: entry.id, field: 'productCategory' }]) %}
+			#}
+
+		{# 2)
+			Get the search parameters from the URL and assign each of them to Twig variables we can use in the results query
+			The URL may be something like: https://mysite.com/search?searchTerm=searchtext&category=exampleCategory&exampleField=1
+		#}
+			{% set searchTermSearched    = craft.app.request.getParam('searchTerm')      ??? null %}
+			{% set categorySearched      = craft.app.request.getParam('category')        ??? null %}{# expects a slug #}
+			{% set otherCategorySearched = craft.app.request.getParam('otherCategories') ??? null %}{# pretend we expect an array #}
+			{% set exampleFieldSearched  = craft.app.request.getParam('exampleField')    ??? null %}
+
+		{# 3)
+			Parse any RELATIONAL fields
+			Fields that are relational in Craft terms are fields of the following fieldtypes:
+			Assets, Categories, Entries, Tags, Users
+
+			In the example here, 'category' is passed in the URL as a Category Slug.
+			Additionally 'otherCategories' is passed as an array of IDs (?otherCategories[]=1&otherCategories[]=2)
+		#}
+			{% if categorySearched is defined and categorySearched != '' %}{# takes a single category slug #}
+				{% set categoryIds    = craft.categories.group('categoryGroup').slug( categorySearched ).ids() %}
+				{% set relatedToParam = relatedToParam|merge([{ targetElement: categoryIds }]) %}
+			{% endif %}
+
+			{% if
+				otherCategorySearched is defined
+				and
+				otherCategorySearched is iterable
+				and
+				otherCategorySearched | length > 0
+			%}{# takes an array of category slugs that belong to one cateogry group #}
+				{% set otherCategorySearchedIds = craft.categories
+					.group('otherCategoryGroup')
+					.slug( otherCategorySearched )
+					.ids()
+				%}
+				{# Treat the array of passed categories as OR (a match is any Entry with one or more of these) #}
+				{% set relatedToParam = relatedToParam|merge([{
+					targetElement: otherCategorySearchedIds,
+					field: 'relatedCategories'
+				}]) %}
+
+				{# Treat the array of passed categories as AND (a match must be an Entry with ALL of these)
+				{% for arrayItem in otherCategorySearched %}
+					{% set relatedToParam = relatedToParam|merge([{ targetElement: arrayItem, field: 'relatedCategories' }]) %}
+				{% endfor %} #}
+			{% endif %}
+
+			{# EXAMPLE for if you need another category relational field... (you'll need to add the appropriate code in the Search Parameters section above)
+
+				{% if anotherCategorySearched is defined and anotherCategorySearched != '' %}
+					{% set anotherCategoryIds = craft.categories.group('anotherCategoryGroup').slug(anotherCategorySearched).ids() %}
+					{% set relatedToParam     = relatedToParam|merge([{ targetElement: anotherCategoryIds }]) %}
+				{% endif %}
+
+			#}
+
+		{# 4)
+			Amend the search query if required to filter the results down
+		#}
+			{% if relatedToParam|length > 1 %}{# there are relations criteria generated in (3) to search by #}
+				{% set searchQuery = searchQuery.relatedTo(relatedToParam) %}
+			{% endif %}
+
+			{% if searchTermSearched is defined and searchTermSearched | length > 0 %}{# there is also a text search we need to apply #}
+				{% set searchQuery = searchQuery.search(searchTermSearched) %}
+			{% endif %}
+
+		{# 5)
+			Still amending the query, but now we're adding non-relational fields to the query
+		#}
+			{% if exampleFieldSearched is defined and exampleFieldSearched | length > 0 %}
+				{% set searchQuery = searchQuery.exampleField(exampleFieldSearched) %}
+			{% endif %}
+
+		{# 6)
+			Set the ordering
+		#}
+			{% set searchQuery = searchQuery.orderBy('score') %}
+	{% endif %}
+
+	<form
+		action="{{ craft.app.request.getHostInfo ~ '/' ~ craft.app.request.getFullPath }}" {# Submit to the same page #}
+		method="get"
+		accept-charset="UTF-8"
+	>
+		{# The text search #}
+			{{ macros.htmlField({
+				type       : 'text',
+				id         : 'searchTerm',
+				name       : 'searchTerm',
+				value      : searchTermSearched ??? null,
+				placeholder: 'e.g., needle',
+				required   : false,
+				label      : 'Search Term',
+			}) }}
+
+		{# The category search; as a dropdown (only one cat can be selected) #}
+			{# Build the categoryGroupOptions object to pass to the htmlField macro #}
+				{% set categoryGroup = craft.categories.group('categoryGroup').leaves().all() %}
+				{% set categoryGroupOptions = [{
+					label: 'Any',
+					value: null
+				}] %}
+
+				{% for category in categoryGroup %}
+					{% set categoryGroupOptions = categoryGroupOptions | merge( [{
+						label   : category.title,
+						value   : category.slug,
+						selected: (category.slug == categorySearched) ??? false
+					}] ) %}
+				{% endfor %}
+
+			{{ macros.htmlField({
+				type   : 'select',
+				id     : 'category',
+				name   : 'category',
+				label  : 'Category Group',
+				options: categoryGroupOptions
+			}) }}
+
+		{# The other category search; as checkboxes so you can pick multiple categories in this category group #}
+			<div class="fieldset">
+				<fieldset>
+					<legend>Other Category Group</legend>
+
+					<div class="theOptions">
+						{% for cat in craft.categories.group('otherCategoryGroup').leaves().all() %}
+							{{ macros.htmlField({
+								type        : 'checkbox',
+								id          : 'otherCategory' ~ loop.index,
+								name        : 'otherCategory[]',
+								value       : cat.slug,
+								required    : false,
+								checked     : (cat.slug in otherCategorySearched) ??? false,
+								label       : cat.title
+							}) }}
+						{% endfor %}
+					</div>
+				</fieldset>
+			</div>
+
+		<div class="form-actions">
+			<button type="submit" class="dc_button">
+				<span>Search</span>
+			</button>
+		</div>
+	</form>
+
+	{% paginate searchQuery as paginationInfo, results %}
+	{% do seomatic.helper.paginate(paginationInfo) %}
+
+	<p>
+		There are {{ searchQuery|length }} results.
+		{% if results|length > paginationLimit %}
+			You can refine your results by changing the options above.
+		{% endif %}
+	</p>
+
+	<div class="results">
+		{% for result in results %}
+			{% include "_partials/cardListing" with {
+				craftElement: result
+			} %}
+		{% endfor %}
+	</div><!--.results-->
+
+	{% include '_partials/pagination-controls.twig' %}
+{% endblock %}
+
+{# EXAMPLES OF OTHER FORM INPUT TYPES #}
+
+{# Radio group representing LightSwitch field on the Entry # }
+	{# LightSwitch field on the Entry # }
+				{# to go in 2) # }
+					{% if craft.request.getParam('lightSwitchField') | length %}
+						{% if craft.request.getParam('lightSwitchField') == '1' %}
+							{% set lightSwitchFieldSearched = '1' %}
+						{% else %}
+							{% set lightSwitchFieldSearched = 'not 1' %}
+						{% endif %}
+					{% endif %}
+
+				{# to go in 5) # }
+					{% if lightSwitchFieldSearched is defined %}
+						{% set searchQuery = results.lightSwitchField(lightSwitchFieldSearched) %}
+					{% endif %}
+
+				{# To go in the form # }
+					<fieldset>
+						<legend>Family Friendly</legend>
+						<label for="lightSwitchFieldAny">
+							<input type="radio" name="lightSwitchField" value="" id="lightSwitchFieldAny" {% if lightSwitchFieldSearched is not defined %}checked{% endif %}/>
+							<span>Any</span>
+						</label>
+						<label for="lightSwitchFieldYes">
+							<input type="radio" name="lightSwitchField" value="1" id="lightSwitchFieldYes" {% if lightSwitchFieldSearched is defined and lightSwitchFieldSearched == 1 %}checked{% endif %} />
+							<span>Yes</span>
+						</label>
+						<label for="lightSwitchFieldNo">
+							<input type="radio" name="lightSwitchField" value="0" id="lightSwitchFieldNo" {% if lightSwitchFieldSearched is defined and lightSwitchFieldSearched != 1 %}checked{% endif %} />
+							<span>No</span>
+						</label>
+					</fieldset>
+#}

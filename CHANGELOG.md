@@ -15,6 +15,16 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.26] 2023-03-20
+
+### Added
+
+- Updated packages
+- Default example for a search form
+- Default example for a listing card
+- Default templates for various system emails
+- Default template for Commerce PDF of an Order
+
 ## [1.0.25] 2023-03-14
 
 ### Added
