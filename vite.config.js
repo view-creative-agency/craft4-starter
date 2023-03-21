@@ -11,29 +11,28 @@ export default defineConfig(({command}) => ({
 	publicDir: path.resolve(__dirname, 'src/public'),
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, 'src'),
+			'@'   : path.resolve(__dirname, 'src'),
 			'@css': path.resolve(__dirname, 'src/pcss'),
-			'@js': path.resolve(__dirname, 'src/js'),
+			'@js' : path.resolve(__dirname, 'src/js'),
 		},
 	},
 
 	build: {
-		outDir: path.resolve(__dirname, 'web/dist/'),
+		outDir     : path.resolve(__dirname, 'web/dist/'),
 		emptyOutDir: true,
-		manifest: true,
+		manifest   : true,
 		commonjsOptions: {
 			transformMixedEsModules: true,
 		},
 		rollupOptions: {
 			input: {
-				app: path.resolve(__dirname, 'src/js/app.js'),
-
-				fetchWrapper: path.resolve(__dirname, 'src/js/modules/fetch-wrapper.js'),
-				helpers: path.resolve(__dirname, 'src/js/modules/helpers.js'),
-				responsiveNavigation: path.resolve(__dirname, 'src/js/modules/responsive-navigation.js'),
-				detailsElement: path.resolve(__dirname, 'src/js/modules/details-element.js'),
-
-				containerQueryPolyfill: path.resolve(__dirname, 'src/js/third-party/container-query-polyfill.modern.js')
+				app                   : path.resolve(__dirname, 'src/js/app.js'),
+				containerQueryPolyfill : path.resolve(__dirname, 'src/js/third-party/container-query-polyfill.modern.js'),
+				fetchWrapper          : path.resolve(__dirname, 'src/js/modules/fetch-wrapper.js'),
+				helpers               : path.resolve(__dirname, 'src/js/modules/helpers.js'),
+				responsiveNavigation  : path.resolve(__dirname, 'src/js/modules/responsive-navigation.js'),
+				detailsElement        : path.resolve(__dirname, 'src/js/modules/details-element.js'),
+				savedEntries          : path.resolve(__dirname, 'src/js/modules/saved-entries.js')
 			},
 			output: {
 				sourcemap: true

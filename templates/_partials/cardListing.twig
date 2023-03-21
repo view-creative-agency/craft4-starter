@@ -1,0 +1,36 @@
+{% import '_macros/helpers' as helpers -%}
+{% import '_macros/images' as imageHelper %}
+
+{#
+	This is responsible for outputting "listing excerpt" type cards on other pages.
+	Listing image, title, excerpt, link.
+
+	{% include "_partials/cardListing" with {
+		craftElement: entry
+	} %}
+#}
+
+<div class="cardListing" data-reveal-on-scroll="">
+	{{ imageHelper.basic({
+		transform: 'imagesGrid',
+		source:    craftElement.listingImage[0] ??? website.missingImageFallback[0]
+	}) }}
+
+	<div class="text">
+		<p class="subTitle">{{ craftElement.section.name }}</p>
+		<h2>{{ craftElement.title }}</h2>
+		{% if craftElement.listingExcerpt | length %}
+			<div class="listingExcerpt">
+				{{ craftElement.listingExcerpt }}
+			</div>
+		{% endif %}
+
+		<a
+			href="{{ craftElement.url }}"
+			class="uc_button"
+		>
+			Read more
+			<span class="uc_hide-visually">about {{ craftElement.title }}</span>
+		</a>
+	</div>
+</div>

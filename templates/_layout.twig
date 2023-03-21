@@ -65,6 +65,27 @@
 		{{ craft.vite.script('src/js/modules/details-element.js', false) }}
 		{{ craft.vite.script('src/js/third-party/container-query-polyfill.modern.js', false) }}
 		{# {{ craft.vite.script('src/js/modules/responsive-navigation.js', false) }} #}
+		{#
+			Saved Entries (Liked/Saved pane)
+
+			You will want to un-comment this line:
+			{{ craft.vite.script('src/js/modules/saved-entries.js', false) }}
+
+			Ensure you add the following into /config/routes.php
+			'saved-entries' => ['template' => '_partials/saved-entries']
+
+			Uncomment the following line in screen.pcss
+			@import "components/saved-entries.pcss";
+
+			Then add the following button for any Entry you want to be savable:
+			<button
+				role="button"
+				data-save-button
+				data-entry-id="{{ entry.id }}"
+			>
+				Save
+			</button>
+		#}
 
 		{% if sprig is defined %}
 			{{ sprig.script }}

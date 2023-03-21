@@ -15,6 +15,16 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.27] 2023-03-21
+
+### Added
+
+- Added example "Saved / Liked Entries" functionality
+
+### Changed
+
+- Updated jsconfig to exclude un-needed folders
+
 ## [1.0.26] 2023-03-20
 
 ### Added

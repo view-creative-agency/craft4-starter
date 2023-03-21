@@ -1,0 +1,29 @@
+{#
+	This is the Craft part of the in-browser "saved entries" drawer.
+	Set up a route in /config/routes.php
+
+	'saved-entries' => ['template' => '_partials/saved-entries']
+
+	The feature relies on JavaScript, with the only bit of Craft stuff being this template, which returns an HTML fragment to the "AJAX" request.
+#}
+{% import '_macros/helpers' as helpers -%}
+{% import '_macros/images' as imageHelper %}
+
+{% set entryIds     = craft.app.request.param('entryIds') %}
+{% set savedEntries = craft.entries
+	.id( entryIds )
+	.with([
+		'listingImage'
+	])
+	.collect()
+%}
+
+<div class="savedEntries">
+	<div class="theEntries l_liquid-grid">
+		{% for savedEntry in savedEntries %}
+			{% include "_partials/cardListing" with {
+				craftElement: savedEntry
+			} %}
+		{% endfor %}
+	</div>
+</div>
