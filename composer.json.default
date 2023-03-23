@@ -3,6 +3,7 @@
 		"craftcms/cms": "^4.4.0",
 		"craftcms/redactor": "^3.0.2",
 		"ether/simplemap": "^v4.0.3",
+		"nystudio107/craft-closure": "^1.0",
 		"nystudio107/craft-minify": "^4.0.0-beta.1",
 		"nystudio107/craft-seomatic": "^4.0.9",
 		"nystudio107/craft-vite": "^4.0.3",
