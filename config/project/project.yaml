@@ -1,4 +1,4 @@
-dateModified: 1679312598
+dateModified: 1680173837
 elementSources:
   craft\elements\Asset:
     -
@@ -204,6 +204,11 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.1.0
+  hyper:
+    edition: standard
+    enabled: true
+    licenseKey: $LICENSE_KEY_HYPER
+    schemaVersion: 1.0.0
   image-resizer:
     edition: standard
     enabled: true
