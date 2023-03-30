@@ -15,6 +15,17 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [unreleased]
+
+### Added
+
+- Verbb Hyper plugin
+
+### Changed
+
+- Removed redundant commands from Makefile as DDEV does them
+- Updated npm dependencies (Vite 4, PCSS Nesting)
+
 ## [1.0.27] 2023-03-21
 
 ### Added
