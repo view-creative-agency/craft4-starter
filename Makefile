@@ -33,6 +33,7 @@ install: up build
 	ddev exec php craft plugin/install vite
 	ddev exec php craft plugin/install blitz
 	ddev exec php craft plugin/install blitz-recommendations
+	ddev exec php craft plugin/install hyper
 	ddev exec php craft plugin/install phpdotenv
 up:
 	# if DDEV hasn't been set up, set it up and install the Composer and NPM things

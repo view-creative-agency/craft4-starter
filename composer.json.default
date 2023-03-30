@@ -11,6 +11,7 @@
 		"putyourlightson/craft-blitz-recommendations": "^2.1",
 		"putyourlightson/craft-sprig": "^2.1.0",
 		"spacecatninja/imager-x": "^4.1.6",
+		"verbb/hyper": "^1.1",
 		"verbb/image-resizer": "^3.0.2",
 		"verbb/navigation": "^2.0.6",
 		"vlucas/phpdotenv": "^5.4.0",
