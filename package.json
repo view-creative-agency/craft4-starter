@@ -4,12 +4,12 @@
   "devDependencies": {
     "autoprefixer": "^10.4",
     "postcss": "^8.4",
-    "postcss-import": "^14.1",
+    "postcss-import": "^15.1",
     "postcss-nesting": "^10.1.5",
-    "vite": "^2.9",
+    "vite": "^4.2",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-manifest-sri": "^0.1",
-    "vite-plugin-restart": "^0.1"
+    "vite-plugin-restart": "^0.3"
   },
   "engines": {
     "node": "^16"
