@@ -1,0 +1,18 @@
+headingLevels:
+  - 2
+  - 3
+  - 4
+name: Default
+options:
+  code:
+    indentSequence: ' '
+  link:
+    addTargetToExternalLinks: true
+toolbar:
+  - heading
+  - '|'
+  - bold
+  - italic
+  - bulletedList
+  - numberedList
+  - link

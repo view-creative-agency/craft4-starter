@@ -1,4 +1,4 @@
-dateModified: 1680173837
+dateModified: 1681899275
 elementSources:
   craft\elements\Asset:
     -
@@ -165,6 +165,7 @@ meta:
     a1ad1291-f30b-4c72-9380-081566bacf65: 'Main Navigation' # Main Navigation
     aa3fec5f-bca4-49d9-818a-7e96cac33be9: Images # Images
     ae9dfd77-941c-4707-8fb0-e4fce617b424: 'Youtube/Vimeo Video URL' # Youtube/Vimeo Video URL
+    aea5ff6c-2e97-4659-b273-30e7258dd14d: Default # Default
     aec806ed-10ba-4ecd-819e-bd0bd36ca129: 'Featured Link' # Featured Link
     b0a51bbc-452f-4c28-90cb-be69261fa068: 'Mixed Content' # Mixed Content
     b9df2f18-f25a-4f21-a1bd-2d54dd0ce464: 'Column Count' # Column Count
@@ -174,6 +175,7 @@ meta:
     bb85a1cd-c2b6-49d2-8f4c-221e447e0124: 'Generic Page' # Generic Page
     d0c2725f-cc81-4c85-a467-3179e7b41c85: Entries # Entries
     d9e8808e-2fe2-41ab-b75f-4c7501b6b7d8: 'Public Schema' # Public Schema
+    d40dd4e5-ad74-4354-a28c-e32b99da966c: Simple # Simple
     d77dcb20-938f-42b0-8c62-deed91622131: 'Show Listing Image' # Show Listing Image
     db0b4568-9841-48bd-a7be-a5d617cbf01b: 'Link Title' # Link Title
     de2f35a0-9340-455e-bdd1-56d49ee957e9: Video # Video
@@ -204,6 +206,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.1.0
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
   hyper:
     edition: standard
     enabled: true
@@ -264,10 +270,6 @@ plugins:
     enabled: true
     licenseKey: $LICENSE_KEY_NAVIGATION
     schemaVersion: 2.0.7
-  redactor:
-    edition: standard
-    enabled: true
-    schemaVersion: 2.3.0
   seomatic:
     edition: standard
     enabled: true

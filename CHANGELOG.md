@@ -15,16 +15,25 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
-## [unreleased]
+## [1.0.28] 2023-04-19
 
 ### Added
 
+- CKEditor plugin
 - Verbb Hyper plugin
+- Closure plugin; so we can use Collection operations that require passing a function
 
 ### Changed
 
-- Removed redundant commands from Makefile as DDEV does them
+- Removed redundant commands from Makefile, as DDEV does them
 - Updated npm dependencies (Vite 4, PCSS Nesting)
+- Removed legacy SCSS includes from PCSS files
+- Replaced Redactor fields with CKEditor fields
+	- This due to official Pixel & Tonic recommendations. The existing Redactor plugin is based on an older Redactor version which is End Of Life. The newer Redactor isn't suitable, and CKEditor5 has good accessibility. Their recommendation is to switch.
+
+### Removed
+
+- Redactor plugin
 
 ## [1.0.27] 2023-03-21
 

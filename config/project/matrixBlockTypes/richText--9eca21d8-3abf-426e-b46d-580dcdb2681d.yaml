@@ -44,23 +44,19 @@ fields:
     settings:
       availableTransforms: ''
       availableVolumes: '*'
+      ckeConfig: aea5ff6c-2e97-4659-b273-30e7258dd14d # Default
       columnType: text
-      configSelectionMode: choose
-      defaultTransform: ''
-      manualConfig: ''
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: true
-      redactorConfig: null
-      removeEmptyTags: true
-      removeInlineStyles: true
-      removeNbsp: true
-      showHtmlButtonForNonAdmins: false
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
-      uiMode: enlarged
     translationKeyFormat: null
     translationMethod: none
-    type: craft\redactor\Field
+    type: craft\ckeditor\Field
   fc9fe069-509c-41d5-ab17-fb401bf818e1: # Allow hard to read line lengths
     columnSuffix: qwbzrwnz
     contentColumnType: boolean
