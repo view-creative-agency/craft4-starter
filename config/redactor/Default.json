@@ -1,7 +1,0 @@
-{
-  "buttons": ["formatting", "bold", "italic", "unorderedlist", "orderedlist", "link", "file"],
-  "formatting": ["p", "h2", "h3", "h4"],
-  "linkNewTab": true,
-  "toolbarFixed": true,
-  "plugins": ["counter","alignment"]
-}

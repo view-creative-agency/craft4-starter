@@ -15,6 +15,13 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.29] 2023-05-11
+
+### Changed
+
+- HTML Purifier now allows all youtube and vimeo URLs
+- Redactor configs removed
+
 ## [1.0.28] 2023-04-19
 
 ### Added
