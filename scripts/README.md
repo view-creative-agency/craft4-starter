@@ -30,9 +30,9 @@ The backup scripts are for the live server only, and run via CRON job.
 
 When run they will:
 
-- copy new or changed files from `/web/content`
-- copy new or changed files from `/web/dist`
-- run a database backup via Craft itself
+- copy new or changed files from `/web/content`.
+- copy new or changed files from `/web/dist`.
+- run a database backup via Craft itself.
 
 These files are written to the `PROJECT/backups` folder.
 
@@ -41,13 +41,17 @@ These files are written to the `PROJECT/backups` folder.
 - Databases are stored daily, and retained for 7 days.
 - Files in the `PROJECT/web/*` directory are never deleted, so if a client accidentally deleted source images via the CMS, they will remain here.
 - Files in the `PROJECT/web/*` directory DO reflect changes; so if a client changes an image which retains the same filename, the backup copy will also be updated.
-- We do not back up the `imager` directory, as they can be regenerated from the source images
+- We do not back up the `imager` directory, as they can be regenerated from the source images.
 
 ### Expected use
 
 `./backup.sh` can be executed manually, or via CRON
 
+The CRON file might look like this:
+
 ```bash
+RUN_BY_CRON=true # Variable used in the scripts
+
 3 1 * * * /websites/REPO/scripts/backup.sh >/dev/null 2>&1
   # at 01:03am daily, run the script
 ```

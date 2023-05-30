@@ -1,7 +1,7 @@
-{% import '_macros/helpers' as helpers -%}
-{% import '_macros/images'  as imageHelper %}
+{% import '_macros/helpers.twig' as helpers -%}
+{% import '_macros/images.twig'  as imageHelper %}
 
-{%- extends "_layout" -%}
+{%- extends "_layout.twig" -%}
 {%- set htmlClass = entry.type -%}
 
 {% block content %}<!-- Template: {{ _self }}.twig -->

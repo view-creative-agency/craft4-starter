@@ -1,5 +1,5 @@
-{% import '_macros/helpers' as helpers -%}
-{%- extends "_layout" -%}
+{% import '_macros/helpers.twig' as helpers -%}
+{%- extends "_layout.twig" -%}
 {%- set htmlClass = 'pages ' ~ entry.type -%}
 
 {%- block content %}<!-- Template: {{ _self }}.twig -->

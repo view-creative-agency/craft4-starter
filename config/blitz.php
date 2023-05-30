@@ -23,7 +23,7 @@ return [
 		// The URI patterns to include in caching. Set `siteId` to a blank string to indicate all sites.
 		'includedUriPatterns' => [
 			[
-				'siteId' => 1,
+				'siteId' => 2,
 				'uriPattern' => '.*',
 			],
 		],

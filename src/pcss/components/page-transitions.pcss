@@ -1,0 +1,11 @@
+/* For a quick explainer: https://smashing-transitions.netlify.app/basics-compared-same-page-next/ */
+
+::view-transition-old(root) { /* The outgoing page */
+	blend-mode: normal;
+  animation: var(--animation-out) forwards;
+}
+
+::view-transition-new(root) { /* The incoming page */
+	blend-mode: normal;
+  animation: var(--animation-in) forwards;
+}

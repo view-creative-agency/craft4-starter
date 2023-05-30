@@ -1,5 +1,5 @@
-{% import '_macros/helpers' as helpers %}
-{% import '_macros/forms' as forms %}
+{% import '_macros/helpers.twig' as helpers %}
+{% import '_macros/forms.twig' as forms %}
 
 {% if sprig.isRequest %}
 	{% set form = wheelform.form({
@@ -144,9 +144,9 @@
 
 							uploadField.onchange = function() {
 								if(this.files[0].size > 8388608){
-								alert("Sorry, the file size you are trying to upload is too big, please reduce the file size. ");
-								this.value = "";
-								};
+									alert("Sorry, the file size you are trying to upload is too big, please reduce the file size. ");
+									this.value = "";
+								}
 							};
 						</script>
 

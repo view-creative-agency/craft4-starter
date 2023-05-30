@@ -1,4 +1,4 @@
-{% import '_macros/helpers' as helpers -%}
+{% import '_macros/helpers.twig' as helpers -%}
 {%- minify %}<!doctype html>{# {{ dump(_context|keys) }} DEBUG #}
 {% set devModeIsOn = craft.app.config.general.devMode ??? false %}
 
@@ -30,6 +30,8 @@
 		      content="width=device-width,initial-scale=1">{# For consideration: https://webkit.org/blog/7929/designing-websites-for-iphone-x/ #}
 		<meta name="twitter:dnt"
 		      content="on">{# Disallow Twitter from using your site’s info for personalization purposes: https://github.com/joshbuchea/HEAD#twitter-privacy #}
+		<meta name="view-transition"
+		      content="same-origin" />{# Opt into page transition animations. By default, they cross-fade. See https://smashing-transitions.netlify.app/basics-compared-same-page-next/ and /src/pcss/page-transitions.pcss for more #}
 		{#
 		BILINGUAL SITE? Uncomment this then!
 		{% include "_partials/language-alternatives" %}
@@ -118,7 +120,7 @@
 		{% if extraHead is defined %}{{ extraHead }}{% endif %}{# From Commerce example templates #}
 	</head>
 
-	<body data-instant-intensity="viewport-all">
+	<body>
 		<a href="#main" class="skiplink uc_hide-visually">Skip navigation and jump to content</a>
 
 		{# {% include '_partials/edit-page' %} #}
@@ -264,11 +266,11 @@
 					{% endcache %}
 				</div><!-- .footerContact -->
 
-				{% include '_partials/social-media' with {
+				{% include '_partials/social-media.twig' with {
 					showIntro: true,
 					type: 'brand-compliant'
 				} %}
-				{% include '_partials/seomatic-opening-hours' %}
+				{% include '_partials/seomatic-opening-hours.twig' %}
 			</div><!-- .container -->
 
 			<div class="row2">
@@ -293,20 +295,6 @@
 				</div><!-- .container -->
 			</div><!-- .row2 -->
 		</footer><!-- .section.site_footer -->
-
-		<!-- Redactor -->
-		{% if useRedactor is defined and useRedactor %}
-			<link rel="stylesheet" href="/dist/javascript/third-party/redactor/redactor.min.css">
-			<script src="/dist/javascript/third-party/redactor/redactor.min.js"></script>
-			<script>
-				$R.options = {
-					buttons: ["bold", "italic", "ul", "link"],
-					toolbarFixed: true
-				};
-
-				$R('.redactor', {styles: true});
-			</script>
-		{% endif %}
 
 		{# {% include '_partials/custom-javascript' with { 'location': 'beforeBody' } %} For CMS JS snippets, if defined #}
 

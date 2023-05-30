@@ -1,4 +1,4 @@
-{% import '_macros/helpers' as helpers -%}
+{% import '_macros/helpers.twig' as helpers -%}
 {# This is an example search template; it won't work without you customising it to your needs.
    It's a single page that is both the search form and the results page in one. It will pre-populate the form for repeat and refined searches.
 
@@ -8,7 +8,7 @@
 
 	 NOTE: You can't search Craft's built in "checkboxes" field, so don't use them if you can help it, try lightswitches instead.
 #}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 {% set htmlClass = 'search' %}
 {% block content %}<!-- Template: {{ _self }}.twig -->
 
@@ -202,7 +202,7 @@
 
 	<div class="results">
 		{% for result in results %}
-			{% include "_partials/cardListing" with {
+			{% include "_partials/cardListing.twig" with {
 				craftElement: result
 			} %}
 		{% endfor %}

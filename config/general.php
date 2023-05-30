@@ -1,5 +1,6 @@
-<?php
-	/**
+<?php /** @noinspection ProblematicWhitespace */
+
+/**
 	 * General Configuration
 	 *
 	 * All of your system's general configuration settings go in here. You can see a
@@ -24,6 +25,7 @@
 	return GeneralConfig::create()
 		->omitScriptNameInUrls(true)
 		->defaultWeekStartDay(1)
+		->isSystemLive(App::env('SYSTEM_IS_LIVE'))
 		->cpTrigger(App::env('CP_TRIGGER'))
 		->devMode($isDev)
 		->allowAdminChanges($isDev)
@@ -35,6 +37,7 @@
 		->translationDebugOutput(false)
 		->errorTemplatePrefix('_errors')
 		->postCpLoginRedirect('entries')
+		->preventUserEnumeration()
 		->testToEmailAddress($isDev ? App::env('TEST_TO_EMAIL_ADDRESS') : null)
 		->accessibilityDefaults([
 			'useShapes' => true,

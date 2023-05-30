@@ -15,6 +15,29 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.30] 2023-05-30
+
+### Changed
+
+- We now prevent User Enumeration attacks by default
+- All `{% include ... %}` Twig templates now use the `.twig` file extension to keep PHP Storm happy.
+- GitIgnore has been fixed to allow retention of `/backup/files` and `/backup/database` directories (but not their content)
+
+### Removed
+
+- Legacy Redactor code removed from templates
+
+### Added
+
+- CSS View Transitions supported by default
+- IsSystemLive now controlled through the .env file
+
+### Fixed
+
+- Imager Optimizers set to ones available in Ubuntu 22.04
+- Blitz config set to siteID 2, which is our default siteID for some reason
+- Added missing favicon folder and content
+
 ## [1.0.29] 2023-05-11
 
 ### Changed

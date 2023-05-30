@@ -1,5 +1,5 @@
-{% import '_macros/helpers' as helpers -%}
-{%- extends "_layout" -%}
+{% import '_macros/helpers.twig' as helpers -%}
+{%- extends "_layout.twig" -%}
 {%- set htmlClass = 'section_news ' ~ entry.type -%}
 
 {% block content %}<!-- Template: {{ _self }}.twig -->
@@ -33,19 +33,19 @@
 
 					{% if cacheUntil is defined %}
 						{% cache until cacheUntil %}
-							{% include '_news-listing' %}
+							{% include 'news/_news-listing.twig' %}
 						{% endcache %}
 					{% else %}
 						{% cache %}{# standard caching is fine now #}
-							{% include '_news-listing' %}
+							{% include 'news/_news-listing.twig' %}
 						{% endcache %}
 					{% endif %}
 			</div>
 
 			<div class="col2">
-				{% include 'news/_nav-categories' %}
-				{% include 'news/_nav-archive' %}
-				{% include '_partials/social-share' %}
+				{% include 'news/_nav-categories.twig' %}
+				{% include 'news/_nav-archive.twig' %}
+				{% include '_partials/social-share.twig' %}
 			</div>
 		</div>
 	</main>

@@ -6,8 +6,8 @@
 
 	The feature relies on JavaScript, with the only bit of Craft stuff being this template, which returns an HTML fragment to the "AJAX" request.
 #}
-{% import '_macros/helpers' as helpers -%}
-{% import '_macros/images' as imageHelper %}
+{% import '_macros/helpers.twig' as helpers -%}
+{% import '_macros/images.twig' as imageHelper %}
 
 {% set entryIds     = craft.app.request.param('entryIds') %}
 {% set savedEntries = craft.entries
@@ -21,7 +21,7 @@
 <div class="savedEntries">
 	<div class="theEntries l_liquid-grid">
 		{% for savedEntry in savedEntries %}
-			{% include "_partials/cardListing" with {
+			{% include "_partials/cardListing.twig" with {
 				craftElement: savedEntry
 			} %}
 		{% endfor %}

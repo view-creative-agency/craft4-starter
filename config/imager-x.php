@@ -36,7 +36,7 @@ return [
 				'optionString' => '--optimize=3 --colors 128',
 			],
 		],
-		'optimizers' => ['mozjpeg', 'optipng', 'gifsicle']
+		'optimizers' => ['jpegoptim', 'optipng']
 	],
 
 	'dev' => [

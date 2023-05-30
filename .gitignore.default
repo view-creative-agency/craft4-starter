@@ -3,9 +3,6 @@
 # Don't save package-lock, when we're fresh installing.
 # package-lock.json
 
-# We only need the seed.sql for the initial creation of a project, it shouldn't be in the actual repo
-/seed.sql
-
 ### General files and folders ###
 /.env
 /.idea
@@ -19,6 +16,11 @@ config.codekit3
 *.sublime-project
 *.sublime-workspace
 prepros-6.config
+
+## Specific files and folders
+*.env
+*.env.sh
+/scripts/script.log
 
 ### VSCode ###
 .vscode/*
@@ -52,7 +54,8 @@ prepros-6.config
 !/web/dist/README.md
 
 /backups/*
-!/backups/.gitignore
+!/backups/database/.gitkeep
+!/backups/files/.gitkeep
 
 ### Craft system directories ###
 /vendor
