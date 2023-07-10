@@ -1,4 +1,8 @@
 .mixedContent {
+	& > {
+		content-visibility: auto; /* Optimise rendering per block */
+	}
+
 	& .mixedContent_richText {
 		& a[href^="http" i]:not([href*="craft4-vca" i]) {
 			/* links to external websites */

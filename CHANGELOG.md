@@ -15,6 +15,27 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.31] 2023-07-10
+
+### Changed
+
+- Updated the Fetch JS wrapper to use modern private method syntax.
+- Updated PostCSS nesting plugin for more modern features.
+- The "Simple" CKEditor config no longer allows headings.
+- The Helpers.js file has been refactored and modernised, with JSDoc comments too.
+- We now target ES11 instead of ES6.
+- JS that used to inject classes for state management now use data attributes instead, the CSS has also been updated.
+
+### Added
+
+- Initial code for CSS View Transitions.
+- Image macro now outputs the Focal Point from the original image.
+- Singles are now pre-loaded.
+
+### Fixed
+
+- Fixed error templates being missing (e.g., 404)
+
 ## [1.0.30] 2023-05-30
 
 ### Changed

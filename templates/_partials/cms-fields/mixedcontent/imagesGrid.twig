@@ -9,7 +9,7 @@
 	{% for image in block.images %}
 		<a
 			href="/responsive-image/{{ image.id }}" id="id-{{ block.id }}-{{ loop.index }}"
-			class="popup"
+			data-popup="image"
 		>
 			{{ imageHelper.basic({
 				transform: 'imagesGrid',

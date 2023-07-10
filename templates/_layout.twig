@@ -12,8 +12,9 @@
 %}
 
 {# UPDATED REFERENCE
-   https://www.matuzo.at/blog/html-boilerplate/
-   ALSO SEE https://twitter.com/mmatuzo/status/1567065039718211584 for optimal HEAD order
+   - https://www.matuzo.at/blog/html-boilerplate/
+   - ALSO SEE https://twitter.com/mmatuzo/status/1567065039718211584 for optimal HEAD order
+   - https://github.com/rviscomi/capo.js
 #}
 <html
 	lang="{{ craft.app.language }}"{# https://www.w3.org/International/articles/language-tags/ #}
@@ -44,12 +45,16 @@
 		<link rel="preload" as="font" crossorigin="anonymous" type="font/woff"
 		      href="/dist/fonts/subset-Montserrat-Regular.woff"/>
 
-		<!-- cutting the mustard -->
-		<script type="module">{# Parsed only by modern browsers. Means we have Fetch, ES6, etc. #}
+		{# environmental state indicators.
+		   Add environmental state indicators to the HTML element as soon as possible.
+
+		   NOTE: Scripts with a type of module are parsed only by modern browsers. Means we have Fetch, ES6, etc.
+		#}
+		<script type="module">
 			const htmlElement = document.querySelector('html');
 
 			// We have js, add the class
-			htmlElement.classList.add('js');
+			htmlElement.dataset.jsAvailable = 'true';
 
 			// Do we need mobile nav design? Get this added ASAP to avoid Flash Of Un-styled Navigation.
 			if (window.innerWidth < 680) {
@@ -57,9 +62,9 @@
 			}
 
 			// Let the CSS and JS know when ALL the page resources have finished loading.
-			document.addEventListener('DOMContentLoaded', function() {
-				htmlElement.classList.add('load-complete');
-			});
+			document.onreadystatechange = (e) => {
+				htmlElement.dataset.domReadyState = e.target.readyState;
+			};
 		</script>
 
 		{# remember that new scripts need to be added to the vite.config.js file #}

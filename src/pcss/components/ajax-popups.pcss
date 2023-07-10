@@ -1,4 +1,4 @@
-.popup:has(img) {
+[data-popup="image"]:has(img) {
 	position: relative;
 	display: block;
 
@@ -34,7 +34,7 @@
 		}
 	}
 
-	&.js-loading {
+	&[data-fetch-status='loading'] {
 		& img {
 			opacity: 0;
 		}

@@ -6,6 +6,7 @@
 @import "components/cms-textblock.pcss";
 @import "components/mixed-content.pcss";
 @import "components/ajax-popups.pcss";
+@import "components/page-transitions.pcss";
 /* @import "components/saved-entries.pcss"; */
 
 /* Handy tricks with modern CSS
@@ -39,7 +40,7 @@
 }
 
 /* stop transitions playing on page load */
-	html:not( .load-complete ) *:not( [data-on-load=""] ) {
+	html:not( [data-dom-ready-state='complete'] ) *:not( [data-on-load=""] ) {
 		transition: none !important;
 	}
 
@@ -288,7 +289,7 @@
 		}
 	}
 
-	html.js-supportsIntersectionObserver {
+	html[data-supports-intersection-observer] {
 		& [data-scroll-reveal=""] { /* default reveal effect if no named effect is defined */
 			/* opacity is safe to animate for everyone (in terms of a11y issues) */
 			will-change: opacity, filter;
@@ -297,13 +298,21 @@
 			transition-duration: var(--slow, 0.6s);
 			transition-delay: 0.1s;
 
-			&.js-inViewport {
+			&[data-in-viewport] {
 				opacity: 1; filter: grayscale(0);
 			}
 		}
 
 		@media screen and (prefers-reduced-motion: no-preference) { /* only animate motion if the user is OK with it */
-			&.load-complete picture[data-load-reveal=""] {
+			&[data-dom-ready-state='complete'] picture[data-load-reveal=""] {
+				/*
+					{{ imageHelper.basic({
+						transform:       'imageSingleLandscape32',
+						source:          entry.listingImage[0],
+						aboveTheFold:    true,
+						pictureProperty: "data-load-reveal=''"
+					}) }}
+				*/
 				overflow: hidden;
 
 				& img {
@@ -322,7 +331,7 @@
 					transition-duration: var(--slow, 0.6s);
 					transition-delay: 0.1s;
 
-					&.js-inViewport { /* the end state for all "swipe" animations */
+					&[data-in-viewport] { /* the end state for all "swipe" animations */
 						clip-path: polygon(-5% -5%, 105% -5%, 105% 105%, -5% 105%) !important;
 					}
 				}

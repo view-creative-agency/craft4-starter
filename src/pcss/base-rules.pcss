@@ -238,7 +238,7 @@
 		}
 
 	/* lazy loaded images */
-		html:not(.js) img.lazyload {
+		html:not([data-js-available]) img.lazyload {
 			display: none;
 		}
 
@@ -418,7 +418,7 @@
 
 	.previouslyUploaded {
 		& p {
-			transform: uppercase; margin-bottom: 0.5em;
+			text-transform: uppercase; margin-bottom: 0.5em;
 		}
 
 		& ul {

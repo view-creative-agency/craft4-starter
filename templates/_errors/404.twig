@@ -1,0 +1,33 @@
+{% extends "_layout" %}
+{% set htmlClass = "generic" %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<h1>ERROR 404</h1>
+		<p>page not found</p>
+	</main>
+
+	<script>
+		// Create Tracker - Send to GA
+		ga('send', {
+			hitType:       'event',
+			eventCategory: '404 Response',
+			eventAction:   window.location.href,
+			eventLabel:    document.referrer
+		});
+	</script>
+{% endblock %}
+
+{# {% set entry = craft.entries.slug('error-404').one() %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<h1>{{ entry.title }}</h1>
+
+	<div class="mixedContent">
+		{% cache %}
+			{% for block in entry.mixedContent %}
+				{% include '_partials/mixedcontent/' ~ block.type ignore missing %}
+			{% endfor %}
+		{% endcache %}
+	</div><!-- .mixedContent --> #}
+{# {% endblock %} #}

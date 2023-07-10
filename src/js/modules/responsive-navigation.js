@@ -20,7 +20,7 @@ function doMobileNavigation() {
 		document.querySelector('body').insertAdjacentHTML('afterbegin', templateToggleNav);
 		let navToggle = document.querySelector('#mainNavToggle');
 
-	// Accessilbity enhancements for the dynamic toggling control
+	// Accessibility enhancements for the dynamic toggling control
 		let theMenu = document.querySelector('#site_navigation');
 		theMenu.setAttribute("aria-labelledby", "mainNavToggle");
 

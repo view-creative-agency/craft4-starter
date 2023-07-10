@@ -87,6 +87,9 @@
 		{% if options.pictureClass is defined and options.pictureClass | length -%}
 			class="{{- options.pictureClass -}}"
 		{%- endif -%}
+		{% if options.source.focalPoint %}
+			style="--_object-position: {{ options.source.focalPoint|first * 100 }}% {{ options.source.focalPoint|last * 100 }}%"
+		{% endif %}
 	>
 		{# prefer webp, list these first. Order matters, first media to match is what's rendered - opposite of CSS rules #}
 		{% for bp in breakpoints %}

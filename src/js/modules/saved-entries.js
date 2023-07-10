@@ -53,7 +53,7 @@ function handleSaveButtonClick( event ) { // Hand off to the correct action func
 		return false;
 	}
 
-	if (clickedButton.dataset.state == 'saved') {
+	if (clickedButton.dataset.state === 'saved') {
 		unsave( clickedButton );
 	} else {
 		save( clickedButton );
@@ -179,7 +179,7 @@ function handleMySavedButtonClick() {
 	if (
 		savedEntries.length > 0
 		&&
-		localStorage.getItem('mySavedEntriesStatus') != 'fresh'
+		localStorage.getItem('mySavedEntriesStatus') !== 'fresh'
 	) {
 		console.log('You have items saved, but they need to be loaded via fetch');
 

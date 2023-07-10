@@ -1,11 +1,25 @@
-/* For a quick explainer: https://smashing-transitions.netlify.app/basics-compared-same-page-next/ */
+/*
+	For a quick explainers:
 
-::view-transition-old(root) { /* The outgoing page */
-	blend-mode: normal;
-  animation: var(--animation-out) forwards;
-}
+	- https://smashing-transitions.netlify.app/basics-compared-same-page-next/
+	- https://daverupert.com/2023/05/getting-started-view-transitions/
+	- https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+*/
 
-::view-transition-new(root) { /* The incoming page */
-	blend-mode: normal;
-  animation: var(--animation-in) forwards;
+@media not (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+	  animation-duration: 0.6s;
+	}
+
+	/* Give names to specific sections we want to control */
+	.pageHeader { view-transition-name: pageHeader; }
+
+	/* Control the transition for named sections */
+	::view-transition-old(pageHeader),
+	::view-transition-new(pageHeader){
+		/* Scale between different sized image headers on page transition */
+		height: 100%; object-fit: cover; object-position: 50% 0%;
+		animation-duration: 0.6s;
+	}
 }

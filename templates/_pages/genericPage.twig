@@ -26,12 +26,13 @@
 	) %}
 
 	<main id="main">
-		{{ imageHelper.basic({
-			transform:       'bannerImage',
-			source:          entry.listingImage[0],
-			aboveTheFold:    true,
-			pictureProperty: "data-load-reveal=''"
-		}) }}
+		<div class="pageHeader">
+			{{ imageHelper.basic({
+				transform:    'imageSingleLandscape32',
+				source:       entry.listingImage[0],
+				aboveTheFold: true
+			}) }}
+		</div>
 
 		<div class="row l_constrain">
 			<h1 class="font-size:heading-large">{{ entry.title }}</h1>

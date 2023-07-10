@@ -1,4 +1,5 @@
 {% import '_macros/helpers.twig' as helpers -%}
+{% import '_macros/images.twig' as imageHelper %}
 {%- extends "_layout.twig" -%}
 {%- set htmlClass = 'pages ' ~ entry.type -%}
 
@@ -24,6 +25,14 @@
 	) %}
 	#}
 	<main id="main">
+		<div class="pageHeader">
+			{{ imageHelper.basic({
+				transform:    'bannerImage',
+				source:       entry.listingImage[0],
+				aboveTheFold: true
+			}) }}
+		</div>
+
 		<div class="row l_constrain l_block-padding">
 			<h1>This is the homepage</h1>
 			<p>This is the craft4-vca project.</p>
