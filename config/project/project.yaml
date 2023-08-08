@@ -1,4 +1,4 @@
-dateModified: 1681899275
+dateModified: 1691484642
 elementSources:
   craft\elements\Asset:
     -
@@ -160,6 +160,7 @@ meta:
     91922a85-68db-4cd1-a6a0-54a12b645469: 'Show Listing Excerpt' # Show Listing Excerpt
     97151f9f-def3-4806-894b-148bd551342b: 'Text Colour' # Text Colour
     00365143-d8a1-4887-b5af-649d379597ea: Question # Question
+    847542b0-c1b3-4237-b5e7-2e4f647c576b: 'Simple with links' # Simple with links
     3876604f-baf6-4dcb-a75d-380ed5b026b3: 'Landscape 3:2' # Landscape 3:2
     22079320-7090-4cd8-bbb4-27a18a70f38f: Images # Images
     a1ad1291-f30b-4c72-9380-081566bacf65: 'Main Navigation' # Main Navigation
@@ -201,7 +202,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: $LICENSE_KEY_BLITZ
-    schemaVersion: 4.4.0
+    schemaVersion: 4.5.0
   blitz-recommendations:
     edition: standard
     enabled: true
@@ -274,7 +275,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: $LICENSE_KEY_SEOMATIC
-    schemaVersion: 3.0.11
+    schemaVersion: 3.0.12
     settings:
       addHrefLang: true
       addPaginatedHreflang: true

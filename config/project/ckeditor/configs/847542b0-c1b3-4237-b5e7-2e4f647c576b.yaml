@@ -1,5 +1,5 @@
 headingLevels: false
-name: Simple
+name: 'Simple with links'
 options:
   code:
     indentSequence: ' '
@@ -14,3 +14,4 @@ options:
 toolbar:
   - bold
   - italic
+  - link

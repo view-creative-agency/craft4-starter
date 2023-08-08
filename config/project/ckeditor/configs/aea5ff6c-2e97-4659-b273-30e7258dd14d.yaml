@@ -7,7 +7,13 @@ options:
   code:
     indentSequence: ' '
   link:
-    addTargetToExternalLinks: true
+    decorators:
+      openInNewTab:
+        attributes:
+          rel: 'noopener noreferrer'
+          target: _blank
+        label: 'Open in a new tab'
+        mode: manual
 toolbar:
   - heading
   - '|'

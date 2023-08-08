@@ -26,7 +26,7 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 7e8493d2-74bc-44e2-9bf3-b2273bb014b6
+            uid: d4714d66-0081-428f-a6f7-85a043d51f88
             userCondition: null
             warning: null
             width: 100

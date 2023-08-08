@@ -212,13 +212,12 @@ fields:
       ckeConfig: aea5ff6c-2e97-4659-b273-30e7258dd14d # Default
       columnType: text
       defaultTransform: null
+      enableSourceEditingForNonAdmins: false
       purifierConfig: null
       purifyHtml: true
-      removeEmptyTags: false
-      removeInlineStyles: false
-      removeNbsp: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
+      showWordCount: true
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field
