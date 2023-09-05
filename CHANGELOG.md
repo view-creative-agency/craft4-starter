@@ -15,6 +15,22 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.32] 2023-08-09
+
+### Changed
+
+- Updated CKEditor defaults
+- Updated packages
+- All *.sql files are now gitignored to avoid accidental commits in other repos
+- Updated Swiper
+- Twitter is now X for logos
+- Blitz will no longer cache URLs with query parameters
+
+### Fixed
+
+- Wheelform default email notification template now works properly
+	- Which also fixes issues with Sprig "not sending forms"
+
 ## [1.0.31] 2023-07-10
 
 ### Changed
