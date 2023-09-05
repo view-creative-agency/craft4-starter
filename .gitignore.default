@@ -3,8 +3,8 @@
 # Don't save package-lock, when we're fresh installing.
 # package-lock.json
 
-# We only need the seed.sql for the initial creation of a project, it shouldn't be in the actual repo
-/seed.sql
+# We only need the seed.sql for the initial creation of a project, and no SQL files should be in the repo
+*.sql
 
 ### General files and folders ###
 /.env
