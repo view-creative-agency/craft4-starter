@@ -14,11 +14,12 @@ return [
 		'cachingEnabled' => App::env('BLITZ_CACHE_ENABLED') ?: false,
 
 		// Determines when and how the cache should be refreshed.
+		// https://putyourlightson.com/plugins/blitz#refresh-mode
 		// - `0`: Expire the cache, regenerate manually
 		// - `1`: Clear the cache, regenerate manually or organically
 		// - `2`: Expire the cache and regenerate in a queue job
 		// - `3`: Clear the cache and regenerate in a queue job
-		'refreshMode' => 3,
+		'refreshMode' => 2,
 
 		// The URI patterns to include in caching. Set `siteId` to a blank string to indicate all sites.
 		'includedUriPatterns' => [
@@ -122,7 +123,7 @@ return [
 		// - `0`: Do not cache URLs with query strings
 		// - `1`: Cache URLs with query strings as unique pages
 		// - `2`: Cache URLs with query strings as the same page
-		'queryStringCaching' => 2,
+		'queryStringCaching' => 0,
 
 		// The query string parameters to include when determining if and how a page should be cached (regular expressions may be used).
 		//'includedQueryStringParams' => [
