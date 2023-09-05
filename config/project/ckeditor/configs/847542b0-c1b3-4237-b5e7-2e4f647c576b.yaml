@@ -1,4 +1,5 @@
 headingLevels: false
+listPlugin: DocumentList
 name: 'Simple with links'
 options:
   code:

@@ -2,6 +2,7 @@ headingLevels:
   - 2
   - 3
   - 4
+listPlugin: DocumentList
 name: Default
 options:
   code:
