@@ -6,7 +6,7 @@
 	])
 	.one()
 -%}
-{% import '_macros' as macros %}
+{% import '_macros/helpers.twig' as helpers -%}
 {% extends "_emails/_layout.twig" %}
 
 {% block content %}<!-- Template: {{ _self }}.twig -->
@@ -15,7 +15,7 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						A new Contact Form entry has been submitted, with the following details:
+						A new form has been submitted, with the following details:
 					</td>
 				</tr>
 				<tr>
