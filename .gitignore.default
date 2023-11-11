@@ -57,7 +57,11 @@ prepros-6.config
 !/web/dist/README.md
 
 /backups/*
+!/backups/*/
+!/backups/.gitignore
+/backups/database/*
 !/backups/database/.gitignore
+/backups/files/*
 !/backups/files/.gitignore
 
 ### Craft system directories ###

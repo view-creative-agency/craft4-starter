@@ -15,6 +15,13 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.34] 2023-11-11
+
+### Fixed
+
+- Ensure the subfolders for the `/backups` are kept.
+- Ensure we actually keep the `_gitignore` folder.
+
 ## [1.0.33] 2023-11-11
 
 ### Changed

@@ -1,3 +1,7 @@
 *
+!*/
+!.gitignore
+database/*
 !database/.gitignore
+files/*
 !files/.gitignore
