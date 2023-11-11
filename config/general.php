@@ -16,29 +16,30 @@
 	$isProd = App::env('CRAFT_ENVIRONMENT') === 'production';
 	$blitzCacheEnabled = App::env('BLITZ_CACHE_ENABLED') === 'true';
 
-	// Do we want the templateCaching disabled (i.e., if Blitz is enabled or we are in dev)
-	$enableTemplateCaching = true;
-	if ( $blitzCacheEnabled or $isDev ) {
-		$enableTemplateCaching = false;
-	}
-
 	return GeneralConfig::create()
-		->omitScriptNameInUrls(true)
-		->defaultWeekStartDay(1)
 		->isSystemLive(App::env('SYSTEM_IS_LIVE'))
-		->cpTrigger(App::env('CP_TRIGGER'))
 		->devMode($isDev)
+
+		->defaultCountryCode('GB')
+		->useEmailAsUsername(true)
+		->loginPath('customer/sign-in')
+		->setPasswordRequestPath('customer/reset-password')
+		->setPasswordPath('customer/set-password')
+
 		->preloadSingles()
+		->preventUserEnumeration()
+		->omitScriptNameInUrls(true)
+		->cpTrigger(App::env('CP_TRIGGER'))
+		->postCpLoginRedirect('entries')
 		->allowAdminChanges($isDev)
 		->allowUpdates($isDev)
 		->disallowRobots(!$isProd)
 		->maxRevisions(10)
 		->maxBackups(10)
-		->enableTemplateCaching($enableTemplateCaching)
+		->defaultWeekStartDay(1)
+		->enableTemplateCaching($blitzCacheEnabled)
 		->translationDebugOutput(false)
 		->errorTemplatePrefix('_errors/')
-		->postCpLoginRedirect('entries')
-		->preventUserEnumeration()
 		->testToEmailAddress($isDev ? App::env('TEST_TO_EMAIL_ADDRESS') : null)
 		->accessibilityDefaults([
 			'useShapes' => true,
