@@ -1,0 +1,295 @@
+{% import '_macros/helpers.twig' as helpers -%}
+{% import '_macros/images.twig' as imageHelper %}
+{% import '_macros/forms' as formHelper %}
+
+{%- extends "_layout.twig" -%}
+{%- set htmlClass = null -%}
+
+{% css %}
+	:root {
+		--accentColour : var(--brandOrange);
+	}
+{% endcss %}
+
+{% set number = craft.app.request.getRequiredParam('number') %}
+
+{# @var order \craft\commerce\elements\Order #}
+{% set order = craft.orders()
+  .number(number)
+  .one() %}
+
+{% set extraHead %}
+  <meta name="robots" content="noindex">
+{% endset %}
+
+{% if not order or order.isCompleted == false %}
+  {% redirect 'commerce/customer' %}
+{% endif %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<div class="rowBreadcrumbs l_constrain">
+			{% if currentUser %}
+				{% include '_partials/breadcrumbs.twig' with {
+					crumbs: [
+						{
+							url: '/customer', title: 'Customer'
+						},
+						{
+							url: '/customer/orders', title: 'My Orders'
+						}
+					]
+				} %}
+			{% endif %}
+		</div>
+
+		<div class="rowPageIntroduction l_constrain">
+			<div class="wrapper">
+				<h1>{{- 'Order {ref}'|t({ ref: order.reference }) -}}</h1>
+
+				<div class="pageIntroduction">
+					<p>
+						{{- order.dateOrdered | date('dS M, Y') -}}
+						{% if order.pdfUrl and craft.commerce.pdfs.hasEnabledPdf %}
+							{# Display a link to download a PDF if the order has a PDF URL and a PDF has been configured #}
+							, <a href="{{ order.getPdfUrl('receipt') }}" download target="_blank" class="">
+								{{ 'Download PDF'|t }}
+							</a>
+						{% endif %}
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="rowOrderDetails l_constrain l_commerceMultiColumn">
+			<div class="wrapper">
+				<div class="cmc-col1">
+					<div class="listItems">
+						<h2>Items</h2>
+						<div class="items">
+							{% for item in order.lineItems %}
+								<div class="item">
+									<h3>{{ item.description }}</h3>
+									<dl>
+										<div>
+											<dt>Quantity</dt>
+											<dd>{{ item.qty }}</dd>
+										</div>
+										<div>
+											<dt>SKU</dt>
+											<dd>{{ item.sku }}</dd>
+										</div>
+										{% if item.options|length %}
+											<div>
+												<dt>{{ 'Options'|t }}</dt>
+												<dd>{{- item.options|json_encode -}}</dd>
+											</div>
+										{% endif %}
+										{% if item.note %}
+											<div>
+												<dt>{{ 'Note'|t }}</dt>
+												<dd{{ item.note }}></dd>
+											</div>
+										{% endif %}
+										{% if item.options.giftWrapped is defined %}
+											<div>
+												<dt>{{ 'Gift Wrapped?'|t }}</dt>
+												<dd>{{ item.options.giftWrapped|title }}</dd>
+											</div>
+										{% endif %}
+										<div>
+											<dt>Price</dt>
+											<dd class="money">
+												{% if item.onSale %}
+													<del>
+												{% endif %}
+												{{ item.priceAsCurrency }}
+												{% if item.onSale %}
+													</del>
+												{% endif %}
+
+												{% if item.onSale %}<br/>
+													{{ 'Sale Price'|t }}: {{ item.salePriceAsCurrency }},<br/>
+													{{ 'Sale Amount'|t }}: {{ item.saleAmountAsCurrency }}
+												{% endif %}
+											</dd>
+										</div>
+										<div class="money">
+											<dt>{{ 'Subtotal'|t }}</dt>
+											<dd>{{ item.subtotalAsCurrency }}</dd>
+										</div>
+
+										{% if item.adjustments|length %}
+											{% for adjustment in item.adjustments %}
+												<div>
+													<dt>{{ adjustment.type }}</dt>
+													<dd>
+														{{ adjustment.name -}}
+														{%- if adjustment.isEstimated %}({{ 'Estimated'|t }}){% endif %},
+														{#{{ adjustment.description }}#}
+														{{ ' ' ~ adjustment.amountAsCurrency }}
+													</dd>
+												</div>
+											{% endfor %}
+										{% endif %}
+
+										<div>
+											<dt>{{ 'Line Total'|t }}</dt>
+											<dd>{{ item.totalAsCurrency }}</dd>
+										</div>
+									</dl>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="listSubtotal">
+						<h2>Items Subtotal</h2>
+						<dl>
+							<div>
+								<dt>{{ 'Items Subtotal'|t }}:</dt>
+								<dd>{{ order.itemSubtotalAsCurrency }}</dd>
+							</div>
+						</dl>
+					</div>
+
+					{% if order.orderAdjustments|length %}
+						<div class="orderAdjustments">
+							<h2>{{ 'Order Adjustments'|t }}</h2>
+							{% for adjustment in order.orderAdjustments %}
+								<dl>
+									<div>
+										<dt>{{ adjustment.type }}</dt>
+										<dd>
+											{{ adjustment.name }}
+											{% if adjustment.isEstimated %}<i class="text-grey-dark">{{ 'Estimated'|t }}</i>{% endif %}<br>
+											{{ adjustment.description }}
+											{{ ' ' ~ adjustment.amountAsCurrency }}
+										</dd>
+									</div>
+								</dl>
+							{% endfor %}
+						</div>
+					{% endif %}
+
+					<div class="adjustmentTotals">
+						<h2>{{ 'Adjustment Totals'|t }}</h2>
+						<dl>
+							<div>
+								<dt>{{ 'Total Shipping'|t }}</dt>
+								<dd>{{ order.totalShippingCostAsCurrency }}</dd>
+							</div>
+							<div>
+								<dt>{{ 'Total Tax'|t }}</dt>
+								<dd>{{ order.totalTaxAsCurrency }}</dd>
+							</div>
+							<div>
+								<dt>{{ 'Total Tax (inc)'|t }}</dt>
+								<dd>{{ order.totalTaxIncludedAsCurrency }}</dd>
+							</div>
+							{% if order.totalDiscount %}
+								<div>
+									<dt>{{ 'Total Discount'|t }}</dt>
+									<dd>{{ order.totalDiscountAsCurrency }}</dd>
+								</div>
+							{% endif %}
+							<div>
+								<dt>{{ 'Total Price'|t }}:</dt>
+								<dd>{{ order.totalPriceAsCurrency }}</dd>
+							</div>
+							<div>
+								<dt>{{ 'Total Paid'|t }}:</dt>
+								<dd>{{ order.totalPaidAsCurrency }}</dd>
+							</div>
+							{% if order.outstandingBalance > 0 %}
+								<div>
+									<dt>{{ 'Outstanding Balance'|t }}:</dt>
+									<dd>{{ order.outstandingBalanceAsCurrency }}</dd>
+								</div>
+							{% endif %}
+						</dl>
+					</div>
+
+					<div class="listTransactions">
+						<h2>Transactions</h2>
+						<dl>
+							{% for transaction in order.transactions %}
+							<div class="transaction">
+								<dt>{{- transaction.status -}}</dt>
+								<dd>
+									{{- transaction.amountAsCurrency }} {{ transaction.currency }} {{ transaction.type -}}<br/>
+									({{ transaction.paymentAmountAsCurrency }} {{ transaction.paymentCurrency }} {{ 'paid'|t }})<br/>
+									{{ transaction.dateCreated|datetime }}
+								</dd>
+							</div>
+						{% endfor %}
+						</dl>
+					</div>
+				</div>
+
+				<div class="cmc-col2">
+					<dl class="highLevelDetails">
+						<div>
+							<dt>{{ 'Customer'|t }}</dt>
+							<dd>{{ order.email }}</dd>
+						</div>
+						<div>
+							<dt>{{ 'Total'|t }}</dt>
+							<dd>{{ order.totalPriceAsCurrency }}</dd>
+						</div>
+						<div>
+							<dt>{{ 'Payment Status'|t }}</dt>
+							<dd>{{ order.paidStatushtml|raw }}</dd>
+						</div>
+						<div>
+							<dt>{{ 'Amount Paid'|t }}</dt>
+							<dd>{{ order.totalPaidAsCurrency }}</dd>
+						</div>
+						{% if order.shippingMethodName %}
+							<div>
+								<dt>{{ 'Shipping Method'|t }}</dt>
+								<dd>{{ order.shippingMethodName }}</dd>
+							</div>
+						{% endif %}
+					</dl>
+
+					<dl class="addressInfo">
+						<div>
+							<dt>{{- 'Shipping Address'|t -}}</dt>
+							<dd>
+								{% if order.shippingAddress %}
+									{{ craft.app.addresses.formatAddress(order.shippingAddress)|raw }}
+								{% else %}
+									<abbr title="Not Applicable">N/A</abbr>
+								{% endif %}
+							</dd>
+						</div>
+						<div>
+							<dt>{{- 'Billing Address'|t -}}</dt>
+							<dd>
+								{% if order.billingAddress %}
+									{{ craft.app.addresses.formatAddress(order.billingAddress)|raw }}
+								{% else %}
+									<abbr title="Not Applicable">N/A</abbr>
+								{% endif %}
+							</dd>
+						</div>
+					</dl>
+
+					{% if order.getOutstandingBalance() - order.getTotalAuthorized() > 0 %}
+						<a href="{{ siteUrl(
+							'online-store/checkout/pay-static',
+							{
+								number: order.number,
+								email: order.email,
+								class: 'uc_button mainAction'
+							}) }}"
+						>
+							{{- 'Make payment'|t -}}
+						</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}

@@ -1,0 +1,8 @@
+{#
+	Some Entry Types have their own fields and therefore also their own template. If so, load the right template.
+	If the current entry is an Entry Type that does not, fall back to the default template.
+
+	There's some potential weirdness in Craft4 now we have Conditional Fields, but it may be better to stick to
+	this approach because it's more compatible with Eager Loading - you know what fields to grab ahead of time.
+#}
+{% include ["customer/" ~ entry.type, "_pages/genericPage"] %}

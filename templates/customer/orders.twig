@@ -1,0 +1,112 @@
+{% import '_macros/helpers.twig' as helpers -%}
+{% import '_macros/images.twig' as imageHelper %}
+{% import '_macros/forms' as formHelper %}
+
+{%- extends "_layout.twig" -%}
+{%- set htmlClass = null -%}
+
+{% if not currentUser %}
+	{% redirect '/customer/sign-in' %}
+{% endif %}
+
+{# Truncate order preview line items after this many to avoid an overly-verbose layout #}
+{% set limitPreviewLineItems = 3 %}
+
+{% css %}
+	:root {
+		--accentColour : var(--brandOrange);
+	}
+{% endcss %}
+
+{% do seomatic.meta.robots('noindex,nofollow') %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	{# @var orders \craft\commerce\elements\Order[] #}
+  {% set orders = craft.orders()
+		.customer(currentUser)
+		.isCompleted(true)
+		.orderBy('dateOrdered DESC')
+		.collect()
+	%}
+	<main id="main">
+		<div class="rowBreadcrumbs l_constrain">
+			{% if currentUser %}
+				{% include '_partials/breadcrumbs.twig' with {
+					crumbs: [
+						{
+							url: '/customer', title: 'Customer'
+						}
+					]
+				} %}
+			{% endif %}
+		</div>
+
+		<div class="rowPageIntroduction l_constrain">
+			<div class="wrapper">
+				<h1>{{- 'My Orders'|t -}}</h1>
+
+				<div class="pageIntroduction">
+					<p>
+						Here are your orders
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="rowOrderDetails l_constrain l_commerceMultiColumn">
+			<div class="wrapper">
+				<div class="cmc-col1">
+					{% if not orders|length %}
+						<p>You have no orders</p>
+					{% else %}
+						<div class="yourOrdersList">
+							<ul role="list">
+								{% for order in orders %}
+									{% set totalLineItems = order.lineItems|length %}
+
+									<li>
+										<div class="wrapper">
+											<hgroup>
+												<h2>Order #{{ order.reference }}</h2>
+												<p class="meta">{{ order.dateOrdered|date }}</p>
+											</hgroup>
+											<a href="{{ url('/customer/order', { number: order.number }) }}" class="uc_button">View Order <span class="uc_hide-visually">{{ order.reference }}</span></a>
+										</div>
+
+										<ul>
+											<li>{{ order.totalPriceAsCurrency }}</li>
+											<li>
+												{{ '{x} {items}'|t({
+													x: order.totalQty,
+													items: order.totalQty == 1 ? 'item' : 'items'
+												}) }}
+
+												<ul class="items">
+													{% for item in order.lineItems|slice(0, limitPreviewLineItems) %}
+														<li class="item">
+															{{ item.description }}
+															{% if item.qty > 1 %}(x {{ item.qty }}){% endif %}
+														</li>
+													{%- endfor -%}
+													{%- if totalLineItems > limitPreviewLineItems and loop.last -%}
+														<li>{{ 'and {x} other items'|t({
+															x: totalLineItems - limitPreviewLineItems
+															}) }}</li>
+													{% endif %}
+												</ul>
+											</li>
+										</ul>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="cmc-col2">
+					{{ include('customer/_includes/navigation.twig') }}
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}

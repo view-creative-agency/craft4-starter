@@ -1,0 +1,88 @@
+{% import '_macros/helpers.twig' as helpers -%}
+{% import '_macros/images.twig' as imageHelper %}
+{% import '_macros/forms' as formHelper %}
+
+{%- extends "_layout.twig" -%}
+{%- set htmlClass = null -%}
+
+{% if not currentUser %}
+	{% redirect '/customer/sign-in' %}
+{% endif %}
+
+{# @var primaryBillingAddress \craft\commerce\models\Address #}
+{% set primaryBillingAddress = currentUser.getPrimaryBillingAddress() %}
+{# @var primaryShippingAddress \craft\commerce\models\Address #}
+{% set primaryShippingAddress = currentUser.getPrimaryShippingAddress() %}
+
+{% css %}
+	:root {
+		--accentColour : var(--brandOrange);
+	}
+{% endcss %}
+
+{% do seomatic.meta.robots('noindex,nofollow') %}
+
+{% block content %}<!-- Template: {{ _self }}.twig -->
+	<main id="main">
+		<div class="rowBreadcrumbs l_constrain">
+			{% if currentUser %}
+				{% include '_partials/breadcrumbs.twig' with {
+					crumbs: [
+						{ url: '/customer', title: 'Customer' },
+					]
+				} %}
+			{% endif %}
+		</div>
+
+		<div class="rowPageIntroduction l_constrain">
+			<div class="wrapper">
+				<h1>{{- 'Addresses'|t -}}</h1>
+
+				<div class="pageIntroduction">
+					<p>
+						Manage your saved addresses
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="rowOrderDetails l_constrain l_commerceMultiColumn">
+			<div class="wrapper">
+				<div class="cmc-col1">
+					{% if currentUser.addresses|length %}
+						{{ include('online-store/_private/address/list.twig', {
+							addresses: currentUser.addresses,
+							selectable: false,
+							primaryBillingAddressId: currentUser.primaryBillingAddressId,
+							primaryShippingAddressId: currentUser.primaryShippingAddressId,
+							showDelete: true,
+							showAdd: true
+						}) }}
+					{% else %}
+						<p>{{ 'You don’t have any addresses yet.'|t }}</p>
+					{% endif %}
+				</div>
+
+				<div class="cmc-col2">
+					{{ include('customer/_includes/navigation.twig') }}
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
+
+
+
+
+
+{% block main %}
+  <!-- Template: {{ _self }}.twig -->
+
+  <div class="lg:flex lg:justify-between">
+    <h1 class="text-3xl block sm:inline">
+      {{- 'My Addresses'|t -}}
+    </h1>
+  </div>
+
+
+{% endblock %}
