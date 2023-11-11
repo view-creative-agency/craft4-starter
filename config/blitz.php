@@ -30,12 +30,13 @@ return [
 		],
 
 		// The URI patterns to exclude from caching (overrides any matching patterns to include). Set `siteId` to a blank string to indicate all sites.
-		//'excludedUriPatterns' => [
-		//    [
-		//        'siteId' => 1,
-		//        'uriPattern' => 'pages/contact',
-		//    ],
-		//],
+		'excludedUriPatterns' => [
+			['siteId' => 2, 'uriPattern' => 'saved-entries'],
+
+			['siteId' => 2, 'uriPattern' => 'customer/*'],
+			['siteId' => 2, 'uriPattern' => 'online-store/basket'],
+			['siteId' => 2, 'uriPattern' => 'online-store/checkout/*'],
+		],
 
 		// The storage type to use.
 		'cacheStorageType' => 'putyourlightson\blitz\drivers\storage\FileStorage',
@@ -114,7 +115,10 @@ return [
 		//],
 
 		// With this setting enabled, Blitz will statically include templates using Server-Side Includes (SSI), which must be enabled on the web server.
-		//'ssiEnabled' => false,
+		'ssiEnabled' => App::env('BLITZ_SERVER_TYPE') === 'caddy',
+
+		// With this setting enabled, Blitz will output "SSI" tags in the Caddy Server Templates syntax; this is not compatible with nGinx or Apache's standard SSI syntax. This should only be set to true if you are running Caddy Server
+		'caddySSI' => App::env('BLITZ_SERVER_TYPE') === 'caddy',
 
 		// With this setting enabled, Blitz will statically include templates using Edge-Side Includes (ESI), which must be enabled on the web server or CDN.
 		//'esiEnabled' => false,
