@@ -15,6 +15,16 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.33] 2023-11-11
+
+### Changed
+
+- Public User Account templates from Optec (/customer) and Blitz exceptions
+- JSDoc implemented throughout multiple JS files
+- Use `data-entry-type` rather than classes on the body
+- Sprig no longer requires explicit loading of its own JS
+
+
 ## [1.0.33] 2023-09-06
 
 ### Fixed
