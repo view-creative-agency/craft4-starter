@@ -1,31 +1,55 @@
 #mySavedEntries {
+	--_drawerBgColour: var(--white);
+	--_drawerTextColour: var(--black);
+
 	position: fixed; inset: auto 0 0 0; isolation: isolate;
-	padding-block-start: var(--gap);
-	background-color: hsl( var(--white) );
+	padding-block: var(--gap);
+	background-color: hsl( var(--_drawerBgColour) );
+	color: hsl( var(--_drawerTextColour) );
 	transform: translateY(100%); transition: transform, var(--fast); z-index: 4;
 
-	&.active {
-		transform: translateY(0);
-	}
-
-	& .l_constrain > .wrapper {
-		max-height: 540px; padding-block-end: var(--gap);
+	.l_constrain > .wrapper {
+		max-height: 60vh; padding: var(--gap);
 		overflow: auto;
 	}
 
-	& .theSavedEntries {
+	.theEntries {
+		grid-gap: 3em 2em;
+	}
+
+	.theSavedEntries {
 		background-color: transparent;
 		--minimum-width: 360px;
 	}
 
-	& button.toggleMySavedEntries {
-		position: absolute; top: 0; right: var(--gap); transform: translateY( -100% );
-		display: inline-flex; padding: 0.5em;
-		background-color: hsl( var(--brand-colour-2-lightest) );
+	button.toggleMySavedEntriesDrawer {
+		position: absolute; top: 0; right: var(--gap); transform: translateY( calc( 0px - 100% ) );
+		display: inline-flex; padding: 1em;
+		border: 1px solid currentColor; border-block-end: 0;
+		background-color: hsl( var(--_drawerBgColour) );
+		color: hsl( var(--_drawerTextColour) );
 		z-index: 2; opacity: 1;
-
-		& img {
-			display: block;
-		}
 	}
+
+	&[data-drawer-state='open'] {
+		transform: translateY(0);
+		filter: drop-shadow(0 -1em 0.75em hsl( var(--black) / 0.1 ));
+		border-block-start: 1px solid currentColor;
+	}
+}
+
+button[data-save-button] {
+	display: flex; align-items: center; gap: 0.5em;
+	.saveIcon { display: block; }
+	.unsaveIcon { display: none; }
+
+	&[data-state='saved'] {
+		.saveIcon { display: none; }
+		.unsaveIcon { display: block; }
+	}
+}
+
+/* Buttons without an EntryID are invalid - just hide them if for some reason the template screws it up */
+button[data-entry-id=''] {
+	display: none !important;
 }

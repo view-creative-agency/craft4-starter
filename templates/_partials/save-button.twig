@@ -1,0 +1,23 @@
+{#
+	{% include '_partials/save-button.twig' with {
+		theEntryId: entry.id
+	} %}
+#}
+<button
+	role="button"
+	data-save-button
+	data-entry-id="{{ theEntryId ??? null }}"
+>
+	<div class="icons">
+		{#
+			If the button image needs to be colour coded to match whatever page or block accent it's inside, then they likely need to be inline SVGs. That's BAD for performance, so try to avoid this.
+			<div class="saveIcon">{{ svg('@webroot/dist/images/heart-white.svg') }}</div>
+			<div class="unsaveIcon">{{ svg('@webroot/dist/images/x-white.svg') }}</div>
+		#}
+
+		<div class="saveIcon"><img src="/dist/svg/heart.svg" alt="" width="24" height="24"/></div>
+		<div class="unsaveIcon"><img src="/dist/svg/x.svg" alt="" width="24" height="24"/></div>
+	</div>
+
+	<span>Save</span>
+</button>
