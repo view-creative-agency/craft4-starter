@@ -24,6 +24,17 @@
 		]
 	) %}
 	#}
+
+	{% if
+		craft.blitz is defined
+		and
+		getenv('BLITZ_CACHE_ENABLED') == true
+	%}
+		{% do craft.blitz.options({
+			tags: [ entry.type ]
+		}) %}
+	{% endif %}
+
 	<main id="main">
 		<div class="pageHeader">
 			{{ imageHelper.basic({

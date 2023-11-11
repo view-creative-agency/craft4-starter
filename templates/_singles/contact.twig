@@ -2,7 +2,7 @@
 {% import '_macros/images.twig'  as imageHelper %}
 
 {%- extends "_layout.twig" -%}
-{%- set htmlClass = entry.type -%}
+{%- set htmlClass = null -%}
 
 {% block content %}<!-- Template: {{ _self }}.twig -->
 	{% do craft.app.elements.eagerLoadElements(
@@ -12,6 +12,16 @@
 			'listingImage'
 		]
 	) %}
+
+	{% if
+		craft.blitz is defined
+		and
+		getenv('BLITZ_CACHE_ENABLED') == true
+	%}
+		{% do craft.blitz.options({
+			tags: [ entry.type ]
+		}) %}
+	{% endif %}
 
 	<main id="main">
 		<div class="row main l_padding-block l_constrain">

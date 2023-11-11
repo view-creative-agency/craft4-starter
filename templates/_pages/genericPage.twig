@@ -2,7 +2,7 @@
 {% import '_macros/images.twig' as imageHelper %}
 
 {%- extends "_layout.twig" -%}
-{%- set htmlClass = 'pages ' ~ entry.type -%}
+{%- set htmlClass = null -%}
 
 {%- block content %}<!-- Template: {{ _self }}.twig -->
 	{# Eager load the entries own fields #}
@@ -25,6 +25,16 @@
 		]
 	) %}
 
+	{% if
+		craft.blitz is defined
+		and
+		getenv('BLITZ_CACHE_ENABLED') == true
+	%}
+		{% do craft.blitz.options({
+			tags: [ entry.type ]
+		}) %}
+	{% endif %}
+
 	<main id="main">
 		<div class="pageHeader">
 			{{ imageHelper.basic({
@@ -32,6 +42,10 @@
 				source:       entry.listingImage[0],
 				aboveTheFold: true
 			}) }}
+
+			{# {% include '_partials/save-button.twig' with {
+				theEntryId: entry.id
+			} %} #}
 		</div>
 
 		<div class="row l_constrain">
