@@ -20,9 +20,15 @@
 	lang="{{ craft.app.language }}"{# https://www.w3.org/International/articles/language-tags/ #}
 	class="preload
 	       {%- if craft.app.config.general.devMode %} dev-mode {% endif -%}
-	       {%- if entry is defined %} {{ entry.type }} {% endif -%}
+	       {%- if entry is defined %} entryType-{{ entry.type }} {% endif -%}
 	       {{- craft.app.request.segments|join(' ') -}}
 	       {%- if htmlClass is defined %} {{ htmlClass }} {% endif %}"
+	{% if entry is defined %}
+		data-entry-type="{{ entry.type }}"
+	{% endif %}
+	{% if entry.section is defined %}
+		data-section="{{ entry.section }}"
+	{% endif %}
 >
 	<head>
 		<!-- basic meta information -->
@@ -74,29 +80,24 @@
 		{# {{ craft.vite.script('src/js/modules/responsive-navigation.js', false) }} #}
 		{#
 			Saved Entries (Liked/Saved pane)
-
-			You will want to un-comment this line:
 			{{ craft.vite.script('src/js/modules/saved-entries.js', false) }}
 
-			Ensure you add the following into /config/routes.php
-			'saved-entries' => ['template' => '_partials/saved-entries']
+			To use this, you'll need to add a button to any entry you want save-able:
+				{% include '_partials/save-button.twig' with {
+					theEntryId: entry.id
+				} %}
 
-			Uncomment the following line in screen.pcss
-			@import "components/saved-entries.pcss";
+			In the screen.pcss file load in the styles:
+				@import "components/saved-entries.pcss";
 
-			Then add the following button for any Entry you want to be savable:
-			<button
-				role="button"
-				data-save-button
-				data-entry-id="{{ entry.id }}"
-			>
-				Save
-			</button>
+			Ensure there's a Route in /config/routes.php
+				'saved-entries' => ['template' => '_partials/saved-entries'],
+
+			And double check /config/blitz.php is set to ignore the `saved-entries` URL
+				'excludedUriPatterns' => [
+					['siteId' => 2, 'uriPattern' => 'saved-entries']
+				],
 		#}
-
-		{% if sprig is defined %}
-			{{ sprig.script }}
-		{% endif %}
 
 		<!-- Styling for all devices -->
 		{{ craft.vite.script('src/js/app.js', false) }}{# Generates the CSS link, in dev will use Vite, in prod proper CSS #}
