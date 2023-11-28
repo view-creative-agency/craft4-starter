@@ -2,35 +2,71 @@
 {% import '_macros/images.twig' as imageHelper %}
 
 {#
-	This is responsible for outputting "listing excerpt" type cards on other pages.
+	This is responsible for outputting "listing excerpt" type 'cards'.
 	Listing image, title, excerpt, link.
 
 	{% include "_partials/cardListing" with {
-		craftElement: entry
+		craftElement: entry,
+		showPublishDate: false,
+		showSaveToggle: false
 	} %}
 #}
 
-<div class="cardListing" data-reveal-on-scroll="">
+<div
+	class="cardListing"
+	data-reveal-on-scroll=""
+	{% if showPublishDate is defined and showPublishDate %}
+		data-date-posted="{{ newsItem.postDate | date('c') }}"
+	{% endif %}
+>
+	{# All Craft elements have a listingImage defined #}
 	{{ imageHelper.basic({
 		transform: 'imagesGrid',
 		source:    craftElement.listingImage[0] ??? website.missingImageFallback[0]
 	}) }}
 
-	<div class="text">
-		<p class="subTitle">{{ craftElement.section.name }}</p>
-		<h2>{{ craftElement.title }}</h2>
-		{% if craftElement.listingExcerpt | length %}
-			<div class="listingExcerpt">
-				{{ craftElement.listingExcerpt }}
-			</div>
-		{% endif %}
+	{# The Element we are using might be an Entry, or a Product, or something else - in which case the card content may need to be a little different... #}
+	{% switch craftElement.displayName() %}
+		{#{% case 'Entry' %}#}
+		{#{% case 'Product' %}#}
+		{% default %}
+			<div class="text">
+				<hgroup>
+					<p class="subTitle">{{ craftElement.section.name }}</p>
+					<h2>
+						<a href="{{ craftElement.url }}">
+							{{- craftElement.title -}}
+						</a>
+					</h2>
+					{% if showPublishDate is defined and showPublishDate %}
+						<p class="postDate">
+							<span>Published:</span>
+							{{ craftElement.postDate | date('d/m/Y') }}
+						</p>
+					{% endif %}
+				</hgroup>
 
-		<a
-			href="{{ craftElement.url }}"
-			class="uc_button"
-		>
-			Read more
-			<span class="uc_hide-visually">about {{ craftElement.title }}</span>
-		</a>
-	</div>
+				{% if craftElement.listingExcerpt | length %}
+					<div class="listingExcerpt">
+						{{ craftElement.listingExcerpt }}
+					</div>
+				{% endif %}
+
+				<div class="actions">
+					<a
+						href="{{ craftElement.url }}"
+						class="uc_more"
+					>
+						Read more
+						<span class="uc_hide-visually">about {{ craftElement.title }}</span>
+					</a>
+
+					{% if showSaveToggle is defined and showSaveToggle %}
+						{% include '_partials/save-button.twig' with {
+							theEntryId: craftElement.id
+						} %}
+					{% endif %}
+				</div>
+			</div>{# .text #}
+	{% endswitch %}
 </div>

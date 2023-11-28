@@ -22,7 +22,8 @@
 	<div class="theEntries l_liquid-grid">
 		{% for savedEntry in savedEntries %}
 			{% include "_partials/cardListing.twig" with {
-				craftElement: savedEntry
+				craftElement: savedEntry,
+				showSaveToggle: true
 			} %}
 		{% endfor %}
 	</div>

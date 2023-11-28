@@ -1,0 +1,62 @@
+{% set query = query ?? '' %}
+
+<dialog id="siteSearchDialog">
+	<search role="search" aria-label="Site wide search"><!-- search is a new tag for 2023 https://html.spec.whatwg.org/multipage/grouping-content.html#the-search-element -->
+
+		{# Replaces only the `#results` on keyup or when the value is changed #}
+		<form action="">
+			<label for="sprigSearchInput">
+				<span>Search site for:</span>
+			</label>
+			<input
+				sprig
+				s-trigger="keyup changed"
+				s-replace="#sprigSearchResults"
+				type="text"
+				name="query"
+				value="{{ query }}"
+				placeholder="{{ "e.g., health" | t }}"
+				id="sprigSearchInput"
+			/>
+		</form>
+
+		<output id="sprigSearchResults" for="sprigSearchInput">
+			{% if query %}
+				<ul role="list">
+					{% if currentSite.language == 'cy-GB' %}
+						{% set entries = craft.entries.site('english').search( query ).all() %}
+					{% else %}
+						{% set entries = craft.entries.site('cymraeg').search( query ).all() %}
+					{% endif %}
+
+					{% if entries | length %}
+						{% for entry in entries %}
+							<li>
+								<a href="{{ entry.url }}">
+									{#<strong>{{ entry.section.name }}</strong> - #}
+									{{ entry.title }}
+								</a>
+							</li>
+						{% endfor %}
+					{% else %}
+						<li>{{ "No Results" | t }}</li>
+					{% endif %}
+				</ul>
+			{% endif %}
+		</output>
+	</search>
+
+	<form method="dialog">
+		<button>Close</button>
+	</form>
+</dialog>
+
+{% js %}
+	const showSearchButton   = document.querySelector('#showSiteSearch');
+	const siteSearchDialog   = document.querySelector('#siteSearchDialog');
+	const sprigSearchResults = document.querySelector('#sprigSearchResults');
+
+	showSearchButton.addEventListener('click', () => {
+		siteSearchDialog.showModal();
+	});
+{% endjs %}

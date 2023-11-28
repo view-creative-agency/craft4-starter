@@ -1,3 +1,5 @@
+/* VITE processes this file */
+
 /* CSS */
 import "@js/parts/css";
 
@@ -13,7 +15,7 @@ import "@js/parts/fetch-wrapper"; */
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
- */
+*/
 
 /**
  * Accept HMR as per: https://vitejs.dev/guide/api-hmr.html
@@ -24,4 +26,4 @@ if (import.meta.hot) {
 	});
 }
 
-console.log('this is a test');
+console.log('app.js says hello');

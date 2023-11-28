@@ -1,11 +1,13 @@
 {#
 	{% include '_partials/breadcrumbs' with {
-		crumbs: entry
+		crumbs: entry,
+		listCurrentPage: false
 	} %}
 
 	OR
 
 	{% include '_partials/breadcrumbs' with {
+		listCurrentPage: true,
 		crumbs: [
 			{
 				url: '/top-level', title: 'Top Level'
@@ -27,10 +29,18 @@
 	<div class="breadcrumbs">
 		<ul class="l_cluster" role="list">
 			<li><a href="{{ siteUrl }}">Home</a></li>
+
 			{% for crumb in theCrumbs %}
 				<li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
 			{% endfor %}
-			<li>{{ entry.title }}</li>
+
+			{% if
+				(listCurrentPage is not defined)
+				or
+				(listCurrentPage is defined and listCurrentPage)
+			%}
+				<li><span>{{ entry.title }}</span></li>
+			{% endif %}
 		</ul>
 	</div>
 {#{% endif %}#}

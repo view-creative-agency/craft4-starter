@@ -15,6 +15,18 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.35] 2023-11-28
+
+### Added
+
+- Sprig powered site search template
+
+### Changed
+
+- Updated News section to use the CardListing partial
+- Saved Entries card listing now supports its own buttons
+- Breadcrumbs can now opt out of listing the current page
+
 ## [1.0.34] 2023-11-11
 
 ### Fixed

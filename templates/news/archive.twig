@@ -72,33 +72,11 @@
 							<h2 class="heading-year">{{ month }}</h2>
 
 							{% for newsItem in entries %}
-								<div class="newsItem">
-									{# output a lazy-loaded webp/jpeg image which becomes a fixed 200px square at breapoint3 #}
-									{{ macros.imageChangesShape({
-										theImage     : newsItem.listingImage[0] ??? website.missingImageFallback[0],
-										transforms   : [
-											{ media: '(max-width: 479px)',  width: 480,  height: 240 },
-											{ media: '(min-width: 700px)',  width: 400,  height: 400 },
-											{ media: '(min-width: 480px)',  width: 700,  height: 400 },
-										],
-										className: 'media'
-									}) }}
-
-									<div class="text">
-										<h3>{{ newsItem.title }}</h3>
-										<p class="meta">
-											Published on {{ newsItem.postDate | date('l jS F Y') }} at {{ newsItem.postDate | date('g:i A') }}
-										</p>
-										<div class="listingExcerpt">
-											{{ newsItem.listingExcerpt }}
-										</div>
-										<p>
-											<a href="{{ newsItem.url }}" class="dc_more">
-												Read more<span> about {{ newsItem.title }}</span>
-											</a>
-										</p>
-									</div><!-- .text -->
-								</div><!-- .newsItem -->
+								{% include "_partials/cardListing" with {
+									craftElement: newsItem,
+									showPublishDate: true,
+									showSaveToggle: false
+								} %}
 							{% endfor %}
 						</div><!-- .container -->
 					</div><!-- .section.newsItems -->
