@@ -115,10 +115,8 @@ return [
 		//],
 
 		// With this setting enabled, Blitz will statically include templates using Server-Side Includes (SSI), which must be enabled on the web server.
-		'ssiEnabled' => App::env('BLITZ_SERVER_TYPE') === 'caddy',
-
-		// With this setting enabled, Blitz will output "SSI" tags in the Caddy Server Templates syntax; this is not compatible with nGinx or Apache's standard SSI syntax. This should only be set to true if you are running Caddy Server
-		'caddySSI' => App::env('BLITZ_SERVER_TYPE') === 'caddy',
+		'ssiEnabled'   => App::env('SSI_ENABLED'),
+		'ssiTagFormat' => App::env('SERVER_TYPE') === 'caddy' ? '<!--#caddy httpInclude "{uri}" -->' : '{{httpInclude "{uri}"}}',
 
 		// With this setting enabled, Blitz will statically include templates using Edge-Side Includes (ESI), which must be enabled on the web server or CDN.
 		//'esiEnabled' => false,
@@ -189,12 +187,12 @@ return [
 		//    'putyourlightson\campaign\elements\CampaignElement' => 'campaignTypeId',
 		//],
 
-		// The integrations to initialise.
-		'integrations' => [
-			// 'putyourlightson\blitz\drivers\integrations\CommerceIntegration',
-			// 'putyourlightson\blitz\drivers\integrations\FeedMeIntegration',
-			'putyourlightson\blitz\drivers\integrations\SeomaticIntegration',
-		],
+		// The integrations to initialise. BY DEFAULT THEY'RE ALL INITIALISED
+		// 'integrations' => [
+		// 	'putyourlightson\blitz\drivers\integrations\CommerceIntegration',
+		// 	'putyourlightson\blitz\drivers\integrations\FeedMeIntegration',
+		// 	'putyourlightson\blitz\drivers\integrations\SeomaticIntegration',
+		// ],
 
 		// The value to send in the cache control header.
 		//'cacheControlHeader' => 'public, s-maxage=31536000, max-age=0',

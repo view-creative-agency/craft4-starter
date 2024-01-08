@@ -15,6 +15,22 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.38] 2024-01-08
+
+### Added
+
+- Added a `uc_toggle` to show checkbox inputs as toggles.
+- Now includes default translation files
+- DDEV added a couple of new config files
+
+### Changed
+
+### Fixed
+
+- `blitz.php` uncommented the Integrations; turns out they're all enabled by default, and their being set in this file is counter-productive as it then *disables* integrations that are commented out here.
+	- This in turn fixes an issue where FeedMe imports might cause massive Blitz refresh queue jobs, because it was not operating in Batch mode without the integration functioning.
+- Version numbering for the changelog got out of sync somewhere along the line.
+
 ## [1.0.35] 2023-11-28
 
 ### Added
