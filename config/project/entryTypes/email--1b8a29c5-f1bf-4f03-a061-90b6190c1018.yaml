@@ -12,6 +12,7 @@ fieldLayouts:
             disabled: false
             elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -26,7 +27,7 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 4fad6e48-b5c5-4012-a80c-736211409238
+            uid: 6b076c8c-d915-415e-b347-be2209a7c7ba
             userCondition: null
             warning: null
             width: 100
@@ -49,6 +50,9 @@ handle: email
 hasTitleField: false
 name: Email
 section: f1d8fe85-91fd-4f12-9b2e-b04e172ed43d # Email
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

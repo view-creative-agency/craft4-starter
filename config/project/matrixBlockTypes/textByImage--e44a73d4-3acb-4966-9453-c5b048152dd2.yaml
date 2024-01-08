@@ -115,6 +115,7 @@ fields:
     name: 'Expansion Method'
     searchable: false
     settings:
+      columnType: string
       options:
         -
           __assoc__:
@@ -172,6 +173,7 @@ fields:
     name: 'Text Position'
     searchable: false
     settings:
+      columnType: string
       options:
         -
           __assoc__:
@@ -218,6 +220,7 @@ fields:
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       showWordCount: true
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field

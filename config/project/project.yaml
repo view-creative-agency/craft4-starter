@@ -1,4 +1,4 @@
-dateModified: 1693906540
+dateModified: 1704733013
 elementSources:
   craft\elements\Asset:
     -
@@ -120,7 +120,6 @@ meta:
     2b187454-5e81-41a2-bb5a-67f435df8ad2: Image # Image
     3d35622b-6607-4a05-81f0-93d712f18eed: 'Minimal UI' # Minimal UI
     4b265d58-9bcb-446a-8339-a25f3f625338: 'Listing Image' # Listing Image
-    4ca648ee-78d8-4b4e-be42-119bdc9ac095: Crop # Crop
     5aacad15-f360-4977-9943-6c56e7ceaa59: 'Landscape: 2.39:1' # Landscape: 2.39:1
     5c964f76-f7db-4765-8c8d-add2047d8ba7: 'Missing Image Fallback' # Missing Image Fallback
     5dee40ad-8466-4b85-887a-e0c1862061f8: Code # Code
@@ -169,13 +168,11 @@ meta:
     aea5ff6c-2e97-4659-b273-30e7258dd14d: Default # Default
     aec806ed-10ba-4ecd-819e-bd0bd36ca129: 'Featured Link' # Featured Link
     b0a51bbc-452f-4c28-90cb-be69261fa068: 'Mixed Content' # Mixed Content
-    b9df2f18-f25a-4f21-a1bd-2d54dd0ce464: 'Column Count' # Column Count
     b331abc3-406d-4f08-9b2c-7c672bf0de0e: Primary # Primary
     b582704c-66aa-4611-a6e1-79f208db6ab7: 'Link Description' # Link Description
     bb1cad82-345d-45ce-8868-7e95321e0dde: Attribution # Attribution
     bb85a1cd-c2b6-49d2-8f4c-221e447e0124: 'Generic Page' # Generic Page
     d0c2725f-cc81-4c85-a467-3179e7b41c85: Entries # Entries
-    d9e8808e-2fe2-41ab-b75f-4c7501b6b7d8: 'Public Schema' # Public Schema
     d40dd4e5-ad74-4354-a28c-e32b99da966c: Simple # Simple
     d77dcb20-938f-42b0-8c62-deed91622131: 'Show Listing Image' # Show Listing Image
     db0b4568-9841-48bd-a7be-a5d617cbf01b: 'Link Title' # Link Title
@@ -196,7 +193,6 @@ meta:
     faf93cfc-3cbf-4eaa-bd2d-16952cde36db: Entries # Entries
     fb6bb926-0792-4a1f-804a-cca44724ce74: 'Images: Slider' # Images: Slider
     fc9fe069-509c-41d5-ab17-fb401bf818e1: 'Allow hard to read line lengths' # Allow hard to read line lengths
-    ff214a18-a91f-4bdf-b3bf-2904b0be331a: 'Public Schema' # Public Schema
 plugins:
   blitz:
     edition: standard

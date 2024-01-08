@@ -143,6 +143,7 @@ fields:
     name: 'Text Colour'
     searchable: false
     settings:
+      columnType: string
       options:
         -
           __assoc__:
