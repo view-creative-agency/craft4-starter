@@ -15,6 +15,12 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.39] 2024-01-08
+
+### Changed
+
+- Project Config files regenerated and new `seed.sql` to ensure that `Listing Image` does not have any constraints on it.
+
 ## [1.0.38] 2024-01-08
 
 ### Added
