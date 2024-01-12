@@ -116,7 +116,9 @@ return [
 
 		// With this setting enabled, Blitz will statically include templates using Server-Side Includes (SSI), which must be enabled on the web server.
 		'ssiEnabled'   => App::env('SSI_ENABLED'),
-		'ssiTagFormat' => App::env('SERVER_TYPE') === 'caddy' ? '<!--#caddy httpInclude "{uri}" -->' : '{{httpInclude "{uri}"}}',
+		'ssiTagFormat' => App::env('SERVER_TYPE') === 'caddy' ?
+			'<!--#caddy httpInclude "{uri}" -->' :
+			'<!--#include virtual="{uri}" -->',
 
 		// With this setting enabled, Blitz will statically include templates using Edge-Side Includes (ESI), which must be enabled on the web server or CDN.
 		//'esiEnabled' => false,
