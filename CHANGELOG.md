@@ -15,6 +15,12 @@ The purpose of a changelog entry is to document the noteworthy difference, often
 
 # view-creative-agency/craft4-starter Changelog
 
+## [1.0.40] 2024-01-12
+
+### Fixed
+
+- `config/blitz.php` had wrong values for SSI, now fixed.
+
 ## [1.0.39] 2024-01-08
 
 ### Changed
