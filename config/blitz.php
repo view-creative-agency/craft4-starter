@@ -19,7 +19,7 @@ return [
 		// - `1`: Clear the cache, regenerate manually or organically
 		// - `2`: Expire the cache and regenerate in a queue job
 		// - `3`: Clear the cache and regenerate in a queue job
-		'refreshMode' => 2,
+		'refreshMode' => 1,
 
 		// The URI patterns to include in caching. Set `siteId` to a blank string to indicate all sites.
 		'includedUriPatterns' => [
